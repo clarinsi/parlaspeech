@@ -1,0 +1,5 @@
+https://github.com/jonatasgrosman/huggingsound/archive/refs/heads/main.zip
+https://github.com/kensho-technologies/pyctcdecode/archive/refs/heads/main.zip
+https://github.com/kpu/kenlm/archive/master.zip
+torchaudio
+matplotlib

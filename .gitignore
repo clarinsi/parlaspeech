@@ -1,0 +1,13 @@
+/sample.wav
+/segment.wav
+/asr_results.json
+/final_segments.json
+/kaldi_models.tar.xz
+/lm.binary
+/lm.tar.xz
+/lm.vocab
+/sample.mp3
+/sample.txt
+/cache/
+/work/
+/kaldi_models/
