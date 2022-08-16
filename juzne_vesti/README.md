@@ -32,3 +32,22 @@ The rest of the processing followed Danijel's pipeline closely:
 + 'kaldi_word_starts': starting timestamps of the words (above), starting at the beginning of the recording, not instance!,
 + 'kaldi_word_ends': as above, but for word ends,  
 + 'segment_file: file, containing the audio, corresponding to the instance.'
+
+# [Dataset in ParlaSpeech-HR.v1.0 form](JuzneVesti-SR.v1.0.jsonl)
+
+The dataset is also encoded in another form in order to match original ParlaSpeech-HR encoding as closely as possible:
+
+
+* `path`: path to the segment
+* `orig_file`: path to full length audio (youtube_hash + `.wav`)
+* `start`: start time in seconds since the beginning of the full length audio
+* `end`: end time in in seconds since the beginning of the full length audio
+* `words`: raw transcript, word delimited, contains numerals, punctuation, `JV:` separators...
+* `norm_words`: kaldi alignment, word delimited, with normalized, lowercased Kaldi output. Host questions are delimited with `<anchor_start>` and `<anchor_end>`.
+* `norm_words_start_times`: timestamps of `norm_words` starts
+* `utterance_id_start`: moot, kept for consistency with ParlaSpeech-HR.v1.0
+* `utterance_id_end`: see above
+* `speaker_info`: dictionary, containing keys `guest_name`, `guest_description`, `host`, and `speaker_breakdown`
+* `split`: to which split the instance belongs (test (10%), dev (10%), or train (80%))
+
+Only the instances that have been correctly transcribed are included in this dataset (this was identified by comparing `words` and `norm_words`).
