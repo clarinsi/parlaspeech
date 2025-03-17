@@ -6,7 +6,7 @@ recognition.
 
 ### Old repository
 
-This repository is used for the new iteration of the project starting 2025. For old data, switch to [old-2022](clarinsi/parlaspeech/tree/old-2022) branch.
+This repository is used for the new iteration of the project starting 2025. For old data, switch to [old-2022](https://github.com/clarinsi/parlaspeech/tree/old-2022) branch.
 
 ### Authors
 
