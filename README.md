@@ -4,8 +4,9 @@ This repository demonstrates the procedure and utilities used to automatically p
 order to create a corpus which can be used to train models for speech processing, for example in automatic speech
 recognition.
 
-The examples used here are based on the corpus of croatian parliamentary speech distributed using this link:
-http://hdl.handle.net/11356/1494
+### Old repository
+
+This repository is used for the new iteration of the project starting 2025. For old data, switch to [old-2022](clarinsi/parlaspeech/tree/old-2022) branch.
 
 ### Authors
 
@@ -14,12 +15,3 @@ http://hdl.handle.net/11356/1494
 * Peter Rupnik <peter.rupnik@ijs.si>
 * Ivo-Pavao Jazbec <ipjazbec@gmail.com>
 
-### Citation
-
-The contents of this repository is described in the paper:
-
-*TODO*
-
-## Description
-
-All the details are described in the [tutorial notebook](Tutorial.ipynb).
