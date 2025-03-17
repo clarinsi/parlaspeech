@@ -1,5 +1,9 @@
 # ParlaSpeech data preparation procedure
 
+## 2022 branch
+
+This is a snapshot of old experiments done in 2022.
+
 This repository demonstrates the procedure and utilities used to automatically process large amounts of speech data in
 order to create a corpus which can be used to train models for speech processing, for example in automatic speech
 recognition.
