@@ -66,12 +66,160 @@
 </head>
 <body>
     <h1>Welcome to ParlaSpeech</h1>
+    <!-- <p>ParlaSpeech is a multilingual collection of parliamentary speech corpora with rich linguistic annotations, built by aligning official parliamentary recordings with <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts.</p> -->
+    
+    <p class="intro">
+        <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
+        Croatian (HR), Czech (CZ), Polish (PL), and Serbian (SR) parliamentary proceedings. 
+        The corpora were created by automatically aligning official parliamentary recordings with their 
+        corresponding <strong><a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a></strong> 
+        transcripts, preserving the rich structural and speaker metadata from the original transcripts. 
+        This includes detailed information about speakers (name, gender, political party, role) and 
+        parliamentary sessions (date, agenda items, parliamentary term). The aligned corpora enable 
+        research at the intersection of speech processing and political discourse analysis.
+    </p>
+    
+    <h2>Annotation Layers</h2>
+    <div class="annotation-layers">
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies formatted linguistic annotations (lemma, POS, syntax, etc.)
+        </div>
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech
+        </div>
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Align:</strong></span> Precise grapheme/word-level alignments (HR/SR only)
+        </div>
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Stress:</strong></span> Primary stress markers in multisyllabic words (HR/SR only)
+        </div>
+    </div>
+    
+    <div class="availability">
+        <p>
+            <strong>Available formats:</strong><br>
+            • <strong>JSONL</strong> for computational processing<br>
+            • <strong>TextGrid</strong> for phonetic analysis<br>
+            <br>
+            Includes complete speaker metadata (party, gender, role, etc.) from ParlaMint.
+        </p>
+    </div>
+    
+    <div class="reference">
+        Reference: <a href="https://www.clarin.si/repository/xmlui/handle/11356/1914" target="_blank">Ljubešić et al. (2024)</a>
+    </div>
+
+
+    <h2>Corpus Overview</h2>
+    <div class="corpus-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Version</th>
+                    <th>Duration</th>
+                    <th>Segments</th>
+                    <th>Layers</th>
+                    <th>Links</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Croatian (HR)</td>
+                    <td>v2.0</td>
+                    <td>3,061 hours</td>
+                    <td>922,679</td>
+                    <td>All layers</td>
+                    <td><a href="http://hdl.handle.net/11356/1494" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR" target="_blank">Hugging Face Demo</a></td>
+                </tr>
+                <tr>
+                    <td>Czech (CZ)</td>
+                    <td>v1.0</td>
+                    <td>1,218 hours</td>
+                    <td>717,682</td>
+                    <td>Pause, Ling</td>
+                    <td><a href="http://hdl.handle.net/11356/1785" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-CZ" target="_blank">Hugging Face Demo</a></td>
+                </tr>
+                <tr>
+                    <td>Polish (PL)</td>
+                    <td>v1.0</td>
+                    <td>1,010 hours</td>
+                    <td>535,465</td>
+                    <td>Pause, Ling</td>
+                    <td><a href="http://hdl.handle.net/11356/1686" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL" target="_blank">Hugging Face Demo</a></td>
+                </tr>
+                <tr>
+                    <td>Serbian (SR)</td>
+                    <td>v1.0</td>
+                    <td>896 hours</td>
+                    <td>290,778</td>
+                    <td>All layers</td>
+                    <td><a href="http://hdl.handle.net/11356/1834" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS" target="_blank">Hugging Face Demo</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+
+    <!-- <h3>Annotation Layers</h3>
+    <div class="annotation-layers">
+        <div class="layer">
+            <h4>ParlaSpeech-Ling</h4>
+            <p>Universal Dependencies linguistic annotation (lemma, POS, morphology, syntax)</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Pause</h4>
+            <p>Filled pause detection in speech recordings</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Align</h4>
+            <p>Precise grapheme/word-level alignments (HR/SR only)</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Stress</h4>
+            <p>Primary stress detection in multisyllabic words (HR/SR only)</p>
+        </div>
+    </div> -->
+
+
+    <div class="note">
+        <p><strong>Note:</strong> HR and SR contain all of the annotation layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
+        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
+    </div>
+    
+    <h2>Authors</h2>
+    <div class="authors-list">
+        <div class="author">
+            <h3>Nikola Ljubešić</h3>
+            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Peter Rupnik</h3>
+            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Ivan Porupski</h3>
+            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Taja Kuzman Pungeršek</h3>
+            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
+        </div>
+    </div> 
+
+    <!-- <div class="note">
+        <p><strong>Formats:</strong> Available as JSONL for computational use and TextGrid for phonetic analysis.</p>
+        <p><strong>Metadata:</strong> All corpora include complete speaker metadata (party, gender, role) from ParlaMint.</p>
+        <p><strong>Reference:</strong> <a href="https://aclanthology.org/2022.parlaclarin-1.16" target="_blank">Ljubešić et al. (2022)</a></p>
+    </div> -->
+
+
+    <!-- <h1>Welcome to ParlaSpeech</h1>
     <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech, a multilingual corpus of parliamentary proceedings.</p>
     
     <h2>Corpus Overview</h2>
-    <p>ParlaAnno-v1.0 is a corpus of 5 languages:</p>
+    <p>ParlaAnno-v1.0 is a corpus of 4 languages:</p>
     <div class="language-list">
-        <span class="language-tag">Slovenian (ROG/Artur SL)</span>
         <span class="language-tag">Croatian (ParlaSpeech-v2 HR)</span>
         <span class="language-tag">Czech (ParlaSpeech-v1 CZ)</span>
         <span class="language-tag">Serbian (ParlaSpeech-v1 SR, RS)</span>
@@ -80,16 +228,34 @@
     <p>It contains audio files of speech and its transcripts, alongside enrichments.</p>
     
     <div class="note">
-        <p><strong>Note:</strong> HR and SR contain all of the layers, while SL, CZ and PL contain only ParlaPause (filled pauses) and ParlaLing (linguistic metadata) layers.</p>
+        <p><strong>Note:</strong> HR and SR contain all of the layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
         <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
     </div>
     
     <h2>Authors</h2>
-    <p>TBD</p>
+    <div class="authors-list">
+        <div class="author">
+            <h3>Nikola Ljubešić</h3>
+            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Peter Rupnik</h3>
+            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Ivan Porupski</h3>
+            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Taja Kuzman Pungeršek</h3>
+            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
+        </div>
+    </div> -->
     
     <h2>Dataset Schema</h2>
     
     <div class="schema">
+        <h3>ParlaMint/ParlaSpeech</h3>
         <div class="field">
             <span class="field-name">1. id</span> [string] - Unique utterance ID reference to the ParlaMint 4.0 corpus (ParlaSpeech-HR v2.0).
         </div>
@@ -153,7 +319,7 @@
             <div class="subfield">• <strong>Party_orientation</strong> [string] - Political orientation (e.g., left, right).</div>
             <div class="subfield">• <strong>Speaker_ID</strong> [string] - Unique speaker identifier, usually in format "LastnameFirstName".</div>
             <div class="subfield">• <strong>Speaker_name</strong> [string] - Full name of the speaker in format "Lastname, Firstname".</div>
-            <div class="subfield">• <strong>Speaker_gender</strong> [string] - Gender of the speaker (M, F or "-" unknown).</div>
+            <div class="subfield">• <strong>Speaker_gender</strong> [string] - Gender of the speaker (M, F or "-").</div>
             <div class="subfield">• <strong>Speaker_birth</strong> [string] - Birth year of the speaker.</div>
         </div>
         
@@ -170,6 +336,7 @@
             <div class="subfield">• <strong>char_e</strong> [int] - End character index, relative.</div>
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
+            <div class="subfield">• <strong>words_idx</strong> [int] - [TO BE INCLUDED] Index of word in the `words` (ASR word-level). </div>
         </div>
         
         <div class="field">
