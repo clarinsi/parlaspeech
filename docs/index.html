@@ -1,8 +1,213 @@
 <!DOCTYPE html>
-<html>
-<head><title>ParlaSpeech</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParlaSpeech - Parliamentary Speech Corpus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .language-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .language-tag {
+            background-color: #e8f4fc;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .schema {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .field {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
+        }
+        .field-name {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .subfield {
+            margin-left: 20px;
+            font-size: 0.95em;
+        }
+        .note {
+            background-color: #fffde7;
+            padding: 10px;
+            border-left: 4px solid #ffd600;
+            margin: 15px 0;
+        }
+    </style>
+</head>
 <body>
-  <h1>Welcome to ParlaSpeech</h1>
-  <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech.</p>
+    <h1>Welcome to ParlaSpeech</h1>
+    <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech, a multilingual corpus of parliamentary proceedings.</p>
+    
+    <h2>Corpus Overview</h2>
+    <p>ParlaAnno-v1.0 is a corpus of 5 languages:</p>
+    <div class="language-list">
+        <span class="language-tag">Slovenian (ROG/Artur SL)</span>
+        <span class="language-tag">Croatian (ParlaSpeech-v2 HR)</span>
+        <span class="language-tag">Czech (ParlaSpeech-v1 CZ)</span>
+        <span class="language-tag">Serbian (ParlaSpeech-v1 SR, RS)</span>
+        <span class="language-tag">Polish (ParlaSpeech-v1 PL)</span>
+    </div>
+    <p>It contains audio files of speech and its transcripts, alongside enrichments.</p>
+    
+    <div class="note">
+        <p><strong>Note:</strong> HR and SR contain all of the layers, while SL, CZ and PL contain only ParlaPause (filled pauses) and ParlaLing (linguistic metadata) layers.</p>
+        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
+    </div>
+    
+    <h2>Authors</h2>
+    <p>TBD</p>
+    
+    <h2>Dataset Schema</h2>
+    
+    <div class="schema">
+        <div class="field">
+            <span class="field-name">1. id</span> [string] - Unique utterance ID reference to the ParlaMint 4.0 corpus (ParlaSpeech-HR v2.0).
+        </div>
+        
+        <div class="field">
+            <span class="field-name">2. words</span> [list of dicts] - ASR Word-level timing and character offset annotations.
+            <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
+            <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
+            <div class="subfield">• <strong>char_s</strong> [int] - Start character index in the transcript, relative.</div>
+            <div class="subfield">• <strong>char_e</strong> [int] - End character index in the transcript, relative.</div>
+        </div>
+        
+        <div class="field">
+            <span class="field-name">3. audio</span> [string] - Relative path to the audio file in ParlaSpeech-HR v2.0.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">4. audio_length</span> [float] - Duration of the audio file in seconds.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">5. text</span> [string] - Human-transcribed text corresponding to the audio.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">6. text_start</span> [int] - Start character index of the relevant text segment, absolute.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">7. text_end</span> [int] - End character index of the relevant text segment, absolute.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">8. audio_start</span> [float] - Start time of the relevant audio segment, absolute.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">9. audio_end</span> [float] - End time of the relevant audio segment, absolute.
+        </div>
+        
+        <div class="field">
+            <span class="field-name">10. speaker_info</span> [dict] - Metadata about the speaker and session.
+            <div class="subfield">• <strong>Text_ID</strong> [string] - Text document ID.</div>
+            <div class="subfield">• <strong>ID</strong> [string] - Speech segment ID.</div>
+            <div class="subfield">• <strong>Title</strong> [string] - Title of the debate/session.</div>
+            <div class="subfield">• <strong>Date</strong> [string] - Date of the session.</div>
+            <div class="subfield">• <strong>Body</strong> [string] - Parliamentary body or chamber.</div>
+            <div class="subfield">• <strong>Term</strong> [string] - Parliamentary term.</div>
+            <div class="subfield">• <strong>Session</strong> [string] - Session number.</div>
+            <div class="subfield">• <strong>Meeting</strong> [string] - Meeting number.</div>
+            <div class="subfield">• <strong>Sitting</strong> [string] - Sitting number.</div>
+            <div class="subfield">• <strong>Agenda</strong> [string] - Agenda topic.</div>
+            <div class="subfield">• <strong>Subcorpus</strong> [string] - Subcorpus name.</div>
+            <div class="subfield">• <strong>Lang</strong> [string] - Language of the transcript.</div>
+            <div class="subfield">• <strong>Speaker_role</strong> [string] - Role of the speaker (e.g., Regular, Minister).</div>
+            <div class="subfield">• <strong>Speaker_MP</strong> [string] - Whether speaker is a Member of Parliament.</div>
+            <div class="subfield">• <strong>Speaker_minister</strong> [string] - Whether speaker is a minister.</div>
+            <div class="subfield">• <strong>Speaker_party</strong> [string] - Party abbreviation.</div>
+            <div class="subfield">• <strong>Speaker_party_name</strong> [string] - Full name of the party.</div>
+            <div class="subfield">• <strong>Party_status</strong> [string] - Government or opposition or coalition.</div>
+            <div class="subfield">• <strong>Party_orientation</strong> [string] - Political orientation (e.g., left, right).</div>
+            <div class="subfield">• <strong>Speaker_ID</strong> [string] - Unique speaker identifier, usually in format "LastnameFirstName".</div>
+            <div class="subfield">• <strong>Speaker_name</strong> [string] - Full name of the speaker in format "Lastname, Firstname".</div>
+            <div class="subfield">• <strong>Speaker_gender</strong> [string] - Gender of the speaker (M, F or "-" unknown).</div>
+            <div class="subfield">• <strong>Speaker_birth</strong> [string] - Birth year of the speaker.</div>
+        </div>
+        
+        <h3>ParlaSpeech-Pause</h3>
+        <div class="field">
+            <span class="field-name">11. filled_pauses</span> [list of lists of floats] - Timestamped intervals of filled pauses in the audio.
+        </div>
+        
+        <h3>ParlaSpeech-Align</h3>
+        <div class="field">
+            <span class="field-name">12. words_align</span> [list of dicts] - Kaldi MFA word-level alignment data.
+            <div class="subfield">• <strong>text</strong> [string] - Word text.</div>
+            <div class="subfield">• <strong>char_s</strong> [int] - Start character index, relative.</div>
+            <div class="subfield">• <strong>char_e</strong> [int] - End character index, relative.</div>
+            <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
+            <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
+        </div>
+        
+        <div class="field">
+            <span class="field-name">13. chars_align</span> [list of lists of dicts] - Kaldi MFA character-level alignment data.
+            <div class="subfield">• <strong>text</strong> [string] - Character(s).</div>
+            <div class="subfield">• <strong>time_s</strong> [float] - Start time of the character(s), relative.</div>
+            <div class="subfield">• <strong>time_e</strong> [float] - End time of the character(s), relative.</div>
+            <div class="subfield">• <strong>char_s</strong> [int] - Start index in the full text, relative.</div>
+            <div class="subfield">• <strong>char_e</strong> [int] - End index in the full text, relative.</div>
+        </div>
+        
+        <h3>ParlaSpeech-Stress</h3>
+        <div class="field">
+            <span class="field-name">14. multisyllabic_words</span> [list of dicts] - Primary stress annotations for multisyllabic words.
+            <div class="subfield">• <strong>words_align_idx</strong> [int] - Index of word in the `words_align`.</div>
+            <div class="subfield">• <strong>stress</strong> [int] - Index of syllable containing the primary stress.</div>
+            <div class="subfield">• <strong>nuclei</strong> [list of int] - Character indices of syllable nuclei.</div>
+            <div class="subfield">• <strong>raw</strong> [list of float] - Inferred and unprocessed timestamped intervals of primary stress, relative to audio file.</div>
+        </div>
+        
+        <h3>ParlaSpeech-Ling</h3>
+        <div class="field">
+            <span class="field-name">15. annotations</span> [list of dicts] - Syntactic annotations per word.
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from 'words'. Equal to Null for parts of the 'text' that cannot be found in 'words'</div>
+            <div class="subfield">• <strong>id</strong> [int] - Token ID.</div>
+            <div class="subfield">• <strong>text</strong> [string] - Word form.</div>
+            <div class="subfield">• <strong>lemma</strong> [string] - Lemma of the word.</div>
+            <div class="subfield">• <strong>upos</strong> [string] - Universal part of speech.</div>
+            <div class="subfield">• <strong>xpos</strong> [string] - Language-specific part of speech.</div>
+            <div class="subfield">• <strong>feats</strong> [string] - Morphological features.</div>
+            <div class="subfield">• <strong>head</strong> [int] - Head of the current word (dependency relation).</div>
+            <div class="subfield">• <strong>deprel</strong> [string] - Type of dependency relation.</div>
+            <div class="subfield">• <strong>misc</strong> [string] - Additional information.</div>
+        </div>
+    </div>
+    
+    <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
+        <p>© 2023 ParlaSpeech Project | CLARIN.SI</p>
+    </footer>
 </body>
 </html>
