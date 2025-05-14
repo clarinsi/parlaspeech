@@ -17,7 +17,7 @@
             color: #2c3e50;
         }
         h1 {
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid #1f77b4;
             padding-bottom: 10px;
         }
         h2 {
@@ -46,7 +46,7 @@
         .field {
             margin-bottom: 10px;
             padding-left: 15px;
-            border-left: 3px solid #3498db;
+            border-left: 3px solid #1f77b4;
         }
         .field-name {
             font-weight: bold;
@@ -59,7 +59,7 @@
         .note {
             background-color: #fffde7;
             padding: 10px;
-            border-left: 4px solid #ffd600;
+            border-left: 4px solid #FFA500;
             margin: 15px 0;
         }
         .authors-table {
@@ -224,7 +224,7 @@
 
     <div class="note">
         <p><strong>Note 1:</strong> HR and RS contain all of the annotation layers, while CZ and PL contain only ParlaSpeech-Senti (sentiment), ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
-        <p><strong>Note 2:</strong> There are two word-level alignments: <code>words</code> and <code>words_align</code>. <code>words</code> is the ASR-level alignment, available in all languages, while <code>words_align</code> is a finer Kaldi MFA-level alignment, available only in HR and RS..</p>
+        <p><strong>Note 2:</strong> There are two word-level alignments: <code>words</code> and <code>words_align</code>. <code>words</code> is the ASR-level alignment, available in all languages, while <code>words_align</code> is a finer Kaldi MFA-level alignment, available only in HR and RS.</p>
     </div>
 
     
@@ -521,7 +521,7 @@
         
         <h3>ParlaSpeech-Ling</h3>
         <div class="field">
-            <span class="field-name">15. annotations</span> [list of dicts] - Syntactic annotations per word.
+            <span class="field-name">15. annotations</span> [list of dicts] - Linguistic annotations per word.
             <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the <code>text</code> that cannot be found in <code>words</code></div>
             <div class="subfield">• <strong>id</strong> [int] - Token ID.</div>
             <div class="subfield">• <strong>text</strong> [string] - Word form.</div>
@@ -529,8 +529,8 @@
             <div class="subfield">• <strong>upos</strong> [string] - Universal part of speech.</div>
             <div class="subfield">• <strong>xpos</strong> [string] - Language-specific part of speech.</div>
             <div class="subfield">• <strong>feats</strong> [string] - Morphological features.</div>
-            <div class="subfield">• <strong>head</strong> [int] - Head of the current word (dependency relation).</div>
-            <div class="subfield">• <strong>deprel</strong> [string] - Type of dependency relation.</div>
+            <div class="subfield">• <strong>head</strong> [int] - Head of the current word (syntactic dependency relation).</div>
+            <div class="subfield">• <strong>deprel</strong> [string] - Type of syntactic dependency relation.</div>
             <div class="subfield">• <strong>misc</strong> [string] - Additional information.</div>
         </div>
 
@@ -545,16 +545,23 @@
             <span class="field-name">18. ParlaSent_6</span> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).
         </div>
 
-        <h3>History</h3>
+        <h3>Example of an Entry</h3>
+        <div class="intro">
+        <p>Here is a short sample from the corpora:</p>
+        <p>(to be added)</p>
+        </div>
+
+    </div>
+
+
+    <h3>History</h3>
     <div class="intro">
         <p>Here is a little version history of the corpora.</p>
         <p>Second, we did...</p>
         <p>First, we did...</p>
-
     </div>
 
-    </div>
-    
+
     <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
         <p>© 2023 ParlaSpeech Project | CLARIN.SI</p>
     </footer>
