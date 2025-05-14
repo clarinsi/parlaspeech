@@ -99,38 +99,134 @@
         .corpus-table tr:hover {
             background-color: #f5f5f5;
         }
+        .header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+        }
+
+        .logo {
+        height: 100px; /* Adjust as needed */
+        width: auto;
+        }
+
+        @media (max-width: 600px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .logo {
+            height: 50px;
+        }
+        }
+        .availability {
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .format-example {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .textgrid-example {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .availability {
+                padding: 15px;
+            }
+            
+            .textgrid-example {
+                max-width: 95%;
+            }
+        }
+        /* Code styling - neutral gray */
+        code, .code, .inline-code {
+            font-family: 'Roboto Mono', 'Courier New', monospace;
+            background-color: #f0f0f0;  /* Light gray background */
+            color: #616161;             /* Dark gray text */
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            border: 1px solid #e0e0e0;  /* Slightly darker gray border */
+            font-size: 85%;
+            font-weight: 500;           /* Slightly bolder than normal text */
+        }
+
+        /* Dark mode adaptation */
+        @media (prefers-color-scheme: dark) {
+            code, .code, .inline-code {
+                background-color: #2a2a2a;  /* Dark gray */
+                color: #e0e0e0;            /* Light gray text */
+                border-color: #3a3a3a;     /* Slightly lighter border */
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to ParlaSpeech</h1>
+    <div class="header">
+        <img src="img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
+        <h1>Welcome to ParlaSpeech</h1>
+    </div>
     <!-- <p>ParlaSpeech is a multilingual collection of parliamentary speech corpora with rich linguistic annotations, built by aligning official parliamentary recordings with <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts.</p> -->
     
     <p class="intro">
-        <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
-        Croatian (HR), Serbian (SR), Czech (CZ), and Polish (PL) parliamentary proceedings. 
+        <strong>ParlaSpeech-Anno-v1.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
+        Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, <strong>enriched with multiple linguistic and paralinguistic layers</strong>. 
         The corpora were created by automatically aligning official parliamentary recordings with their 
         corresponding <strong><a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a></strong> 
         transcripts, preserving the rich structural and speaker metadata from the original transcripts. 
         This includes detailed information about speakers (name, gender, political party, role) and 
-        parliamentary sessions (date, agenda items, parliamentary term). The aligned corpora enable 
-        research at the intersection of speech processing and political discourse analysis.
+        parliamentary sessions (date, agenda items, parliamentary term). The aligned corpora enables 
+        research at the intersection of NLP, speech processing and political discourse analysis.
     </p>
+
+    <div class="reference">
+        Reference: <a href="https://www.clarin.si/repository/xmlui/handle/11356/1914" target="_blank">Ljubešić et al. (2024)</a>
+    </div>
     
-    <h2>Annotation Layers</h2>
+    <h2>Annotation Layers (ParlaSpeechAnno)</h2>
     <div class="annotation-layers">
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies formatted linguistic annotations (lemma, POS, syntax, etc.)
+            <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies (UD) formatted linguistic annotations (lemma, POS, syntax, etc.)
         </div>
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech
+            <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech (i.e. "ermm", "umm")
         </div>
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Align:</strong></span> Precise grapheme/word-level alignments (HR/SR only)
+            <span class="layer-name"><strong>ParlaSpeech-Senti:</strong></span> Sentiment from transcript (ParlaSent).
         </div>
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Stress:</strong></span> Primary stress markers in multisyllabic words (HR/SR only)
+            <span class="layer-name"><strong>ParlaSpeech-Align:</strong></span> Precise grapheme/word-level alignments (HR/RS only)
+        </div>
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Stress:</strong></span> Primary stress markers in multisyllabic words (HR/RS only)
         </div>
     </div>
+
+
+    <div class="note">
+        <p><strong>Note 1:</strong> HR and RS contain all of the annotation layers, while CZ and PL contain only ParlaSpeech-Senti (sentiment), ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
+        <p><strong>Note 2:</strong> There are two word-level alignments: <code>words</code> and <code>words_align</code>. <code>words</code> is the ASR-level alignment, available in all languages, while <code>words_align</code> is a finer Kaldi MFA-level alignment, available only in HR and RS..</p>
+    </div>
+
     
     <div class="availability">
         <p>
@@ -138,12 +234,12 @@
             • <strong>JSONL</strong> for computational processing<br>
             • <strong>TextGrid</strong> for phonetic analysis<br>
             <br>
-            Includes complete speaker metadata (party, gender, role, etc.) from ParlaMint.
         </p>
-    </div>
-    
-    <div class="reference">
-        Reference: <a href="https://www.clarin.si/repository/xmlui/handle/11356/1914" target="_blank">Ljubešić et al. (2024)</a>
+        
+        <div class="format-example">
+            <img src="img/TextGrid_example_v0.png" alt="Example TextGrid visualization" class="textgrid-example">
+            <p class="caption">Example TextGrid file visualization</p>
+        </div>
     </div>
 
 
@@ -170,7 +266,7 @@
                     <td><a href="http://hdl.handle.net/11356/1494" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR" target="_blank">Hugging Face Demo</a></td>
                 </tr>
                 <tr>
-                    <td>Serbian (SR)</td>
+                    <td>Serbian (RS)</td>
                     <td>v1.0</td>
                     <td>896 hours</td>
                     <td>290,778</td>
@@ -182,7 +278,7 @@
                     <td>v1.0</td>
                     <td>1,218 hours</td>
                     <td>717,682</td>
-                    <td>Pause, Ling</td>
+                    <td>Senti, Pause, Ling</td>
                     <td><a href="http://hdl.handle.net/11356/1785" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-CZ" target="_blank">Hugging Face Demo</a></td>
                 </tr>
                 <tr>
@@ -190,20 +286,36 @@
                     <td>v1.0</td>
                     <td>1,010 hours</td>
                     <td>535,465</td>
-                    <td>Pause, Ling</td>
+                    <td>Senti, Pause, Ling</td>
                     <td><a href="http://hdl.handle.net/11356/1686" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL" target="_blank">Hugging Face Demo</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-
-
-    <div class="note">
-        <p><strong>Note:</strong> HR and SR contain all of the annotation layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
-        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
-    </div>
     
+
+    <!-- <h3>Annotation Layers</h3>
+    <div class="annotation-layers">
+        <div class="layer">
+            <h4>ParlaSpeech-Ling</h4>
+            <p>Universal Dependencies linguistic annotation (lemma, POS, morphology, syntax)</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Pause</h4>
+            <p>Filled pause detection in speech recordings</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Align</h4>
+            <p>Precise grapheme/word-level alignments (HR/SR only)</p>
+        </div>
+        <div class="layer">
+            <h4>ParlaSpeech-Stress</h4>
+            <p>Primary stress detection in multisyllabic words (HR/SR only)</p>
+        </div>
+    </div> -->
+
+
+
     <!-- <h2>Authors</h2>
     <div class="authors-list">
         <div class="author">
@@ -250,14 +362,61 @@
             </tr>
         </tbody>
     </table>
- 
+    <!-- <div class="note">
+        <p><strong>Formats:</strong> Available as JSONL for computational use and TextGrid for phonetic analysis.</p>
+        <p><strong>Metadata:</strong> All corpora include complete speaker metadata (party, gender, role) from ParlaMint.</p>
+        <p><strong>Reference:</strong> <a href="https://aclanthology.org/2022.parlaclarin-1.16" target="_blank">Ljubešić et al. (2022)</a></p>
+    </div> -->
+
+
+    <!-- <h1>Welcome to ParlaSpeech</h1>
+    <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech, a multilingual corpus of parliamentary proceedings.</p>
+    
+    <h2>Corpus Overview</h2>
+    <p>ParlaAnno-v1.0 is a corpus of 4 languages:</p>
+    <div class="language-list">
+        <span class="language-tag">Croatian (ParlaSpeech-v2 HR)</span>
+        <span class="language-tag">Czech (ParlaSpeech-v1 CZ)</span>
+        <span class="language-tag">Serbian (ParlaSpeech-v1 SR, RS)</span>
+        <span class="language-tag">Polish (ParlaSpeech-v1 PL)</span>
+    </div>
+    <p>It contains audio files of speech and its transcripts, alongside enrichments.</p>
+    
+    <div class="note">
+        <p><strong>Note:</strong> HR and SR contain all of the layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
+        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
+    </div>
+    
+    <h2>Authors</h2>
+    <div class="authors-list">
+        <div class="author">
+            <h3>Nikola Ljubešić</h3>
+            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Peter Rupnik</h3>
+            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Ivan Porupski</h3>
+            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
+        </div>
+        <div class="author">
+            <h3>Taja Kuzman Pungeršek</h3>
+            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
+        </div>
+    </div> -->
     
     <h2>Dataset Schema</h2>
-    
+
+    <div class="note">
+        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted sentence, always beginning at 0.0s.</p>
+    </div>
+
     <div class="schema">
-        <h3>ParlaMint/ParlaSpeech</h3>
+        <h3>ParlaSpeech</h3>
         <div class="field">
-            <span class="field-name">1. id</span> [string] - Unique utterance ID reference to the ParlaMint 4.0 corpus (ParlaSpeech-HR v2.0).
+            <span class="field-name">1. id</span> [string] - Unique sentence ID, referencing the utterance ID from ParlaMint 4.0, expanded with character offsets.
         </div>
         
         <div class="field">
@@ -269,7 +428,7 @@
         </div>
         
         <div class="field">
-            <span class="field-name">3. audio</span> [string] - Relative path to the audio file in ParlaSpeech-HR v2.0.
+            <span class="field-name">3. audio</span> [string] - Relative path to the audio file in ParlaSpeech.
         </div>
         
         <div class="field">
@@ -325,7 +484,10 @@
         
         <h3>ParlaSpeech-Pause</h3>
         <div class="field">
-            <span class="field-name">11. filled_pauses</span> [list of lists of floats] - Timestamped intervals of filled pauses in the audio.
+            <span class="field-name">11. filled_pauses</span> [list of dicts] - Timestamped intervals of filled pauses in the audio.
+            <div class="subfield">• <strong>time_s</strong> [float] - Start time of the pause in seconds, relative.</div>
+            <div class="subfield">• <strong>time_e</strong> [float] - End time of the pause in seconds, relative.</div>
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the word in <code>words</code> preceding the pause.</div>
         </div>
         
         <h3>ParlaSpeech-Align</h3>
@@ -336,7 +498,7 @@
             <div class="subfield">• <strong>char_e</strong> [int] - End character index, relative.</div>
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
-            <div class="subfield">• <strong>words_idx</strong> [int] - [TO BE INCLUDED] Index of word in the `words` (ASR word-level). </div>
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of word in <code>words</code>. Equal to Null if instance cannot be matched to any <code>words</code> instance.. </div>
         </div>
         
         <div class="field">
@@ -351,7 +513,7 @@
         <h3>ParlaSpeech-Stress</h3>
         <div class="field">
             <span class="field-name">14. multisyllabic_words</span> [list of dicts] - Primary stress annotations for multisyllabic words.
-            <div class="subfield">• <strong>words_align_idx</strong> [int] - Index of word in the `words_align`.</div>
+            <div class="subfield">• <strong>words_align_idx</strong> [int] - Index of word in the <code>words_align</code>.</div>
             <div class="subfield">• <strong>stress</strong> [int] - Index of syllable containing the primary stress.</div>
             <div class="subfield">• <strong>nuclei</strong> [list of int] - Character indices of syllable nuclei.</div>
             <div class="subfield">• <strong>raw</strong> [list of float] - Inferred and unprocessed timestamped intervals of primary stress, relative to audio file.</div>
@@ -360,7 +522,7 @@
         <h3>ParlaSpeech-Ling</h3>
         <div class="field">
             <span class="field-name">15. annotations</span> [list of dicts] - Syntactic annotations per word.
-            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from 'words'. Equal to Null for parts of the 'text' that cannot be found in 'words'</div>
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the 'text' that cannot be found in 'words'</div>
             <div class="subfield">• <strong>id</strong> [int] - Token ID.</div>
             <div class="subfield">• <strong>text</strong> [string] - Word form.</div>
             <div class="subfield">• <strong>lemma</strong> [string] - Lemma of the word.</div>
@@ -371,6 +533,26 @@
             <div class="subfield">• <strong>deprel</strong> [string] - Type of dependency relation.</div>
             <div class="subfield">• <strong>misc</strong> [string] - Additional information.</div>
         </div>
+
+        <h3>ParlaSpeech-Senti</h3>
+        <div class="field">
+            <span class="field-name">16. ParlaSent_logit</span> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value).
+        </div>
+        <div class="field">
+            <span class="field-name">17. ParlaSent_3</span> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).
+        </div>
+        <div class="field">
+            <span class="field-name">18. ParlaSent_6</span> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).
+        </div>
+
+        <h3>History</h3>
+    <div class="intro">
+        <p>Here is a little version history of the corpora.</p>
+        <p>Second, we did...</p>
+        <p>First, we did...</p>
+
+    </div>
+
     </div>
     
     <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
