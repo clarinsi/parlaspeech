@@ -62,6 +62,43 @@
             border-left: 4px solid #ffd600;
             margin: 15px 0;
         }
+        .authors-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .authors-table th, .authors-table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .authors-table th {
+            background-color: #f2f2f2;
+        }
+        .corpus-table {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .corpus-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .corpus-table th, .corpus-table td {
+            padding: 10px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .corpus-table th {
+            background-color: #f5f9ff;
+            font-weight: bold;
+        }
+
+        .corpus-table tr:hover {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +107,7 @@
     
     <p class="intro">
         <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
-        Croatian (HR), Czech (CZ), Polish (PL), and Serbian (SR) parliamentary proceedings. 
+        Croatian (HR), Serbian (SR), Czech (CZ), and Polish (PL) parliamentary proceedings. 
         The corpora were created by automatically aligning official parliamentary recordings with their 
         corresponding <strong><a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a></strong> 
         transcripts, preserving the rich structural and speaker metadata from the original transcripts. 
@@ -133,6 +170,14 @@
                     <td><a href="http://hdl.handle.net/11356/1494" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR" target="_blank">Hugging Face Demo</a></td>
                 </tr>
                 <tr>
+                    <td>Serbian (SR)</td>
+                    <td>v1.0</td>
+                    <td>896 hours</td>
+                    <td>290,778</td>
+                    <td>All layers</td>
+                    <td><a href="http://hdl.handle.net/11356/1834" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS" target="_blank">Hugging Face Demo</a></td>
+                </tr>
+                <tr>
                     <td>Czech (CZ)</td>
                     <td>v1.0</td>
                     <td>1,218 hours</td>
@@ -148,38 +193,10 @@
                     <td>Pause, Ling</td>
                     <td><a href="http://hdl.handle.net/11356/1686" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL" target="_blank">Hugging Face Demo</a></td>
                 </tr>
-                <tr>
-                    <td>Serbian (SR)</td>
-                    <td>v1.0</td>
-                    <td>896 hours</td>
-                    <td>290,778</td>
-                    <td>All layers</td>
-                    <td><a href="http://hdl.handle.net/11356/1834" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS" target="_blank">Hugging Face Demo</a></td>
-                </tr>
             </tbody>
         </table>
     </div>
-    
 
-    <!-- <h3>Annotation Layers</h3>
-    <div class="annotation-layers">
-        <div class="layer">
-            <h4>ParlaSpeech-Ling</h4>
-            <p>Universal Dependencies linguistic annotation (lemma, POS, morphology, syntax)</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Pause</h4>
-            <p>Filled pause detection in speech recordings</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Align</h4>
-            <p>Precise grapheme/word-level alignments (HR/SR only)</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Stress</h4>
-            <p>Primary stress detection in multisyllabic words (HR/SR only)</p>
-        </div>
-    </div> -->
 
 
     <div class="note">
@@ -187,7 +204,7 @@
         <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
     </div>
     
-    <h2>Authors</h2>
+    <!-- <h2>Authors</h2>
     <div class="authors-list">
         <div class="author">
             <h3>Nikola Ljubešić</h3>
@@ -205,52 +222,35 @@
             <h3>Taja Kuzman Pungeršek</h3>
             <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
         </div>
-    </div> 
-
-    <!-- <div class="note">
-        <p><strong>Formats:</strong> Available as JSONL for computational use and TextGrid for phonetic analysis.</p>
-        <p><strong>Metadata:</strong> All corpora include complete speaker metadata (party, gender, role) from ParlaMint.</p>
-        <p><strong>Reference:</strong> <a href="https://aclanthology.org/2022.parlaclarin-1.16" target="_blank">Ljubešić et al. (2022)</a></p>
-    </div> -->
-
-
-    <!-- <h1>Welcome to ParlaSpeech</h1>
-    <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech, a multilingual corpus of parliamentary proceedings.</p>
-    
-    <h2>Corpus Overview</h2>
-    <p>ParlaAnno-v1.0 is a corpus of 4 languages:</p>
-    <div class="language-list">
-        <span class="language-tag">Croatian (ParlaSpeech-v2 HR)</span>
-        <span class="language-tag">Czech (ParlaSpeech-v1 CZ)</span>
-        <span class="language-tag">Serbian (ParlaSpeech-v1 SR, RS)</span>
-        <span class="language-tag">Polish (ParlaSpeech-v1 PL)</span>
-    </div>
-    <p>It contains audio files of speech and its transcripts, alongside enrichments.</p>
-    
-    <div class="note">
-        <p><strong>Note:</strong> HR and SR contain all of the layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
-        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
-    </div>
-    
+    </div>  -->
     <h2>Authors</h2>
-    <div class="authors-list">
-        <div class="author">
-            <h3>Nikola Ljubešić</h3>
-            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Peter Rupnik</h3>
-            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Ivan Porupski</h3>
-            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Taja Kuzman Pungeršek</h3>
-            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
-        </div>
-    </div> -->
+    <table class="authors-table">
+        <!-- <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            <tr>
+                <td>Nikola Ljubešić</td>
+                <td><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></td>
+            </tr>
+            <tr>
+                <td>Peter Rupnik</td>
+                <td><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></td>
+            </tr>
+            <tr>
+                <td>Ivan Porupski</td>
+                <td><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></td>
+            </tr>
+            <tr>
+                <td>Taja Kuzman Pungeršek</td>
+                <td><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></td>
+            </tr>
+        </tbody>
+    </table>
+ 
     
     <h2>Dataset Schema</h2>
     
