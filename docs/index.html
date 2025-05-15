@@ -187,7 +187,18 @@
     </div>
     <!-- <p>ParlaSpeech is a multilingual collection of parliamentary speech corpora with rich linguistic annotations, built by aligning official parliamentary recordings with <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts.</p> -->
     
-    <p class="intro">
+    <div class="description">
+        <p class="intro">
+          <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
+          Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts. It preserves rich metadata including speaker attributes (name, gender, political party) and session details (date, agenda, parliamentary term), enabling cross-disciplinary research in political discourse analysis, speech processing, and computational linguistics. The corpus supports both computational (JSONL) and phonetic (TextGrid) analysis formats.
+        </p>
+      
+        <p class="intro">
+          <strong>ParlaSpeech-Anno</strong> extends the base corpus with four annotation layers: linguistic annotations (ParlaSpeech-Ling following Universal Dependencies), filled pause detection (ParlaSpeech-Pause), precise word-level alignments (ParlaSpeech-Align), and primary stress markers (ParlaSpeech-Stress). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
+        </p>
+      </div>
+
+    <!-- <p class="intro">
         <strong>ParlaSpeech-Anno-v1.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
         Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, <strong>enriched with multiple linguistic and paralinguistic layers</strong>. 
         The corpora were created by automatically aligning official parliamentary recordings with their 
@@ -196,13 +207,13 @@
         This includes detailed information about speakers (name, gender, political party, role) and 
         parliamentary sessions (date, agenda items, parliamentary term). The aligned corpora enables 
         research at the intersection of NLP, speech processing and political discourse analysis.
-    </p>
+    </p> -->
 
     <div class="reference">
-        Reference: <a href="https://www.clarin.si/repository/xmlui/handle/11356/1914" target="_blank">Ljubešić et al. (2024)</a>
+        Reference: <a href="https://arxiv.org/abs/2409.15397v2" target="_blank">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)</a>
     </div>
     
-    <h2>Annotation Layers (ParlaSpeechAnno)</h2>
+    <h2>Annotation Layers (ParlaSpeech-Anno)</h2>
     <div class="annotation-layers">
         <div class="layer">
             <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies (UD) formatted linguistic annotations (lemma, POS, syntax, etc.)
@@ -251,7 +262,7 @@
                     <th>Language</th>
                     <th>Version</th>
                     <th>Duration</th>
-                    <th>Segments</th>
+                    <th>Sentences</th>
                     <th>Layers</th>
                     <th>Links</th>
                 </tr>
@@ -263,7 +274,7 @@
                     <td>3,061 hours</td>
                     <td>922,679</td>
                     <td>All layers</td>
-                    <td><a href="http://hdl.handle.net/11356/1494" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR" target="_blank">Hugging Face Demo</a></td>
+                    <td><a href="http://hdl.handle.net/11356/1914" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR" target="_blank">HuggingFace</a></td>
                 </tr>
                 <tr>
                     <td>Serbian (RS)</td>
@@ -271,7 +282,7 @@
                     <td>896 hours</td>
                     <td>290,778</td>
                     <td>All layers</td>
-                    <td><a href="http://hdl.handle.net/11356/1834" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS" target="_blank">Hugging Face Demo</a></td>
+                    <td><a href="http://hdl.handle.net/11356/1834" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS" target="_blank">HuggingFace</a></td>
                 </tr>
                 <tr>
                     <td>Czech (CZ)</td>
@@ -279,7 +290,7 @@
                     <td>1,218 hours</td>
                     <td>717,682</td>
                     <td>Senti, Pause, Ling</td>
-                    <td><a href="http://hdl.handle.net/11356/1785" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-CZ" target="_blank">Hugging Face Demo</a></td>
+                    <td><a href="http://hdl.handle.net/11356/1785" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-CZ" target="_blank">HuggingFace</a></td>
                 </tr>
                 <tr>
                     <td>Polish (PL)</td>
@@ -287,7 +298,7 @@
                     <td>1,010 hours</td>
                     <td>535,465</td>
                     <td>Senti, Pause, Ling</td>
-                    <td><a href="http://hdl.handle.net/11356/1686" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL" target="_blank">Hugging Face Demo</a></td>
+                    <td><a href="http://hdl.handle.net/11356/1686" target="_blank">CLARIN</a> | <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL" target="_blank">HuggingFace</a></td>
                 </tr>
             </tbody>
         </table>
@@ -355,6 +366,10 @@
             <tr>
                 <td>Ivan Porupski</td>
                 <td><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></td>
+            </tr>
+            <tr>
+                <td>Danijel Koržinek</td>
+                <td><a href="mailto:danijel@pjwstk.edu.pl">danijel@pjwstk.edu.pl</a></td>
             </tr>
             <tr>
                 <td>Taja Kuzman Pungeršek</td>
@@ -536,14 +551,18 @@
 
         <h3>ParlaSpeech-Senti</h3>
         <div class="field">
-            <span class="field-name">16. ParlaSent_logit</span> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value).
+            <span class="field-name">16. sentiment</span> [list of dicts] - 
+            <div class="subfield">• <strong>ParlaSent_logit</strong> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value).</div>
+            <div class="subfield">• <strong>ParlaSent_3</strong> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).</div>
+            <div class="subfield">• <strong>ParlaSent_6</strong> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).</div>
         </div>
+        <!-- </div>
         <div class="field">
             <span class="field-name">17. ParlaSent_3</span> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).
         </div>
         <div class="field">
             <span class="field-name">18. ParlaSent_6</span> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).
-        </div>
+        </div> -->
 
         <h3>Example of an Entry</h3>
         <div class="intro">
