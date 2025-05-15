@@ -178,12 +178,16 @@
                 border-color: #3a3a3a;     /* Slightly lighter border */
             }
         }
+        html {
+        scroll-behavior: smooth;
+        }
+
     </style>
 </head>
 <body>
     <div class="header">
         <img src="img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
-        <h1>Welcome to ParlaSpeech</h1>
+        <h1 id="welcome">Welcome to ParlaSpeech</h1>
     </div>
     <!-- <p>ParlaSpeech is a multilingual collection of parliamentary speech corpora with rich linguistic annotations, built by aligning official parliamentary recordings with <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts.</p> -->
     
@@ -195,7 +199,7 @@
         </p>
       
         <p class="intro">
-            <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora with four annotation layers: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), and primary stress markers (<strong>ParlaSpeech-Stress</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
+            <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora <strong>with five annotation layers</strong>: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), primary stress markers (<strong>ParlaSpeech-Stress</strong>), and sentiment (<strong>ParlaSpeech-Senti</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
         </p>
           
       
@@ -215,7 +219,7 @@
     <strong>Reference:</strong> <a href="https://arxiv.org/abs/2409.15397v2" target="_blank">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)</a>
     </div>
     
-    <h2>Annotation Layers</h2>
+    <h2 id="annotation_layers">Annotation Layers</h2>
     <div class="annotation-layers">
         <div class="layer">
             <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies (UD) formatted linguistic annotations (lemma, POS, syntax, etc.)
@@ -256,7 +260,7 @@
     </div>
 
 
-    <h2>Corpus Overview</h2>
+    <h2 id="corpus_overview">Corpus Overview</h2>
     <div class="corpus-table">
         <table>
             <thead>
@@ -343,7 +347,7 @@
             <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
         </div>
     </div>  -->
-    <h2>Authors</h2>
+    <h2 id="authors">Authors</h2>
     <table class="authors-table">
         <!-- <thead>
             <tr>
@@ -419,7 +423,7 @@
         </div>
     </div> -->
     
-    <h2>Dataset Schema</h2>
+    <h2 id="dataset_schema">Dataset Schema</h2>
 
     <div class="note">
         <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted sentence, always beginning at 0.0s.</p>
@@ -561,7 +565,7 @@
             <span class="field-name">18. ParlaSent_6</span> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).
         </div> -->
 
-        <h3>Example of an Entry</h3>
+        <h3 id="example">Example of an Entry</h3>
         <div class="intro">
         <p>Here is a short sample from the corpora:</p>
         <p>(to be added)</p>
@@ -570,7 +574,7 @@
     </div>
 
 
-    <h3>History</h3>
+    <h3 id="history">History</h3>
     <div class="intro">
         <p>2021 -- The idea of the ParlaSpeech corpora was born while proposing the second iteration of the <a href="https://www.clarin.eu/parlamint">ParlaMint project</a> inside which textual transcripts were made available for 20+ European parliaments. We ideated a task to deliver at least 50 hours of aligned text and speech for at least three parliaments / languages. Inside the ParlaMint project ParlaSpeech v1 and ParlaSpeech v2 were born.</p>
         <p>2022 -- ParlaSpeech v1 was born in the early days of the second iteration of the ParlaMint project, where the Croatian parliament spoken data were aligned to the existing Croatian ParlaMint text transcripts. The result are the <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ParlaCLARIN workshop paper</a> describing the construction process, and the <a href="http://hdl.handle.net/11356/1494">ParlaSpeech-HR v1 corpus</a>,  1816 hours in size.</p>
