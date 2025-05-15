@@ -189,14 +189,16 @@
     
     <div class="description">
         <p class="intro">
-          <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
-          Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts. It preserves rich metadata including speaker attributes (name, gender, political party) and session details (date, agenda, parliamentary term), enabling cross-disciplinary research in political discourse analysis, speech processing, and computational linguistics. The corpus supports both computational (JSONL) and phonetic (TextGrid) analysis formats.
+          <strong>ParlaSpeech-v3.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
+          Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding 
+          <a href="https://www.clarin.eu/parlamint" target="_blank">ParlaMint</a> transcripts. It preserves rich metadata including speaker attributes (name, gender, political party) and session details (date, agenda, parliamentary term), enabling cross-disciplinary research in political discourse analysis, speech processing, and computational linguistics. The corpus supports both computational (JSONL) and phonetic (TextGrid) analysis formats.
         </p>
       
         <p class="intro">
-          <strong>ParlaSpeech-Anno</strong> extends the base corpus with four annotation layers: linguistic annotations (ParlaSpeech-Ling following Universal Dependencies), filled pause detection (ParlaSpeech-Pause), precise word-level alignments (ParlaSpeech-Align), and primary stress markers (ParlaSpeech-Stress). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
+            <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora with four annotation layers: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), and primary stress markers (<strong>ParlaSpeech-Stress</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
         </p>
-      </div>
+          
+      
 
     <!-- <p class="intro">
         <strong>ParlaSpeech-Anno-v1.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
@@ -210,10 +212,10 @@
     </p> -->
 
     <div class="reference">
-        Reference: <a href="https://arxiv.org/abs/2409.15397v2" target="_blank">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)</a>
+    <strong>Reference:</strong> <a href="https://arxiv.org/abs/2409.15397v2" target="_blank">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)</a>
     </div>
     
-    <h2>Annotation Layers (ParlaSpeech-Anno)</h2>
+    <h2>Annotation Layers</h2>
     <div class="annotation-layers">
         <div class="layer">
             <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies (UD) formatted linguistic annotations (lemma, POS, syntax, etc.)
@@ -260,7 +262,6 @@
             <thead>
                 <tr>
                     <th>Language</th>
-                    <th>Version</th>
                     <th>Duration</th>
                     <th>Sentences</th>
                     <th>Layers</th>
@@ -270,7 +271,6 @@
             <tbody>
                 <tr>
                     <td>Croatian (HR)</td>
-                    <td>v2.0</td>
                     <td>3,061 hours</td>
                     <td>922,679</td>
                     <td>All layers</td>
@@ -278,7 +278,6 @@
                 </tr>
                 <tr>
                     <td>Serbian (RS)</td>
-                    <td>v1.0</td>
                     <td>896 hours</td>
                     <td>290,778</td>
                     <td>All layers</td>
@@ -286,7 +285,6 @@
                 </tr>
                 <tr>
                     <td>Czech (CZ)</td>
-                    <td>v1.0</td>
                     <td>1,218 hours</td>
                     <td>717,682</td>
                     <td>Senti, Pause, Ling</td>
@@ -294,7 +292,6 @@
                 </tr>
                 <tr>
                     <td>Polish (PL)</td>
-                    <td>v1.0</td>
                     <td>1,010 hours</td>
                     <td>535,465</td>
                     <td>Senti, Pause, Ling</td>
