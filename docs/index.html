@@ -161,13 +161,13 @@
         /* Code styling - neutral gray */
         code, .code, .inline-code {
             font-family: 'Roboto Mono', 'Courier New', monospace;
-            background-color: #f0f0f0;  /* Light gray background */
-            color: #616161;             /* Dark gray text */
+            background-color: rgba(77, 77, 77, 0.6) !important;
+            color: #ffffff !important;             /* Dark gray text */
             padding: 0.2em 0.4em;
             border-radius: 3px;
-            border: 1px solid #e0e0e0;  /* Slightly darker gray border */
+            border: 1px solid #e0e0e0 !important;  /* Slightly darker gray border */
             font-size: 85%;
-            font-weight: 500;           /* Slightly bolder than normal text */
+            font-weight: 500;           /* Slightly bolder than normal text */      
         }
 
         /* Dark mode adaptation */
@@ -193,13 +193,13 @@
     
     <div class="description">
         <p class="intro">
-          <strong>ParlaSpeech-v3.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
+          <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
           Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding 
           <a href="https://www.clarin.eu/parlamint" target="_blank">ParlaMint</a> transcripts. It preserves rich metadata including speaker attributes (name, gender, political party) and session details (date, agenda, parliamentary term), enabling cross-disciplinary research in political discourse analysis, speech processing, and computational linguistics. The corpus supports both computational (JSONL) and phonetic (TextGrid) analysis formats.
         </p>
       
         <p class="intro">
-            <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora <strong>with five annotation layers</strong>: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), primary stress markers (<strong>ParlaSpeech-Stress</strong>), and sentiment (<strong>ParlaSpeech-Senti</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause, sentiment and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
+            <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora <strong>with five annotation layers</strong>: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), sentiment (<strong>ParlaSpeech-Senti</strong>), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), and primary stress markers (<strong>ParlaSpeech-Stress</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause, sentiment and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
         </p>
           
       
@@ -216,8 +216,15 @@
     </p> -->
 
     <div class="reference">
-    <strong>Reference:</strong> <a href="https://arxiv.org/abs/2409.15397v2" target="_blank">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)</a>
-    </div>
+        <strong id="reference">Reference:</strong>
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-77961-9_10#citeas" target="_blank">
+          The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings (2024)
+        </a>
+        <br>
+        [<a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-031-77961-9_10?format=bibtex&flavour=citation" target="_blank">BibTeX</a>]
+        [<a href="https://arxiv.org/abs/2409.15397v2" target="_blank">arXiv</a>]
+      </div>
+      
     
     <h2 id="annotation_layers">Annotation Layers</h2>
     <div class="annotation-layers">
@@ -225,11 +232,13 @@
             <span class="layer-name"><strong>ParlaSpeech-Ling:</strong></span> Universal Dependencies (UD) formatted linguistic annotations (lemma, POS, syntax, etc.)
         </div>
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech (i.e. "ermm", "umm")
+            <span class="layer-name"><strong>ParlaSpeech-Senti:</strong></span> Sentiment from transcript (ParlaSent).
+
         </div>
         <div class="layer">
-            <span class="layer-name"><strong>ParlaSpeech-Senti:</strong></span> Sentiment from transcript (ParlaSent).
+            <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech (i.e. "ermm", "umm")
         </div>
+
         <div class="layer">
             <span class="layer-name"><strong>ParlaSpeech-Align:</strong></span> Precise grapheme/word-level alignments (HR/RS only)
         </div>
@@ -426,7 +435,7 @@
     <h2 id="dataset_schema">Dataset Schema</h2>
 
     <div class="note">
-        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted sentence, always beginning at 0.0s.</p>
+        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so instances don't start at 0.0s. Relative times are normalized to each extracted sentence, always beginning at 0.0s.</p>
     </div>
 
     <div class="schema">
