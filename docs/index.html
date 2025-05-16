@@ -63,17 +63,42 @@
             margin: 15px 0;
         }
         .authors-table {
-            width: 100%;
+            width: auto; /* Let the content determine width */
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 10px 0;
+            font-size: 1em; /* Adjust font size if needed */
         }
-        .authors-table th, .authors-table td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
+
+        .authors-table td {
+            padding: 4px 0; /* Reduce vertical and horizontal padding */
+            border: none;
             text-align: left;
+            vertical-align: baseline; /* Align name and email properly */
         }
-        .authors-table th {
-            background-color: #f2f2f2;
+
+        /* Bring emails closer to names by reducing left padding */
+        .authors-table td:first-child {
+            padding-right: 10px; /* Space between name and email */
+            white-space: nowrap; /* Prevent line breaks in names */
+        }
+
+        .authors-table td:last-child {
+            padding-left: 0; /* Remove left padding for emails */
+        }
+
+        /* Optional: Remove hover effect if it still feels "table-like" */
+        .authors-table tr:hover {
+            background-color: transparent;
+        }
+
+        /* Style email links */
+        .authors-table a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .authors-table a:hover {
+            text-decoration: underline;
         }
         .corpus-table {
             margin: 20px 0;
@@ -178,10 +203,112 @@
                 border-color: #3a3a3a;     /* Slightly lighter border */
             }
         }
+        
+        .example-entry {
+            margin: 20px 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .json-viewer {
+            background-color: #f0f0f0;  /* subtle gray, same as .json-full */
+            color: #000000;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 12px;
+            box-sizing: border-box;
+            overflow-x: auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.5;
+            box-shadow: none; /* remove shadow for consistent look */
+        }
+
+
+        .json-full {
+            background-color: transparent !important; /* transparent because .json-viewer has background */
+            color: inherit !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            display: none; /* toggled visibility */
+            width: 100% !important;
+            box-sizing: border-box !important;
+            overflow-x: auto !important;
+        }
+
+        .json-full code {
+            background: transparent !important;
+            color: inherit !important;
+            display: block !important;
+            white-space: pre-wrap !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+        }
+
+
+
+
+
+        .toggle-json {
+            background: #f6f8fa;
+            color: #0366d6;
+            border: 1px solid #e1e4e8;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toggle-json:hover {
+            background: #e1e4e8;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
         html {
         scroll-behavior: smooth;
         }
+        .history-timeline {
+            list-style: none; /* Remove bullets */
+            padding-left: 0;
+            margin: 1em 0;
+            line-height: 1.5;
+        }
 
+        .history-timeline li {
+            margin-bottom: 1.2em; /* Space between entries */
+            padding-left: 1.2em;
+            position: relative;
+        }
+
+        .history-timeline li:before {
+            content: "⚬"; /* Small circle */
+            color: #666;
+            left: 0;
+            position: absolute;
+            font-size: 0.9em;
+        }
+
+        .history-timeline strong {
+            font-weight: 600; /* Slightly bolder year */
+            margin-right: 0.3em;
+        }
+
+        .history-timeline a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .history-timeline a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -269,7 +396,7 @@
     </div>
 
 
-        <h2 id="corpus_overview">Corpus Overview</h2>
+    <h2 id="corpus_overview">Corpus Overview</h2>
     <div class="corpus-table">
         <table>
             <thead>
@@ -461,7 +588,7 @@
         </div>
         
         <div class="field">
-            <span class="field-name">5. text</span> [string] - Human-transcribed text corresponding to the audio.
+            <span class="field-name">5. text</span> [string] - Text from official manual transcriptions corresponding to the audio.
         </div>
         
         <div class="field">
@@ -517,17 +644,17 @@
         
         <h3>ParlaSpeech-Align</h3>
         <div class="field">
-            <span class="field-name">12. words_align</span> [list of dicts] - Kaldi MFA word-level alignment data.
+            <span class="field-name">12. words_align</span> [list of dicts] - Kaldi MFA word-level alignment data. Each dictionary corresponds to a word.
             <div class="subfield">• <strong>text</strong> [string] - Word text.</div>
             <div class="subfield">• <strong>char_s</strong> [int] - Start character index, relative.</div>
             <div class="subfield">• <strong>char_e</strong> [int] - End character index, relative.</div>
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
-            <div class="subfield">• <strong>words_idx</strong> [int] - Index of word in <code>words</code>. Equal to Null if instance cannot be matched to any <code>words</code> instance.. </div>
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of word in <code>words</code>. Equal to Null if instance cannot be matched to any <code>words</code> instance.</div>
         </div>
         
         <div class="field">
-            <span class="field-name">13. chars_align</span> [list of lists of dicts] - Kaldi MFA character-level alignment data.
+            <span class="field-name">13. chars_align</span> [list of lists of dicts] - Kaldi MFA character-level alignment data. Every dictionary corresponds to a character, while the list of dictionaries corresponds to a word.
             <div class="subfield">• <strong>text</strong> [string] - Character(s).</div>
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the character(s), relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the character(s), relative.</div>
@@ -537,7 +664,7 @@
         
         <h3>ParlaSpeech-Stress</h3>
         <div class="field">
-            <span class="field-name">14. multisyllabic_words</span> [list of dicts] - Primary stress annotations for multisyllabic words.
+            <span class="field-name">14. primary_stress</span> [list of dicts] - Primary stress annotations for multisyllabic words.
             <div class="subfield">• <strong>words_align_idx</strong> [int] - Index of word in the <code>words_align</code>.</div>
             <div class="subfield">• <strong>stress</strong> [int] - Index of syllable containing the primary stress.</div>
             <div class="subfield">• <strong>nuclei</strong> [list of int] - Character indices of syllable nuclei.</div>
@@ -546,8 +673,8 @@
         
         <h3>ParlaSpeech-Ling</h3>
         <div class="field">
-            <span class="field-name">15. annotations</span> [list of dicts] - Linguistic annotations per word.
-            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the <code>text</code> that cannot be found in <code>words</code></div>
+            <span class="field-name">15. linguistic_annotation</span> [list of dicts] - Text-based word-level linguistic annotation.
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the <code>text</code> that cannot be found in <code>words</code> (such as punctuation).</div> 
             <div class="subfield">• <strong>id</strong> [int] - Token ID.</div>
             <div class="subfield">• <strong>text</strong> [string] - Word form.</div>
             <div class="subfield">• <strong>lemma</strong> [string] - Lemma of the word.</div>
@@ -561,8 +688,9 @@
 
         <h3>ParlaSpeech-Senti</h3>
         <div class="field">
-            <span class="field-name">16. sentiment</span> [list of dicts] - 
-            <div class="subfield">• <strong>ParlaSent_logit</strong> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value).</div>
+            <span class="field-name">16. sentiment</span> [list of dicts] - Text-based sentiment prediction based on the ParlaSent model (https://huggingface.co/classla/xlm-r-parlasent).
+            <div class="subfield">• <strong>ParlaSent_logit</strong> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value, ranging from 0 (negative) to 6 (positive)).
+            </div>
             <div class="subfield">• <strong>ParlaSent_3</strong> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).</div>
             <div class="subfield">• <strong>ParlaSent_6</strong> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).</div>
         </div>
@@ -575,26 +703,151 @@
         </div> -->
 
         <h3 id="example">Example of an Entry</h3>
-        <div class="intro">
-        <p>Here is a short sample from the corpora:</p>
-        <p>(to be added)</p>
+        <div class="example-entry">
+            <p>Here is a short sample from the corpora, reformatted for readability:</p>
+            
+            <div class="json-viewer">
+                <!-- Preview Mode (collapsed by default) -->
+                <div class="json-preview">
+                    <div class="json-line"><span class="json-key">"id"</span>: <span class="json-string">"ParlaMint-HR_2020-01-15-0.u182035_5483-5490"</span></div>
+                    <div class="json-line"><span class="json-key">"audio"</span>: <span class="json-string">"jgEFZDlBGYg/jgEFZDlBGYg_6640.0-6641.24.flac"</span></div>
+                    <div class="json-line"><span class="json-key">"text"</span>: <span class="json-string">"A zašto?"</span></div>
+                    <div class="json-line"><span class="json-key">"speaker_name"</span>: <span class="json-string">"Batinić, Milorad"</span></div>
+                    <div class="json-line"><span class="json-key">"filled_pauses"</span>: <span class="json-string">[{"time_s": 0.0, "time_e": 0.34, "words_idx": 0}]</span></div>
+                    </span></div>
+                  </div>
+                  
+                
+                <!-- Full JSON (hidden by default) -->
+                <pre class="json-full hidden"><code>{
+          "id": "ParlaMint-HR_2020-01-15-0.u182035_5483-5490",
+          "words": [
+            { "time_s": 0.0, "time_e": 0.34, "char_s": 0, "char_e": 1 },
+            { "time_s": 0.44, "time_e": 1.24, "char_s": 2, "char_e": 7 }
+          ],
+          "audio": "jgEFZDlBGYg/jgEFZDlBGYg_6640.0-6641.24.flac",
+          "audio_length": 1.24,
+          "text": "A zašto?",
+          "text_start": 5483,
+          "text_end": 5490,
+          "audio_start": 6640.0,
+          "audio_end": 6641.24,
+          "speaker_info": {
+            "Text_ID": "ParlaMint-HR_2020-01-15-0",
+            "ID": "ParlaMint-HR_2020-01-15-0.u182035",
+            "Title": "",
+            "Date": "2020-01-15",
+            "Body": "Unicameralism",
+            "Term": "9. mandat",
+            "Session": "-",
+            "Meeting": "Zasedanje 16",
+            "Sitting": "2020-05-13",
+            "Agenda": "-",
+            "Subcorpus": "Reference",
+            "Lang": "Croatian",
+            "Speaker_role": "Regular",
+            "Speaker_MP": "MP",
+            "Speaker_minister": "notMinister",
+            "Speaker_party": "HNS",
+            "Speaker_party_name": "Hrvatska narodna stranka",
+            "Party_status": "Coalition",
+            "Party_orientation": "Centre to centre-left",
+            "Speaker_ID": "BatinićMilorad",
+            "Speaker_name": "Batinić, Milorad",
+            "Speaker_gender": "M",
+            "Speaker_birth": "1957"
+          },
+          "filled_pauses": [
+            { "time_s": 0.0, "time_e": 0.34, "words_idx": 0 }
+          ],
+          "words_align": [
+            { "text": "a", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0.0 },
+            { "text": "zašto", "char_s": 2, "char_e": 7, "time_s": 0.36, "time_e": 1.22, "words_idx": 1.0 }
+          ],
+          "chars_align": [
+            [ { "text": "a", "time_s": 0.03, "time_e": 0.31, "char_s": 0, "char_e": 1 } ],
+            [ 
+              { "text": "z", "time_s": 0.36, "time_e": 0.5, "char_s": 2, "char_e": 3 },
+              { "text": "a", "time_s": 0.5, "time_e": 0.62, "char_s": 3, "char_e": 4 },
+              { "text": "š", "time_s": 0.62, "time_e": 0.71, "char_s": 4, "char_e": 5 },
+              { "text": "t", "time_s": 0.71, "time_e": 0.8, "char_s": 5, "char_e": 6 },
+              { "text": "o", "time_s": 0.8, "time_e": 1.22, "char_s": 6, "char_e": 7 }
+            ]
+          ],
+          "primary_stress": [
+            { "words_align_idx": 1, "stress": 1, "nuclei": [1, 4], "raw": [0.5, 0.62] }
+          ],
+          "lingustic_annotation": [
+            { "words_idx": 0, "id": 1, "text": "A", "lemma": "a", "upos": "CCONJ", "xpos": "Cc", "feats": null, "head": 2, "deprel": "cc", "misc": "start_char=0|end_char=1" },
+            { "words_idx": 1, "id": 2, "text": "zašto", "lemma": "zašto", "upos": "ADV", "xpos": "Rgp", "feats": "Degree=Pos|PronType=Int,Rel", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=7" },
+            { "words_idx": null, "id": 3, "text": "?", "lemma": "?", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=8|end_char=9" }
+          ],
+          "sentiment": [
+            {
+              "ParlaSent_logit": 2.035,
+              "ParlaSent_6": "Neutral Negative",
+              "ParlaSent_3": "Neutral"
+            }
+          ],
+          "key": 8
+          
+        }</code></pre>
+                
+                <button class="toggle-json">Show Full JSON</button>
+            </div>
         </div>
 
     </div>
+    <script>
+        document.querySelector('.toggle-json').addEventListener('click', function() {
+            const fullJson = document.querySelector('.json-full');
+            const preview = document.querySelector('.json-preview');
+            const button = this;
+            
+            if (fullJson.style.display === 'none') {
+                fullJson.style.display = 'block';
+                preview.style.display = 'none';
+                button.textContent = 'Hide Full JSON';
+            } else {
+                fullJson.style.display = 'none';
+                preview.style.display = 'block';
+                button.textContent = 'Show Full JSON';
+            }
+        });
+        </script>
 
-
-    <h3 id="history">History</h3>
+    <!-- <h3 id="history">History</h3>
     <div class="intro">
         <p>2021 -- The idea of the ParlaSpeech corpora was born while proposing the second iteration of the <a href="https://www.clarin.eu/parlamint">ParlaMint project</a> inside which textual transcripts were made available for 20+ European parliaments. We ideated a task to deliver at least 50 hours of aligned text and speech for at least three parliaments / languages. Inside the ParlaMint project ParlaSpeech v1 and ParlaSpeech v2 were born.</p>
         <p>2022 -- ParlaSpeech v1 was born in the early days of the second iteration of the ParlaMint project, where the Croatian parliament spoken data were aligned to the existing Croatian ParlaMint text transcripts. The result are the <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ParlaCLARIN workshop paper</a> describing the construction process, and the <a href="http://hdl.handle.net/11356/1494">ParlaSpeech-HR v1 corpus</a>,  1816 hours in size.</p>
         <p>2023 -- ParlaSpeech v2 was the final result of the ParlaMint project, spanning four parliaments of Croatia, Czechia, Poland, and Serbia, and 5,000 hours of audio. The improved alignment process, applied to the Croatian, Polish and Serbian parliaments, is described in the <a href="https://doi.org/10.1007/978-3-031-77961-9_10">SPECOM conference paper</a>, while the Czech corpus has been compiled from the <a href="https://link.springer.com/chapter/10.1007/978-3-030-83527-9_25">previously constructed Czech parliamentary speech corpus</a>.</p>
-        <p>2024 -- ParlaSpeech v3 is developed as an enriched version of the audio and transcripts available in ParlaSpeech v2. Linguistic UD-based annotation of transcripts and paralinguistic annotation of filled pauses and primary stress, paired with more detailed word- and character-level alignment of text to the audio.</p>
+        <p>2024 -- ParlaSpeech v3 is developed as an enriched version of the audio and transcripts available in ParlaSpeech v2. New features include linguistic UD-based annotation of transcripts, paralinguistic annotation of filled pauses and primary stress, more detailed word- and character-level alignment of text to the audio, and transcript-based sentiment classification.</p>
         <p>2025 -- ParlaSpeech v4, in development, represents an extension of the list of parliaments to also include the Bulgarian, Slovenian and Ukrainian parliament.</p>
-    </div>
+    </div> -->
 
+    <h3 id="history">History</h3>
+<ul class="history-timeline">
+    <li>
+        <strong>2021</strong> — The idea of the ParlaSpeech corpora was born while proposing the second iteration of the <a href="https://www.clarin.eu/parlamint">ParlaMint project</a> inside which textual transcripts were made available for 20+ European parliaments. We ideated a task to deliver at least 50 hours of aligned text and speech for at least three parliaments / languages. Inside the ParlaMint project ParlaSpeech v1 and ParlaSpeech v2 were born.
+    </li>
+    <li>
+        <strong>2022</strong> — ParlaSpeech v1 was born in the early days of the second iteration of the ParlaMint project, where the Croatian parliament spoken data were aligned to the existing Croatian ParlaMint text transcripts. The result are the <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ParlaCLARIN workshop paper</a> describing the construction process, and the <a href="http://hdl.handle.net/11356/1494">ParlaSpeech-HR v1 corpus</a>, 1816 hours in size.
+    </li>
+    <li>
+        <strong>2023</strong> — ParlaSpeech v2 was the final result of the ParlaMint project, spanning four parliaments of Croatia, Czechia, Poland, and Serbia, and 5,000 hours of audio. The improved alignment process, applied to the Croatian, Polish and Serbian parliaments, is described in the <a href="https://doi.org/10.1007/978-3-031-77961-9_10">SPECOM conference paper</a>, while the Czech corpus has been compiled from the <a href="https://link.springer.com/chapter/10.1007/978-3-030-83527-9_25">previously constructed Czech parliamentary speech corpus</a>.
+    </li>
+    <li>
+        <strong>2024</strong> — ParlaSpeech v3 is developed as an enriched version of the audio and transcripts available in ParlaSpeech v2. New features include linguistic UD-based annotation of transcripts, paralinguistic annotation of filled pauses and primary stress, more detailed word- and character-level alignment of text to the audio, and transcript-based sentiment classification.
+    </li>
+    <li>
+        <strong>2025</strong> — ParlaSpeech v4, in development, represents an extension of the list of parliaments to also include the Bulgarian, Slovenian and Ukrainian parliament.
+    </li>
+</ul>
 
     <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
         <p>© 2023 ParlaSpeech Project | CLARIN.SI</p>
     </footer>
 </body>
+
+
 </html>
