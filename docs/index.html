@@ -688,7 +688,7 @@
 
         <h3>ParlaSpeech-Senti</h3>
         <div class="field">
-            <span class="field-name">16. sentiment</span> [list of dicts] - Text-based sentiment prediction based on the ParlaSent model (https://huggingface.co/classla/xlm-r-parlasent).
+            <span class="field-name">16. sentiment</span> [dict] - Text-based sentiment prediction based on the ParlaSent model (https://huggingface.co/classla/xlm-r-parlasent).
             <div class="subfield">• <strong>ParlaSent_logit</strong> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value, ranging from 0 (negative) to 6 (positive)).
             </div>
             <div class="subfield">• <strong>ParlaSent_3</strong> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).</div>
@@ -709,13 +709,16 @@
             <div class="json-viewer">
                 <!-- Preview Mode (collapsed by default) -->
                 <div class="json-preview">
-                    <div class="json-line"><span class="json-key">"id"</span>: <span class="json-string">"ParlaMint-HR_2020-01-15-0.u182035_5483-5490"</span></div>
-                    <div class="json-line"><span class="json-key">"audio"</span>: <span class="json-string">"jgEFZDlBGYg/jgEFZDlBGYg_6640.0-6641.24.flac"</span></div>
-                    <div class="json-line"><span class="json-key">"text"</span>: <span class="json-string">"A zašto?"</span></div>
-                    <div class="json-line"><span class="json-key">"speaker_name"</span>: <span class="json-string">"Batinić, Milorad"</span></div>
-                    <div class="json-line"><span class="json-key">"filled_pauses"</span>: <span class="json-string">[{"time_s": 0.0, "time_e": 0.34, "words_idx": 0}]</span></div>
-                    </span></div>
-                  </div>
+                  <div class="json-line"><span class="json-key">"text"</span>: <span class="json-string">"A zašto?"</span></div>
+                  <div class="json-line"><span class="json-key">"Speaker_name"</span>: <span class="json-string">"Batinić, Milorad"</span></div>
+                  <div class="json-line"><span class="json-key">"Speaker_gender"</span>: <span class="json-string">"M"</span></div>
+                  <div class="json-line"><span class="json-key">"Speaker_birth"</span>: <span class="json-string">"1957"</span></div>
+                  <div class="json-line"><span class="json-key">"filled_pauses"</span>: <span class="json-string">[{ "time_s": 0.0, "time_e": 0.34, "words_idx": 0 }]</span></div>
+                  <div class="json-line"><span class="json-key">"primary_stress"</span>: <span class="json-string">[{ "words_align_idx": 1, "stress": 1, "nuclei": [1, 4], "raw": [0.5, 0.62] }]</span></div>
+                  <div class="json-line"><span class="json-key">"sentiment"</span>: <span class="json-string">{ "ParlaSent_6": "Neutral Negative" }</span></div>
+                </div>
+              </div>
+              
                   
                 
                 <!-- Full JSON (hidden by default) -->
@@ -782,13 +785,11 @@
             { "words_idx": 1, "id": 2, "text": "zašto", "lemma": "zašto", "upos": "ADV", "xpos": "Rgp", "feats": "Degree=Pos|PronType=Int,Rel", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=7" },
             { "words_idx": null, "id": 3, "text": "?", "lemma": "?", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=8|end_char=9" }
           ],
-          "sentiment": [
-            {
+          "sentiment": {
               "ParlaSent_logit": 2.035,
               "ParlaSent_6": "Neutral Negative",
               "ParlaSent_3": "Neutral"
             }
-          ],
         }</code></pre>
                 
                 <button class="toggle-json">Show Full JSON</button>
