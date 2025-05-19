@@ -230,7 +230,7 @@
             padding: 0 !important;
             border-radius: 0 !important;
             border: none !important;
-            display: none; /* toggled visibility */
+            /* display: none; toggled visibility */
             width: 100% !important;
             box-sizing: border-box !important;
             overflow-x: auto !important;
@@ -247,31 +247,37 @@
             font-size: 14px !important;
             line-height: 1.4 !important;
         }
-
-
-
-
-
-        .toggle-json {
-            background: #f6f8fa;
-            color: #0366d6;
-            border: 1px solid #e1e4e8;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 12px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .toggle-json:hover {
-            background: #e1e4e8;
-        }
-
-        .hidden {
-            display: none;
-        }
         
+
+        pre.json-full {
+            background: #e7e7e7 !important;
+            color: rgb(0, 0, 0) !important;
+            padding: 1em;
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+
+        .json-key {
+            color: rgb(255, 115, 0);
+        }
+
+        /* .json-subkey {
+            color: #f4a300;
+        } */
+
+        .json-string {
+            color: #37d46e; /* pastel green */
+        }
+
+        .json-number {
+            color: rgb(168, 33, 60);
+        }
+
+        .json-punctuation {
+            color: rgb(0, 0, 0);
+        }
+
+
         html {
         scroll-behavior: smooth;
         }
@@ -316,8 +322,7 @@
         <img src="img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
         <h1 id="welcome">Welcome to ParlaSpeech</h1>
     </div>
-    <!-- <p>ParlaSpeech is a multilingual collection of parliamentary speech corpora with rich linguistic annotations, built by aligning official parliamentary recordings with <a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a> transcripts.</p> -->
-    
+
     <div class="description">
         <p class="intro">
           <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
@@ -328,19 +333,9 @@
         <p class="intro">
             <strong>ParlaSpeech-v3.0</strong> extends the base ParlaSpeech corpora <strong>with five annotation layers</strong>: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), sentiment (<strong>ParlaSpeech-Senti</strong>), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), and primary stress markers (<strong>ParlaSpeech-Stress</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause, sentiment and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis.
         </p>
-          
+    </div>     
       
 
-    <!-- <p class="intro">
-        <strong>ParlaSpeech-Anno-v1.0</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
-        Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, <strong>enriched with multiple linguistic and paralinguistic layers</strong>. 
-        The corpora were created by automatically aligning official parliamentary recordings with their 
-        corresponding <strong><a href="https://www.clarin.eu/content/parlamint-towards-comparable-parliamentary-corpora" target="_blank">ParlaMint</a></strong> 
-        transcripts, preserving the rich structural and speaker metadata from the original transcripts. 
-        This includes detailed information about speakers (name, gender, political party, role) and 
-        parliamentary sessions (date, agenda items, parliamentary term). The aligned corpora enables 
-        research at the intersection of NLP, speech processing and political discourse analysis.
-    </p> -->
 
     <div class="reference">
         <strong id="reference">Reference:</strong>
@@ -442,47 +437,7 @@
     </div>
     
 
-    <!-- <h3>Annotation Layers</h3>
-    <div class="annotation-layers">
-        <div class="layer">
-            <h4>ParlaSpeech-Ling</h4>
-            <p>Universal Dependencies linguistic annotation (lemma, POS, morphology, syntax)</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Pause</h4>
-            <p>Filled pause detection in speech recordings</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Align</h4>
-            <p>Precise grapheme/word-level alignments (HR/SR only)</p>
-        </div>
-        <div class="layer">
-            <h4>ParlaSpeech-Stress</h4>
-            <p>Primary stress detection in multisyllabic words (HR/SR only)</p>
-        </div>
-    </div> -->
 
-
-
-    <!-- <h2>Authors</h2>
-    <div class="authors-list">
-        <div class="author">
-            <h3>Nikola Ljubešić</h3>
-            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Peter Rupnik</h3>
-            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Ivan Porupski</h3>
-            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Taja Kuzman Pungeršek</h3>
-            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
-        </div>
-    </div>  -->
     <h2 id="authors">Authors</h2>
     <table class="authors-table">
         <!-- <thead>
@@ -514,50 +469,7 @@
             </tr>
         </tbody>
     </table>
-    <!-- <div class="note">
-        <p><strong>Formats:</strong> Available as JSONL for computational use and TextGrid for phonetic analysis.</p>
-        <p><strong>Metadata:</strong> All corpora include complete speaker metadata (party, gender, role) from ParlaMint.</p>
-        <p><strong>Reference:</strong> <a href="https://aclanthology.org/2022.parlaclarin-1.16" target="_blank">Ljubešić et al. (2022)</a></p>
-    </div> -->
 
-
-    <!-- <h1>Welcome to ParlaSpeech</h1>
-    <p>This is the CLARIN.SI GitHub Pages site for ParlaSpeech, a multilingual corpus of parliamentary proceedings.</p>
-    
-    <h2>Corpus Overview</h2>
-    <p>ParlaAnno-v1.0 is a corpus of 4 languages:</p>
-    <div class="language-list">
-        <span class="language-tag">Croatian (ParlaSpeech-v2 HR)</span>
-        <span class="language-tag">Czech (ParlaSpeech-v1 CZ)</span>
-        <span class="language-tag">Serbian (ParlaSpeech-v1 SR, RS)</span>
-        <span class="language-tag">Polish (ParlaSpeech-v1 PL)</span>
-    </div>
-    <p>It contains audio files of speech and its transcripts, alongside enrichments.</p>
-    
-    <div class="note">
-        <p><strong>Note:</strong> HR and SR contain all of the layers, while CZ and PL contain only ParlaSpeech-Pause (filled pauses) and ParlaSpeech-Ling (linguistic metadata) layers.</p>
-        <p><strong>Timing information:</strong> Absolute times are timestamps from the original full-length session audio, so they don't start at 0.0s. Relative times are normalized to each extracted utterance, always beginning at 0.0s.</p>
-    </div>
-    
-    <h2>Authors</h2>
-    <div class="authors-list">
-        <div class="author">
-            <h3>Nikola Ljubešić</h3>
-            <p><a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Peter Rupnik</h3>
-            <p><a href="mailto:peter.rupnik@ijs.si">peter.rupnik@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Ivan Porupski</h3>
-            <p><a href="mailto:ivan.porupski@ijs.si">ivan.porupski@ijs.si</a></p>
-        </div>
-        <div class="author">
-            <h3>Taja Kuzman Pungeršek</h3>
-            <p><a href="mailto:taja.kuzman@ijs.si">taja.kuzman@ijs.si</a></p>
-        </div>
-    </div> -->
     
     <h2 id="dataset_schema">Dataset Schema</h2>
 
@@ -694,135 +606,194 @@
             <div class="subfield">• <strong>ParlaSent_3</strong> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).</div>
             <div class="subfield">• <strong>ParlaSent_6</strong> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).</div>
         </div>
-        <!-- </div>
-        <div class="field">
-            <span class="field-name">17. ParlaSent_3</span> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).
-        </div>
-        <div class="field">
-            <span class="field-name">18. ParlaSent_6</span> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).
-        </div> -->
+
 
         <h3 id="example">Example of an Entry</h3>
         <div class="example-entry">
-            <p>Here is a short sample from the corpora, reformatted for readability:</p>
-            
-            <div class="json-viewer">
-                <!-- Preview Mode (collapsed by default) -->
-                <div class="json-preview">
-                  <div class="json-line"><span class="json-key">"text"</span>: <span class="json-string">"A zašto?"</span></div>
-                  <div class="json-line"><span class="json-key">"Speaker_name"</span>: <span class="json-string">"Batinić, Milorad"</span></div>
-                  <div class="json-line"><span class="json-key">"Speaker_gender"</span>: <span class="json-string">"M"</span></div>
-                  <div class="json-line"><span class="json-key">"Speaker_birth"</span>: <span class="json-string">"1957"</span></div>
-                  <div class="json-line"><span class="json-key">"filled_pauses"</span>: <span class="json-string">[{ "time_s": 0.0, "time_e": 0.34, "words_idx": 0 }]</span></div>
-                  <div class="json-line"><span class="json-key">"primary_stress"</span>: <span class="json-string">[{ "words_align_idx": 1, "stress": 1, "nuclei": [1, 4], "raw": [0.5, 0.62] }]</span></div>
-                  <div class="json-line"><span class="json-key">"sentiment"</span>: <span class="json-string">{ "ParlaSent_6": "Neutral Negative" }</span></div>
-                </div>
-              </div>
-              
-                  
-                
-                <!-- Full JSON (hidden by default) -->
-                <pre class="json-full hidden"><code>{
-          "id": "ParlaMint-HR_2020-01-15-0.u182035_5483-5490",
+          <p>Here is a short sample from the corpora, reformatted for readability:</p>
+          
+          <pre class="json-full" id="json-block"></pre>
+
+
+          <!-- COMMENT THE THING BELLOW TO REMOVE COLORED JSONL AND UNCOMMENT THE CODE BENEATH IT -->
+          <script>
+            const jsonData = {
+              "id": "ParlaMint-HR_2017-11-09-0.u57194_7269-7278",
+              "words": [
+                { "time_s": 0.0, "time_e": 0.44, "char_s": 0, "char_e": 1 },
+                { "time_s": 0.66, "time_e": 1.58, "char_s": 2, "char_e": 9 }
+              ],
+              "audio": "I27W0FVLD2I/I27W0FVLD2I_27158.08-27159.66.flac",
+              "audio_length": 1.58,
+              "text": "I završno.",
+              "text_start": 7269,
+              "text_end": 7278,
+              "audio_start": 27158.08,
+              "audio_end": 27159.66,
+              "speaker_info": {
+                "Text_ID": "ParlaMint-HR_2017-11-09-0",
+                "ID": "ParlaMint-HR_2017-11-09-0.u57194",
+                "Title": "",
+                "Date": "2017-11-09",
+                "Body": "Unicameralism",
+                "Term": "9. mandat",
+                "Session": "-",
+                "Meeting": "Zasedanje 6",
+                "Sitting": "2017-12-15",
+                "Agenda": "-",
+                "Subcorpus": "Reference",
+                "Lang": "Croatian",
+                "Speaker_role": "Regular",
+                "Speaker_MP": "MP",
+                "Speaker_minister": "notMinister",
+                "Speaker_party": "SDP",
+                "Speaker_party_name": "Socijaldemokratska partija Hrvatske",
+                "Party_status": "Coalition",
+                "Party_orientation": "Centre-left",
+                "Speaker_ID": "GlasovacSabina",
+                "Speaker_name": "Glasovac, Sabina",
+                "Speaker_gender": "F",
+                "Speaker_birth": "1978"
+              },
+              "filled_pauses": [
+                { "time_s": 0.36, "time_e": 0.6, "words_idx": 0 }
+              ],
+              "words_align": [
+                { "text": "i", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0 },
+                { "text": "završno", "char_s": 2, "char_e": 9, "time_s": 0.6, "time_e": 1.56, "words_idx": 1 }
+              ],
+              "chars_align": [
+                [ { "text": "i", "time_s": 0.03, "time_e": 0.31, "char_s": 0, "char_e": 1 } ],
+                [
+                  { "text": "z", "time_s": 0.6, "time_e": 0.71, "char_s": 2, "char_e": 3 },
+                  { "text": "a", "time_s": 0.71, "time_e": 0.84, "char_s": 3, "char_e": 4 },
+                  { "text": "v", "time_s": 0.84, "time_e": 0.87, "char_s": 4, "char_e": 5 },
+                  { "text": "r", "time_s": 0.87, "time_e": 0.91, "char_s": 5, "char_e": 6 },
+                  { "text": "š", "time_s": 0.91, "time_e": 1.06, "char_s": 6, "char_e": 7 },
+                  { "text": "n", "time_s": 1.06, "time_e": 1.15, "char_s": 7, "char_e": 8 },
+                  { "text": "o", "time_s": 1.15, "time_e": 1.56, "char_s": 8, "char_e": 9 }
+                ]
+              ],
+              "primary_stress": [
+                { "words_align_idx": 1, "stress": 1, "nuclei": [1, 3, 6], "raw": [0.7, 0.84] }
+              ],
+              "linguistic_annotation": [
+                { "words_idx": 0, "id": 1, "text": "I", "lemma": "i", "upos": "CCONJ", "xpos": "Cc", "feats": null, "head": 2, "deprel": "cc", "misc": "start_char=0|end_char=1" },
+                { "words_idx": 1, "id": 2, "text": "završno", "lemma": "završan", "upos": "ADJ", "xpos": "Agpnsny", "feats": "Case=Nom|Definite=Def|Degree=Pos|Gender=Neut|Number=Sing", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=9" },
+                { "words_idx": null, "id": 3, "text": ".", "lemma": ".", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=10|end_char=11" }
+              ],
+              "sentiment": {
+                "ParlaSent_logit": 3.428,
+                "ParlaSent_6": "Neutral Positive",
+                "ParlaSent_3": "Neutral"
+              }
+            };
+          
+            function syntaxHighlight(json) {
+            if (typeof json !== "string") {
+                json = JSON.stringify(json, null, 2);
+            }
+            json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return json.replace(
+                /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|[0-9.eE+-]+)/g,
+                (match) => {
+                let cls = "json-number";
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                    cls = "json-key";
+                    } else {
+                    cls = "json-string";
+                    }
+                }
+                return `<span class="${cls}">${match}</span>`;
+                }
+            );
+            }
+
+            document.getElementById("json-block").innerHTML = syntaxHighlight(jsonData);
+
+          </script>
+
+<!-- COMMENT THE THING ABOVE TO REMOVE COLORED JSONL AND UNCOMMENT THIS BOTTOM CODE -->
+
+          <!-- <pre class="json-full"><code>{
+          "id": "ParlaMint-HR_2017-11-09-0.u57194_7269-7278",
           "words": [
-            { "time_s": 0.0, "time_e": 0.34, "char_s": 0, "char_e": 1 },
-            { "time_s": 0.44, "time_e": 1.24, "char_s": 2, "char_e": 7 }
+            { "time_s": 0.0, "time_e": 0.44, "char_s": 0, "char_e": 1 },
+            { "time_s": 0.66, "time_e": 1.58, "char_s": 2, "char_e": 9 }
           ],
-          "audio": "jgEFZDlBGYg/jgEFZDlBGYg_6640.0-6641.24.flac",
-          "audio_length": 1.24,
-          "text": "A zašto?",
-          "text_start": 5483,
-          "text_end": 5490,
-          "audio_start": 6640.0,
-          "audio_end": 6641.24,
+          "audio": "I27W0FVLD2I/I27W0FVLD2I_27158.08-27159.66.flac",
+          "audio_length": 1.58,
+          "text": "I završno.",
+          "text_start": 7269,
+          "text_end": 7278,
+          "audio_start": 27158.08,
+          "audio_end": 27159.66,
           "speaker_info": {
-            "Text_ID": "ParlaMint-HR_2020-01-15-0",
-            "ID": "ParlaMint-HR_2020-01-15-0.u182035",
+            "Text_ID": "ParlaMint-HR_2017-11-09-0",
+            "ID": "ParlaMint-HR_2017-11-09-0.u57194",
             "Title": "",
-            "Date": "2020-01-15",
+            "Date": "2017-11-09",
             "Body": "Unicameralism",
             "Term": "9. mandat",
             "Session": "-",
-            "Meeting": "Zasedanje 16",
-            "Sitting": "2020-05-13",
+            "Meeting": "Zasedanje 6",
+            "Sitting": "2017-12-15",
             "Agenda": "-",
             "Subcorpus": "Reference",
             "Lang": "Croatian",
             "Speaker_role": "Regular",
             "Speaker_MP": "MP",
             "Speaker_minister": "notMinister",
-            "Speaker_party": "HNS",
-            "Speaker_party_name": "Hrvatska narodna stranka",
+            "Speaker_party": "SDP",
+            "Speaker_party_name": "Socijaldemokratska partija Hrvatske",
             "Party_status": "Coalition",
-            "Party_orientation": "Centre to centre-left",
-            "Speaker_ID": "BatinićMilorad",
-            "Speaker_name": "Batinić, Milorad",
-            "Speaker_gender": "M",
-            "Speaker_birth": "1957"
+            "Party_orientation": "Centre-left",
+            "Speaker_ID": "GlasovacSabina",
+            "Speaker_name": "Glasovac, Sabina",
+            "Speaker_gender": "F",
+            "Speaker_birth": "1978"
           },
           "filled_pauses": [
-            { "time_s": 0.0, "time_e": 0.34, "words_idx": 0 }
+            { "time_s": 0.36, "time_e": 0.6, "words_idx": 0 }
           ],
           "words_align": [
-            { "text": "a", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0.0 },
-            { "text": "zašto", "char_s": 2, "char_e": 7, "time_s": 0.36, "time_e": 1.22, "words_idx": 1.0 }
+            { "text": "i", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0 },
+            { "text": "završno", "char_s": 2, "char_e": 9, "time_s": 0.6, "time_e": 1.56, "words_idx": 1 }
           ],
           "chars_align": [
-            [ { "text": "a", "time_s": 0.03, "time_e": 0.31, "char_s": 0, "char_e": 1 } ],
-            [ 
-              { "text": "z", "time_s": 0.36, "time_e": 0.5, "char_s": 2, "char_e": 3 },
-              { "text": "a", "time_s": 0.5, "time_e": 0.62, "char_s": 3, "char_e": 4 },
-              { "text": "š", "time_s": 0.62, "time_e": 0.71, "char_s": 4, "char_e": 5 },
-              { "text": "t", "time_s": 0.71, "time_e": 0.8, "char_s": 5, "char_e": 6 },
-              { "text": "o", "time_s": 0.8, "time_e": 1.22, "char_s": 6, "char_e": 7 }
+            [ { "text": "i", "time_s": 0.03, "time_e": 0.31, "char_s": 0, "char_e": 1 } ],
+            [
+              { "text": "z", "time_s": 0.6, "time_e": 0.71, "char_s": 2, "char_e": 3 },
+              { "text": "a", "time_s": 0.71, "time_e": 0.84, "char_s": 3, "char_e": 4 },
+              { "text": "v", "time_s": 0.84, "time_e": 0.87, "char_s": 4, "char_e": 5 },
+              { "text": "r", "time_s": 0.87, "time_e": 0.91, "char_s": 5, "char_e": 6 },
+              { "text": "š", "time_s": 0.91, "time_e": 1.06, "char_s": 6, "char_e": 7 },
+              { "text": "n", "time_s": 1.06, "time_e": 1.15, "char_s": 7, "char_e": 8 },
+              { "text": "o", "time_s": 1.15, "time_e": 1.56, "char_s": 8, "char_e": 9 }
             ]
           ],
           "primary_stress": [
-            { "words_align_idx": 1, "stress": 1, "nuclei": [1, 4], "raw": [0.5, 0.62] }
+            { "words_align_idx": 1, "stress": 1, "nuclei": [1, 3, 6], "raw": [0.7, 0.84] }
           ],
-          "lingustic_annotation": [
-            { "words_idx": 0, "id": 1, "text": "A", "lemma": "a", "upos": "CCONJ", "xpos": "Cc", "feats": null, "head": 2, "deprel": "cc", "misc": "start_char=0|end_char=1" },
-            { "words_idx": 1, "id": 2, "text": "zašto", "lemma": "zašto", "upos": "ADV", "xpos": "Rgp", "feats": "Degree=Pos|PronType=Int,Rel", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=7" },
-            { "words_idx": null, "id": 3, "text": "?", "lemma": "?", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=8|end_char=9" }
+          "linguistic_annotation": [
+            { "words_idx": 0, "id": 1, "text": "I", "lemma": "i", "upos": "CCONJ", "xpos": "Cc", "feats": null, "head": 2, "deprel": "cc", "misc": "start_char=0|end_char=1" },
+            { "words_idx": 1, "id": 2, "text": "završno", "lemma": "završan", "upos": "ADJ", "xpos": "Agpnsny", "feats": "Case=Nom|Definite=Def|Degree=Pos|Gender=Neut|Number=Sing", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=9" },
+            { "words_idx": null, "id": 3, "text": ".", "lemma": ".", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=10|end_char=11" }
           ],
           "sentiment": {
-              "ParlaSent_logit": 2.035,
-              "ParlaSent_6": "Neutral Negative",
-              "ParlaSent_3": "Neutral"
-            }
-        }</code></pre>
-                
-                <button class="toggle-json">Show Full JSON</button>
-            </div>
+            "ParlaSent_logit": 3.428,
+            "ParlaSent_6": "Neutral Positive",
+            "ParlaSent_3": "Neutral"
+          }
+        }</code></pre> -->
+
+<!-- UNCOMMENT THE ABOVE CODE FOR BLACK AND WHITE JSONL-->
+
         </div>
 
-    </div>
-    <script>
-        document.querySelector('.toggle-json').addEventListener('click', function() {
-            const fullJson = document.querySelector('.json-full');
-            const preview = document.querySelector('.json-preview');
-            const button = this;
-            
-            if (fullJson.style.display === 'none') {
-                fullJson.style.display = 'block';
-                preview.style.display = 'none';
-                button.textContent = 'Hide Full JSON';
-            } else {
-                fullJson.style.display = 'none';
-                preview.style.display = 'block';
-                button.textContent = 'Show Full JSON';
-            }
-        });
-        </script>
 
-    <!-- <h3 id="history">History</h3>
-    <div class="intro">
-        <p>2021 -- The idea of the ParlaSpeech corpora was born while proposing the second iteration of the <a href="https://www.clarin.eu/parlamint">ParlaMint project</a> inside which textual transcripts were made available for 20+ European parliaments. We ideated a task to deliver at least 50 hours of aligned text and speech for at least three parliaments / languages. Inside the ParlaMint project ParlaSpeech v1 and ParlaSpeech v2 were born.</p>
-        <p>2022 -- ParlaSpeech v1 was born in the early days of the second iteration of the ParlaMint project, where the Croatian parliament spoken data were aligned to the existing Croatian ParlaMint text transcripts. The result are the <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ParlaCLARIN workshop paper</a> describing the construction process, and the <a href="http://hdl.handle.net/11356/1494">ParlaSpeech-HR v1 corpus</a>,  1816 hours in size.</p>
-        <p>2023 -- ParlaSpeech v2 was the final result of the ParlaMint project, spanning four parliaments of Croatia, Czechia, Poland, and Serbia, and 5,000 hours of audio. The improved alignment process, applied to the Croatian, Polish and Serbian parliaments, is described in the <a href="https://doi.org/10.1007/978-3-031-77961-9_10">SPECOM conference paper</a>, while the Czech corpus has been compiled from the <a href="https://link.springer.com/chapter/10.1007/978-3-030-83527-9_25">previously constructed Czech parliamentary speech corpus</a>.</p>
-        <p>2024 -- ParlaSpeech v3 is developed as an enriched version of the audio and transcripts available in ParlaSpeech v2. New features include linguistic UD-based annotation of transcripts, paralinguistic annotation of filled pauses and primary stress, more detailed word- and character-level alignment of text to the audio, and transcript-based sentiment classification.</p>
-        <p>2025 -- ParlaSpeech v4, in development, represents an extension of the list of parliaments to also include the Bulgarian, Slovenian and Ukrainian parliament.</p>
-    </div> -->
+   
 
     <h3 id="history">History</h3>
 <ul class="history-timeline">
@@ -844,7 +815,7 @@
 </ul>
 
     <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
-        <p>© 2023 ParlaSpeech Project | CLARIN.SI</p>
+        <p>© 2021-2025 ParlaSpeech Project | CLARIN.SI</p>
     </footer>
 </body>
 
