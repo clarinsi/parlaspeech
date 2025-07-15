@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  </head>
+  <body>
+    <header style="display: flex; align-items: center; padding: 10px;">
+      <a href="{{ "/" | relative_url }}">
+        <img src="{{ "/docs/img/ParlaSpeech_logo_v0.png" | relative_url }}" alt="ParlaSpeech Logo" style="height:40px;">
+      </a>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+  </body>
+</html>
