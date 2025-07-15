@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use the Concordancer</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="header">
+        <a href="../index.html">
+            <img src="../img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
+        </a>
+        <h1 id="welcome">Using the ParlaSpeech Concordancer</h1>
+    </div>
+
+
+    <div class="description">
+        <p class="intro">
+            The <strong>ParlaSpeech Concordancer</strong> enables detailed linguistic and prosodic searches in the <strong>ParlaSpeech v3 corpus</strong>.<br>
+            This guide provides a walkthrough of its basic and advanced functionalities, designed for both linguists and interested non-specialists.
+        </p>
+    </div>
+
+    <h2 id="simple_search">1. Simple Search (Word or Lemma)</h2>
+    <div class="description">
+        <p class="intro">
+            Suppose we are interested in the verb <strong>"uspostaviti"</strong> ("to establish").<br>
+            We can begin with a <strong>lemma search</strong>, which retrieves <strong>all inflectional forms</strong> of that lemma.
+        </p>
+        
+        <div class="query-example">
+            <h3>Query: uspostaviti</h3>
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=basic&keyword=uspostaviti&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22iquery%22%2C%22arg%22%3A%22uspostaviti%22%2C%22query%22%3A%7B%22queryselector%22%3A%22iqueryrow%22%2C%22iquery%22%3A%22uspostaviti%22%7D%2C%22id%22%3A399%7D%5D">Try the query</a></p>
+        </div>
+
+        <p class="intro">This will return occurrences of various forms, such as:</p>
+        <ul>
+            <li><strong>uspostavi</strong></li>
+            <li><strong>uspostavljamo</strong></li>
+            <li><strong>uspostavljena</strong>, etc.</li>
+        </ul>
+
+        <p class="intro">It is suggested to <strong>play each audio segment</strong> (red play button on the right side) to verify it is correct.</p>
+
+        <div class="format-example">
+            <a href="../img/1_uspostaviti.png" target="_blank">
+                <img src="../img/1_uspostaviti.png" alt="Screenshot: Simple lemma search" class="textgrid-example">
+            </a>
+            <p class="caption">Screenshot: Simple lemma search</p>
+        </div>
+    </div>
+
+    <h2 id="advanced_search">2. Advanced Search: Word Form</h2>
+    <div class="description">
+        <p class="intro">To search for a <strong>specific word form</strong>, we can input the word directly. For example:</p>
+
+        <div class="query-example">
+            <h3>Query: uspostavi</h3>
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=word&keyword=uspostavi&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bword%3D%22uspostavi%22%20%26%20pos%3D%22VERB%22%5D&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22word%22%2C%22arg%22%3A%22uspostavi%22%2C%22query%22%3A%7B%22queryselector%22%3A%22wordrow%22%2C%22word%22%3A%22uspostavi%22%2C%22qmcase%22%3Afalse%7D%2C%22id%22%3A4390%7D%5D">Try the query</a></p>
+        </div>
+
+        <p class="intro"><strong>Why refine the search?</strong></p>
+        <p class="intro">The form <strong>uspostavi</strong> is <strong>ambiguous</strong>. It may function as:</p>
+        <ul>
+            <li><strong>Verb</strong> (e.g., <em>"He/She establishes"</em>)</li>
+            <li><strong>Noun</strong> (e.g. <em>"The establishment of"</em>)</li>
+        </ul>
+        <p class="intro">To avoid retrieving unrelated occurrences, further filtering is needed.</p>
+    </div>
+
+    <h2 id="cql_pos">3. Advanced Search: CQL with Part of Speech (POS)</h2>
+    <div class="description">
+        <p class="intro">
+            To disambiguate between different <strong>parts of speech</strong>, we use <strong>Corpus Query Language (CQL)</strong>.<br>
+            In this case, to extract only the <strong>verb</strong> usages of <em>uspostavi</em>, the query is:
+        </p>
+
+        <div class="query-example">
+            <h3>Query: [word="uspostavi" & pos="VERB"]</h3>
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=cql&keyword=uspostaviti&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bword%3D%22uspostavi%22%20%26%20pos%3D%22VERB%22%5D&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22cql%22%2C%22arg%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%5D%22%2C%22query%22%3A%7B%22queryselector%22%3A%22cqlrow%22%2C%22cql%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%5D%22%2C%22default_attr%22%3A%22lemma%22%7D%2C%22id%22%3A5463%7D%5D">Try the query</a></p>
+        </div>
+
+        <p class="intro"><strong>Annotation Standards:</strong></p>
+        <ul>
+            <li><strong>word</strong> – surface form</li>
+            <li><strong>pos</strong> – <strong>Universal Dependencies (UD)</strong> part-of-speech tag</li>
+        </ul>
+
+        <p class="intro">This ensures our search is <strong>morphosyntactically precise</strong>.</p>
+
+        <div class="format-example">
+            <a href="../img/2_uspostavi_verb.png" target="_blank">
+                <img src="../img/2_uspostavi_verb.png" alt="Screenshot: CQL with POS" class="textgrid-example">
+            </a>
+            <p class="caption">Screenshot: CQL with POS</p>
+        </div>
+    </div>
+
+    <h2 id="primary_stress">4. Advanced Search: Primary Stress</h2>
+    <div class="description">
+        <p class="intro">The ParlaSpeech corpus includes <strong>prosodic annotations</strong>, such as <strong>primary stress placement</strong>.</p>
+        <p class="intro">For example, the <strong>verb</strong> <em>uspostavi</em> is typically pronounced with <strong>stress on the 2nd syllable</strong>.</p>
+
+        <div class="query-example">
+            <h3>Query: [word="uspostavi" & pos="VERB" & primary_stress="2"]</h3>
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=cql&keyword=uspostaviti&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bword%3D%22uspostavi%22%20%26%20pos%3D%22VERB%22%20%26%20primary_stress%3D%222%22%5D&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22cql%22%2C%22arg%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%20%26%20primary_stress%3D%5C%222%5C%22%5D%22%2C%22query%22%3A%7B%22queryselector%22%3A%22cqlrow%22%2C%22cql%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%20%26%20primary_stress%3D%5C%222%5C%22%5D%22%2C%22default_attr%22%3A%22lemma%22%7D%2C%22id%22%3A5074%7D%5D">Try the query</a></p>
+        </div>
+
+        <p class="intro">To explore variation or errors, we might query for <strong>stress on the 3rd syllable</strong>:</p>
+
+        <div class="query-example">
+            <h3>Query: [word="uspostavi" & pos="VERB" & primary_stress="3"]</h3>
+        </div>
+
+        <p class="intro"><strong>About <code>primary_stress</code>:</strong></p>
+        <ul>
+            <li>Indicates the <strong>syllable index</strong> where stress is realized (1-based).</li>
+            <li>Acceptable values: <code>1</code> to <em>N</em> (number of syllables in the word).</li>
+        </ul>
+
+    <div class="format-example">
+        <a href="../img/3_uspostavi_verb_prim_stress2.png" target="_blank">
+            <img src="../img/3_uspostavi_verb_prim_stress2.png" alt="Screenshot: CQL with primary stress" class="textgrid-example">
+        </a>
+        <p class="caption">Screenshot: CQL with primary stress</p>
+    </div>
+
+    </div>
+
+    <h2 id="filled_pauses">5. Advanced Search: Filled Pauses (FP)</h2>
+    <div class="description">
+        <p class="intro">The concordancer also encodes <strong>disfluency markers</strong>, including <strong>filled pauses</strong> such as <em>"eee"</em> or <em>"umm"</em>.</p>
+
+        <p class="intro">To find occurrences where the word <em>račun</em> is followed by a filled pause:</p>
+        <div class="query-example">
+            <h3>Query: [word="račun" & fp_after="1"]</h3>
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=cql&keyword=uspostavi&attrs=word%2Cfp_after&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bword%3D%22ra%C4%8Dun%22%20%26%20fp_after%3D%221%22%5D&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22cql%22%2C%22arg%22%3A%22%5Bword%3D%5C%22ra%C4%8Dun%5C%22%20%26%20fp_after%3D%5C%221%5C%22%5D%22%2C%22query%22%3A%7B%22queryselector%22%3A%22cqlrow%22%2C%22cql%22%3A%22%5Bword%3D%5C%22ra%C4%8Dun%5C%22%20%26%20fp_after%3D%5C%221%5C%22%5D%22%2C%22default_attr%22%3A%22lemma%22%7D%2C%22id%22%3A6378%7D%5D">Try the query</a></p>
+        </div>
+
+        <p class="intro">To find occurrences where a filled pause precedes the word:</p>
+        <div class="query-example">
+            <h3>Query: [word="račun" & fp_before="1"]</h3>
+        </div>
+
+        <p class="intro"><strong>Interpretation:</strong></p>
+        <ul>
+            <li><code>fp_after</code> and <code>fp_before</code> can take values:
+                <ul>
+                    <li><code>1</code> – Filled pause is present</li>
+                    <li><code>0</code> – No filled pause</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p class="intro">This feature is valuable for research on <strong>speech disfluencies</strong>, <strong>planning phenomena</strong>, and <strong>prosody-syntax interfaces</strong>.</p>
+
+        <div class="format-example">
+            <a href="../img/4_racun_fp_after.png" target="_blank">
+                <img src="../img/4_racun_fp_after.png" alt="Screenshot: CQL with filled pause" class="textgrid-example">
+            </a>
+            <p class="caption">Screenshot: CQL with filled pause</p>
+        </div>
+    </div>
+
+    <h2 id="query_summary">Summary of Query Types</h2>
+    <div class="corpus-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Search Type</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Simple search</td>
+                    <td><code>uspostaviti</code></td>
+                </tr>
+                <tr>
+                    <td>Advanced lemma search</td>
+                    <td><code>uspostavi</code></td>
+                </tr>
+                <tr>
+                    <td>CQL: POS disambiguation</td>
+                    <td><code>[word="uspostavi" & pos="VERB"]</code></td>
+                </tr>
+                <tr>
+                    <td>CQL: Stress on 2nd syllable</td>
+                    <td><code>[word="uspostavi" & pos="VERB" & primary_stress="2"]</code></td>
+                </tr>
+                <tr>
+                    <td>CQL: Filled pause after "račun"</td>
+                    <td><code>[word="račun" & fp_after="1"]</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 id="attributes">Available Attributes</h2>
+    <div class="corpus-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>word</strong></td>
+                    <td>Surface form (orthographic)</td>
+                </tr>
+                <tr>
+                    <td><strong>lemma</strong></td>
+                    <td>Lemma (canonical form)</td>
+                </tr>
+                <tr>
+                    <td><strong>pos</strong></td>
+                    <td>Part of speech (UD standard)</td>
+                </tr>
+                <tr>
+                    <td><strong>primary_stress</strong></td>
+                    <td>Primary stress position (syllable index)</td>
+                </tr>
+                <tr>
+                    <td><strong>fp_before</strong></td>
+                    <td>Filled pause before word (0 = no, 1 = yes)</td>
+                </tr>
+                <tr>
+                    <td><strong>fp_after</strong></td>
+                    <td>Filled pause after word (0 = no, 1 = yes)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 id="additional_notes">Additional Notes</h2>
+    <div class="note">
+        <ul>
+            <li>All searches are <strong>case-sensitive</strong>!</li>
+            <li>On the top right-side, the <strong>eye icon</strong> can be used to display information for each individual token for easier searching.</li>
+            <li>The system uses <strong>Universal Dependencies (UD)</strong> annotation conventions for morphology and syntax.</li>
+            <li>Prosodic and disfluency annotations extend standard corpus search functionality into <strong>speech-oriented analysis</strong>.</li>
+        </ul>
+    </div>
+
+    <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
+        <p>For more information, visit the <a href="../index.html">ParlaSpeech main page</a>.</p>
+    </footer>
+
+</body>
+</html>

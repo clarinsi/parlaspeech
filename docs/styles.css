@@ -1,0 +1,323 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+h1 {
+    border-bottom: 2px solid #1f77b4;
+    padding-bottom: 10px;
+}
+
+h2 {
+    margin-top: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.language-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.language-tag {
+    background-color: #e8f4fc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.schema {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.field {
+    margin-bottom: 10px;
+    padding-left: 15px;
+    border-left: 3px solid #1f77b4;
+}
+
+.field-name {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.subfield {
+    margin-left: 20px;
+    font-size: 0.95em;
+}
+
+.note {
+    background-color: #fffde7;
+    padding: 10px;
+    border-left: 4px solid #FFA500;
+    margin: 15px 0;
+}
+
+.authors-table {
+    width: auto; /* Let the content determine width */
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 1em; /* Adjust font size if needed */
+}
+
+.authors-table td {
+    padding: 4px 0; /* Reduce vertical and horizontal padding */
+    border: none;
+    text-align: left;
+    vertical-align: baseline; /* Align name and email properly */
+}
+
+/* Bring emails closer to names by reducing left padding */
+.authors-table td:first-child {
+    padding-right: 10px; /* Space between name and email */
+    white-space: nowrap; /* Prevent line breaks in names */
+}
+
+.authors-table td:last-child {
+    padding-left: 0; /* Remove left padding for emails */
+}
+
+/* Optional: Remove hover effect if it still feels "table-like" */
+.authors-table tr:hover {
+    background-color: transparent;
+}
+
+/* Style email links */
+.authors-table a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.authors-table a:hover {
+    text-decoration: underline;
+}
+
+.corpus-table {
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.corpus-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.corpus-table th, .corpus-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.corpus-table th {
+    background-color: #f5f9ff;
+    font-weight: bold;
+}
+
+.corpus-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    height: 100px; /* Adjust as needed */
+    width: auto;
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .logo {
+        height: 50px;
+    }
+}
+
+.availability {
+    background-color: #f0f7ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.format-example {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.textgrid-example {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.caption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .availability {
+        padding: 15px;
+    }
+    
+    .textgrid-example {
+        max-width: 95%;
+    }
+}
+
+/* Code styling - neutral gray */
+code, .code, .inline-code {
+    font-family: 'Roboto Mono', 'Courier New', monospace;
+    background-color: rgba(77, 77, 77, 0.6) !important;
+    color: #ffffff !important;             /* Dark gray text */
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0 !important;  /* Slightly darker gray border */
+    font-size: 85%;
+    font-weight: 500;           /* Slightly bolder than normal text */      
+}
+
+/* Dark mode adaptation */
+@media (prefers-color-scheme: dark) {
+    code, .code, .inline-code {
+        background-color: #2a2a2a;  /* Dark gray */
+        color: #e0e0e0;            /* Light gray text */
+        border-color: #3a3a3a;     /* Slightly lighter border */
+    }
+}
+
+.example-entry {
+    margin: 20px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.json-viewer {
+    background-color: #f0f0f0;  /* subtle gray, same as .json-full */
+    color: #333;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 12px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    box-shadow: none; /* remove shadow for consistent look */
+}
+
+.json-full {
+    background-color: transparent !important; /* transparent because .json-viewer has background */
+    color: inherit !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    /* display: none; toggled visibility */
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+}
+
+.json-full code {
+    background: transparent !important;
+    color: inherit !important;
+    display: block !important;
+    white-space: pre-wrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+pre.json-full {
+    background: #e7e7e7 !important;
+    color: rgb(0, 0, 0) !important;
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.json-key {
+    color: rgb(255, 115, 0);
+}
+
+/* .json-subkey {
+    color: #f4a300;
+} */
+
+.json-string {
+    color: #37d46e; /* pastel green */
+}
+
+.json-number {
+    color: rgb(168, 33, 60);
+}
+
+.json-punctuation {
+    color: rgb(0, 0, 0);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.history-timeline {
+    list-style: none; /* Remove bullets */
+    padding-left: 0;
+    margin: 1em 0;
+    line-height: 1.5;
+}
+
+.history-timeline li {
+    margin-bottom: 1.2em; /* Space between entries */
+    padding-left: 1.2em;
+    position: relative;
+}
+
+.history-timeline li:before {
+    content: "⚬"; /* Small circle */
+    color: #666;
+    left: 0;
+    position: absolute;
+    font-size: 0.9em;
+}
+
+.history-timeline strong {
+    font-weight: 600; /* Slightly bolder year */
+    margin-right: 0.3em;
+}
+
+.history-timeline a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.history-timeline a:hover {
+    text-decoration: underline;
+}
