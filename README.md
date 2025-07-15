@@ -12,10 +12,16 @@ This repository is used for the new iteration of the project starting 2025. For 
 
 We are developing the documentation of the ParlaSpeech dataset collection here: [https://clarinsi.github.io/parlaspeech](https://clarinsi.github.io/parlaspeech).
 
+### Concordancer user guide
+
+Learn how to explore this corpus with the concordancer: [https://clarinsi.github.io/parlaspeech/concordancer/](https://clarinsi.github.io/parlaspeech/concordancer/)
+
+
 ### Authors
 
 * Nikola Ljubešić <nikola.ljubesic@ijs.si>
-* Danijel Koržinek <danijel@pja.edu.pl>
 * Peter Rupnik <peter.rupnik@ijs.si>
-* Ivo-Pavao Jazbec <ipjazbec@gmail.com>
-
+* Ivan Porupski <ivan.porupski@ijs.si>
+* Danijel Koržinek <danijel@pja.edu.pl>
+* Taja Kuzman Pungeršek <taja.kuzman@ijs.si>
+  
