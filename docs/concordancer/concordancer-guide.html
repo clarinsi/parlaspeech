@@ -11,22 +11,22 @@
         <a href="../index.html">
             <img src="../img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
         </a>
-        <h1 id="welcome">Using the ParlaSpeech Concordancer</h1>
+        <h1 id="welcome">Using ParlaSpeech Through a Concordancer</h1>
     </div>
 
 
     <div class="description">
         <p class="intro">
             The <strong>ParlaSpeech Concordancer</strong> enables detailed linguistic and prosodic searches in the <strong>ParlaSpeech v3 corpus</strong>.<br>
-            This guide provides a walkthrough of its basic and advanced functionalities, designed for both linguists and interested non-specialists.
+            This guide provides a walkthrough of its basic and advanced functionalities, designed for linguists and phoneticians, as well as interested non-specialists. The examples given are from the Croatian ParlaSpeech v3.
         </p>
     </div>
 
     <h2 id="simple_search">1. Simple Search (Word or Lemma)</h2>
     <div class="description">
         <p class="intro">
-            Suppose we are interested in the verb <strong>"uspostaviti"</strong> ("to establish").<br>
-            We can begin with a <strong>lemma search</strong>, which retrieves <strong>all inflectional forms</strong> of that lemma.
+            Suppose we are interested in the Croatian verb <strong>"uspostaviti"</strong> ("to establish").<br>
+            We can begin with a <strong>lemma search</strong>, which retrieves <strong>all inflected forms</strong> of that lemma thanks to the linguistic annotation of the corpus.
         </p>
         
         <div class="query-example">
@@ -34,14 +34,14 @@
             <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=basic&keyword=uspostaviti&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22iquery%22%2C%22arg%22%3A%22uspostaviti%22%2C%22query%22%3A%7B%22queryselector%22%3A%22iqueryrow%22%2C%22iquery%22%3A%22uspostaviti%22%7D%2C%22id%22%3A399%7D%5D">Try the query</a></p>
         </div>
 
-        <p class="intro">This will return occurrences of various forms, such as:</p>
+        <p class="intro">This query will return occurrences of various forms, such as:</p>
         <ul>
             <li><strong>uspostavi</strong></li>
             <li><strong>uspostavljamo</strong></li>
             <li><strong>uspostavljena</strong>, etc.</li>
         </ul>
 
-        <p class="intro">It is suggested to <strong>play each audio segment</strong> (red play button on the right side) to verify it is correct.</p>
+        <p class="intro">A very important feature is the possibility to <strong>play each audio segment</strong> (red play button on the right side). This button plays the imminent context of the result of a query. If you want to play back the whole sentence, you can click on the metadata button at the left side of each concordance. This will give you the link to the recording of the whole sentence, but additional metadata as well, such as name, gender, age, party of the speaker etc. These metadata can be used during search as well, which will be shown below.</p>
 
         <div class="format-example">
             <a href="../img/1_uspostaviti.png" target="_blank">
@@ -53,7 +53,7 @@
 
     <h2 id="advanced_search">2. Advanced Search: Word Form</h2>
     <div class="description">
-        <p class="intro">To search for a <strong>specific word form</strong>, we can input the word directly. For example:</p>
+        <p class="intro">Let's say we are interested in a <strong>specific word form</strong>, such as <strong>"uspostavi"</strong> due to it being a primary stress doublette. We can still use the simple search and type the required word.</p>
 
         <div class="query-example">
             <h3>Query: uspostavi</h3>
@@ -66,13 +66,13 @@
             <li><strong>Verb</strong> (e.g., <em>"He/She establishes"</em>)</li>
             <li><strong>Noun</strong> (e.g. <em>"The establishment of"</em>)</li>
         </ul>
-        <p class="intro">To avoid retrieving unrelated occurrences, further filtering is needed.</p>
+        <p class="intro">Given that in this example we are interested in the verb primary stress doublette. To avoid retrieving the noun use of that word, further filtering is needed.</p>
     </div>
 
     <h2 id="cql_pos">3. Advanced Search: CQL with Part of Speech (POS)</h2>
     <div class="description">
         <p class="intro">
-            To disambiguate between different <strong>parts of speech</strong>, we use <strong>Corpus Query Language (CQL)</strong>.<br>
+            To disambiguate between different <strong>parts of speech</strong>, we use <strong>Corpus Query Language (CQL)</strong> available in the Advanced tab.<br>
             In this case, to extract only the <strong>verb</strong> usages of <em>uspostavi</em>, the query is:
         </p>
 
@@ -86,8 +86,6 @@
             <li><strong>word</strong> – surface form</li>
             <li><strong>pos</strong> – <strong>Universal Dependencies (UD)</strong> part-of-speech tag</li>
         </ul>
-
-        <p class="intro">This ensures our search is <strong>morphosyntactically precise</strong>.</p>
 
         <div class="format-example">
             <a href="../img/2_uspostavi_verb.png" target="_blank">
