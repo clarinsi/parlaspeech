@@ -41,7 +41,7 @@
             <li><strong>uspostavljena</strong>, etc.</li>
         </ul>
 
-        <p class="intro">A very important feature is the possibility to <strong>play each audio segment</strong> (red play button on the right side). This button plays the imminent context of the result of a query. If you want to play back the whole sentence, you can click on the metadata button at the left side of each concordance. This will give you the link to the recording of the whole sentence, but additional metadata as well, such as name, gender, age, party of the speaker etc. These metadata can be used during search as well, which will be shown below.</p>
+        <p class="intro">  A very important feature is the possibility to <strong>play each audio segment</strong> <img src="../img/play_button_noske_icon.png" alt="Play Button" class="inline-icon"> (red play button on the right side). This button plays the imminent context of the result of a query. If you want to play back the whole sentence, you can click on the metadata button at the left side of each concordance. This will give you the link to the recording of the whole sentence, but additional metadata as well, such as name, gender, age, party of the speaker etc. These metadata can be used during search as well, which will be shown below.</p>
 
         <div class="format-example">
             <a href="../img/1_uspostaviti.png" target="_blank">
@@ -88,8 +88,8 @@
         </ul>
 
         <div class="format-example">
-            <a href="../img/2_uspostavi_verb.png" target="_blank">
-                <img src="../img/2_uspostavi_verb.png" alt="Screenshot: CQL with POS" class="textgrid-example">
+            <a href="../img/3_uspostavi_verb.png" target="_blank">
+                <img src="../img/3_uspostavi_verb.png" alt="Screenshot: CQL with POS" class="textgrid-example">
             </a>
             <p class="caption">Screenshot: CQL with POS</p>
         </div>
@@ -120,8 +120,8 @@
         </ul>
 
     <div class="format-example">
-        <a href="../img/3_uspostavi_verb_prim_stress2.png" target="_blank">
-            <img src="../img/3_uspostavi_verb_prim_stress2.png" alt="Screenshot: CQL with primary stress" class="textgrid-example">
+        <a href="../img/4_uspostavi_verb_prim_stress2.png" target="_blank">
+            <img src="../img/4_uspostavi_verb_prim_stress2.png" alt="Screenshot: CQL with primary stress" class="textgrid-example">
         </a>
         <p class="caption">Screenshot: CQL with primary stress</p>
     </div>
@@ -156,19 +156,89 @@
         <p class="intro">This feature is valuable for research on <strong>speech disfluencies</strong>, <strong>planning phenomena</strong>, and <strong>prosody-syntax interfaces</strong>.</p>
 
         <div class="format-example">
-            <a href="../img/4_racun_fp_after.png" target="_blank">
-                <img src="../img/4_racun_fp_after.png" alt="Screenshot: CQL with filled pause" class="textgrid-example">
+            <a href="../img/5_racun_fp_after.png" target="_blank">
+                <img src="../img/5_racun_fp_after.png" alt="Screenshot: CQL with filled pause" class="textgrid-example">
             </a>
             <p class="caption">Screenshot: CQL with filled pause</p>
         </div>
     </div>
 
+
     <h2 id="metadata">6. Advanced Search: Metadata</h2>
-    <div class="description">
-    
-        <p class="intro">The ParlaSpeech corpora encode also various metadata, such as speaker name, age, gender, party affiliation, the sentiment of the utterance predicted with <a href="https://huggingface.co/classla/xlm-r-parlasent">the ParlaSent model.</a></p>
-        <p class="intro">Example where filled pauses are counted in men and women?</p>
-    </div>
+        
+        <div class="description">
+        
+            <p class="intro">The ParlaSpeech corpora encode also various metadata, such as speaker name, age, gender, party affiliation, the sentiment of the utterance predicted with <a href="https://huggingface.co/classla/xlm-r-parlasent">the ParlaSent model.</a></p>
+            <p class="intro">In the <strong>Change Criteria</strong> <img src="../img/change_criteria_icon.png" alt="Change Criteria Button" class="inline-icon">, these various attributes can be found under <strong>Text Types</strong>. Selecting an attribute from the dropdown menu filters out the search. </p>
+
+        </div>
+
+        <div>
+            <p>Supposed we are interested in checking whether male or female speakers produce more filled pauses. Using the search term <code>[fp_after="1"]</code>, we filter for all utterances with positive filled pauses events. Next, in Text Types, we select <code>speech.speaker_gender</code> and select <code>M</code>.</p>
+        </div>
+
+        <div class="query-example">
+            <h3>Query: [fp_after="1"], with Text Types: speaker_gender = M</h3>   
+            <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=cql&keyword=uspostavi&attrs=word%2Cfp_after&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bfp_after%3D%221%22%5D&showresults=1&tts=%7B%22speech.speaker_gender%22%3A%5B%22M%22%5D%7D&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22cql%22%2C%22arg%22%3A%22%5Bfp_after%3D%5C%221%5C%22%5D%22%2C%22query%22%3A%7B%22queryselector%22%3A%22cqlrow%22%2C%22cql%22%3A%22%5Bfp_after%3D%5C%221%5C%22%5D%22%2C%22default_attr%22%3A%22lemma%22%2C%22sca_speech.speaker_gender%22%3A%5B%22M%22%5D%7D%2C%22id%22%3A8759%7D%5D">Try the query</a></p>
+        </div>
+
+        <div class="format-example">
+            <a href="../img/6_fp_and_gender_search.png" target="_blank">
+                <img src="../img/6_fp_and_gender_search.png" alt="Screenshot: CQL with filled pause and Text type gender" class="textgrid-example">
+            </a>
+            <p class="caption">Screenshot: CQL with filled pause and Text type gender</p>
+        </div>
+        <div>
+            <p>
+                This query returns 189,317 utteranes. By doing the same, but now filtering for <code>F</code> speakers, the query returns 123,344 utterances. Repeating the same steps, but now with <code>[fp_after="0"]</code>, we find all non-filled-pause instances for both male and female speakers, resulting with the following table:
+            </p>
+
+            <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: right;">
+            <thead>
+                <tr>
+                <th></th>
+                <th>FPs</th>
+                <th>nonFPs</th>
+                <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th style="text-align: left;">Female</th>
+                <td>123,344</td>
+                <td>6,301,284</td>
+                <td>6,424,628</td>
+                </tr>
+                <tr>
+                <th style="text-align: left;">Male</th>
+                <td>189,317</td>
+                <td>17,868,505</td>
+                <td>18,057,822</td>
+                </tr>
+                <tr>
+                <th style="text-align: left;">Total</th>
+                <td>312,661</td>
+                <td>24,169,789</td>
+                <td>24,482,450</td>
+                </tr>
+            </tbody>
+            </table>
+
+            <p><strong>Test used:</strong> Pearson’s Chi-Square Test</p>
+
+            <p>
+            χ² = 28,544.00, df = 1<br>
+            p = 0.00 &rarr; The difference between male and female speakers did not occur by chance.<br>
+            Odds ratio (effect size, F/M) = 1.85 &rarr; Women are almost twice as likely to use filled pauses as men.
+            </p>
+
+
+        </div>
+
+
+
+
+
     <h2 id="query_summary">Summary of Query Types</h2>
     <div class="corpus-table">
         <table>
@@ -245,7 +315,7 @@
     <div class="note">
         <ul>
             <li>All searches are <strong>case-sensitive</strong>!</li>
-            <li>On the top right-side, the <strong>eye icon</strong> can be used to display information for each individual token for easier searching.</li>
+            <li>On the top right-side, the <strong>View Options</strong> <img src="../img/view_options_icon.png" alt="View Options Button" class="inline-icon"> can be used to display information for each individual token for easier searching.</li>
             <li>The system uses <strong>Universal Dependencies (UD)</strong> annotation conventions for morphology and syntax.</li>
             <li>Prosodic and disfluency annotations extend standard corpus search functionality into <strong>speech-oriented analysis</strong>.</li>
         </ul>
