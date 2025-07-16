@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to Use the Concordancer</title>
+    <title>How to Use the ParlaSpeech Corpus Through a Concordancer</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -66,7 +66,7 @@
             <li><strong>Verb</strong> (e.g., <em>"He/She establishes"</em>)</li>
             <li><strong>Noun</strong> (e.g. <em>"The establishment of"</em>)</li>
         </ul>
-        <p class="intro">Given that in this example we are interested in the verb primary stress doublette. To avoid retrieving the noun use of that word, further filtering is needed.</p>
+        <p class="intro">Given that in this example we are interested in the verb primary stress doublette, to avoid retrieving the noun use of that word, further filtering is needed via an advanced query.</p>
     </div>
 
     <h2 id="cql_pos">3. Advanced Search: CQL with Part of Speech (POS)</h2>
@@ -97,19 +97,21 @@
 
     <h2 id="primary_stress">4. Advanced Search: Primary Stress</h2>
     <div class="description">
-        <p class="intro">The ParlaSpeech corpus includes <strong>prosodic annotations</strong>, such as <strong>primary stress placement</strong>.</p>
-        <p class="intro">For example, the <strong>verb</strong> <em>uspostavi</em> is typically pronounced with <strong>stress on the 2nd syllable</strong>.</p>
+        <p class="intro">The ParlaSpeech corpus includes <strong>prosodic annotations</strong>, such as <strong>primary stress placement</strong>.</p> This particular annotation layer is currently available for Croatian and Serbian.
+        <p class="intro">For example, the <strong>verb</strong> <em>uspostavi</em> is a primary stress doublette, with possible <strong>stress on the 2nd or 3rd syllable</strong>.</p>
 
         <div class="query-example">
             <h3>Query: [word="uspostavi" & pos="VERB" & primary_stress="2"]</h3>
             <p><a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr&tab=advanced&queryselector=cql&keyword=uspostaviti&attrs=word&viewmode=kwic&attr_allpos=all&refs_up=0&shorten_refs=1&glue=1&gdexcnt=300&show_gdex_scores=0&itemsPerPage=20&structs=s%2Cg&refs=%3Dspeech.speaker_id%2C%3Dspeech.date&default_attr=lemma&cql=%5Bword%3D%22uspostavi%22%20%26%20pos%3D%22VERB%22%20%26%20primary_stress%3D%222%22%5D&showresults=1&showTBL=0&tbl_template=&gdexconf=&f_tab=basic&f_showrelfrq=1&f_showperc=0&f_showreldens=0&f_showreltt=0&c_customrange=0&t_attr=&t_absfrq=0&t_trimempty=1&t_threshold=5&operations=%5B%7B%22name%22%3A%22cql%22%2C%22arg%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%20%26%20primary_stress%3D%5C%222%5C%22%5D%22%2C%22query%22%3A%7B%22queryselector%22%3A%22cqlrow%22%2C%22cql%22%3A%22%5Bword%3D%5C%22uspostavi%5C%22%20%26%20pos%3D%5C%22VERB%5C%22%20%26%20primary_stress%3D%5C%222%5C%22%5D%22%2C%22default_attr%22%3A%22lemma%22%7D%2C%22id%22%3A5074%7D%5D">Try the query</a></p>
         </div>
 
-        <p class="intro">To explore variation or errors, we might query for <strong>stress on the 3rd syllable</strong>:</p>
+        <p class="intro">The query for verbs "uspostavi" with the second syllable stressed gave us 64 results. Let us investigate the same word when <strong>stress is on the 3rd syllable</strong>:</p>
 
         <div class="query-example">
             <h3>Query: [word="uspostavi" & pos="VERB" & primary_stress="3"]</h3>
         </div>
+        
+        This primary stress variant has resulted in 38 results. Use the playback option to listen to various instances. While most primary stress predictions in the corpus are correct, not all will be due to recording issues, alignment issues, or simply a wrong stress position prediction.
 
         <p class="intro"><strong>About <code>primary_stress</code>:</strong></p>
         <ul>
@@ -128,7 +130,7 @@
 
     <h2 id="filled_pauses">5. Advanced Search: Filled Pauses (FP)</h2>
     <div class="description">
-        <p class="intro">The concordancer also encodes <strong>disfluency markers</strong>, including <strong>filled pauses</strong> such as <em>"eee"</em> or <em>"umm"</em>.</p>
+        <p class="intro">The ParlaSpeech corpus also encodes <strong>disfluency markers</strong>, currently only <strong>filled pauses</strong> such as <em>"eee"</em> or <em>"umm"</em>. This annotation layer is available through all current four languages (Croatian, Serbian, Czech, Polish).</p>
 
         <p class="intro">To find occurrences where the word <em>račun</em> is followed by a filled pause:</p>
         <div class="query-example">
@@ -161,6 +163,12 @@
         </div>
     </div>
 
+    <h2 id="metadata">5. Advanced Search: Metadata</h2>
+    <div class="description">
+    
+        <p class="intro">The ParlaSpeech corpora encode also various metadata, such as speaker name, age, gender, party affiliation, the sentiment of the utterance predicted with <a href="https://huggingface.co/classla/xlm-r-parlasent">the ParlaSent model.</a></p>
+        <p class="intro">Example where filled pauses are counted in men and women?</p>
+    </div>
     <h2 id="query_summary">Summary of Query Types</h2>
     <div class="corpus-table">
         <table>
