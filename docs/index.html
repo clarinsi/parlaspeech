@@ -4,7 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ParlaSpeech - Parliamentary Speech Corpus</title>
+    <link rel="canonical" href="https://clarinsi.github.io/parlaspeech/">
     <link rel="stylesheet" href="styles.css">
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings",
+    "description": "ParlaSpeech is a multilingual collection of parliamentary speech corpora covering Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding ParlaMint transcripts.",
+    "url": "https://clarinsi.github.io/parlaspeech/",
+    "creator": [
+        {
+        "@type": "Person",
+        "name": "Nikola Ljubešić"
+        },
+        {
+        "@type": "Person",
+        "name": "Peter Rupnik"
+        },
+        {
+        "@type": "Person",
+        "name": "Ivan Porupski"
+        },
+        {
+        "@type": "Person",
+        "name": "Danijel Koržinek"
+        },
+        {
+        "@type": "Person",
+        "name": "Taja Kuzman Pungeršek"
+        }
+    ],
+    "datePublished": "2025-08",
+    "keywords": [
+        "speech",
+        "corpus",
+        "parliamentary",
+        "parlaspeech",
+        "parlamint",
+        "croatian",
+        "serbian",
+        "czech",
+        "polish"
+    ],
+
+    "distribution": [
+        {
+            "@type": "DataDownload",
+            "name": "ParlaSpeech PL (v1.0)",
+            "contentUrl": "http://hdl.handle.net/11356/1914"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "ParlaSpeech HR (v2.0)",
+            "contentUrl": "http://hdl.handle.net/11356/1834"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "ParlaSpeech CZ (v1.0)",
+            "contentUrl": "http://hdl.handle.net/11356/1785"
+        },
+        {
+            "@type": "DataDownload",
+            "name": "ParlaSpeech RS (v1.0)",
+            "contentUrl": "http://hdl.handle.net/11356/1686"
+        }
+    ],
+
+    "citation": {
+        "@type": "ScholarlyArticle",
+        "name": "The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings",
+        "url": "https://link.springer.com/chapter/10.1007/978-3-031-77961-9_10"
+    }
+    }
+    </script>
+
     
 </head>
 
@@ -254,6 +329,11 @@
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the pause in seconds, relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the pause in seconds, relative.</div>
             <div class="subfield">• <strong>words_idx</strong> [int] - Index of the word in <code>words</code> preceding the pause.</div>
+        
+            <div class="note">
+                <p><strong>Note:</strong> <code>[]</code> (empty list) means no FPs detected, whereas <code>None</code> means that inference failed for that entry.</p>
+            </div>
+        
         </div>
         
         <h3>ParlaSpeech-Align</h3>
