@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use ParlaSpeech TextGrids in Praat</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="header">
+        <a href="../index.html">
+            <img src="../img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech Logo" class="logo">
+        </a>
+        <h1 id="welcome">Using ParlaSpeech TextGrids in Praat</h1>
+    </div>
+
+
+    <div class="description">
+        <p class="intro">
+            Alongside the computational (<strong>JSONL</strong>) and corpus-linguistic
+            (<a href="../concordancer/concordancer-guide.html">NoSketch Engine concordancer</a>)
+            formats, ParlaSpeech v3 is distributed as separate <strong>Praat TextGrid</strong> files.
+            TextGrids let you <strong>see and hear</strong> the annotation layers
+            directly on the waveform, spectrogram, pitch and intensity tracks &mdash; ideal for
+            phonetic inspection, teaching, and error-checking.<br>
+            This guide walks through opening four TextGrids examples, reading their tiers, 
+            and looking at acoustical features. All examples are from the Croatian ParlaSpeech v3.
+        </p>
+
+        <div class="format-example">
+            <img src="../img/parlaspeech-v3_example_ver5.png" alt="Example ParlaSpeech TextGrid visualization" class="textgrid-example">
+            <p class="caption">Example ParlaSpeech TextGrid opened in Praat, showing the alignment, stress and filled-pause tiers.</p>
+        </div>
+
+        <div class="note">
+            <p><strong>Layer availability:</strong> the word- and character-level alignment
+            (<code>WordAlign</code>, <code>GraphAlign</code>, <code>PhoneAlign</code>) and the
+            primary-stress tier (<code>StressGraph</code>) are currently available for
+            <strong>Croatian and Serbian only</strong>. The filled-pause tier
+            (<code>FilledPauses</code>) is available for all four languages
+            (Croatian, Serbian, Czech, Polish).</p>
+        </div>
+    </div>
+
+
+    <h2 id="what_is_praat">1. What is Praat?</h2>
+    <div class="description">
+        <p class="intro">
+            <a href="https://www.praat.org/" target="_blank"><strong>Praat</strong></a> is a free,
+            open-source software package widely used for <strong>speech analysis</strong>
+            in phonetics and other fields of linguistics. It displays the audio as a
+            <strong>waveform</strong> and <strong>spectrogram</strong>, with optional
+            <strong>pitch</strong> (blue), <strong>intensity</strong> (green) and 
+            <strong>formants</strong> (red) envelopes overlaid, and
+            aligns a <strong>TextGrid</strong> of labelled tiers beneath them.
+        </p>
+        <p class="intro">
+            Download Praat from <a href="https://www.praat.org/" target="_blank">praat.org</a>.
+            To open a ParlaSpeech example: start Praat, then <em>Open &rarr; Read from file&hellip;</em>
+            and select <strong>both</strong> the audio (<code>.wav</code>) and the matching
+            <code>.TextGrid</code> (same filename stem). Select both objects in the list and click
+            <strong>View &amp; Edit</strong> to see them together.
+        </p>
+    </div>
+
+
+    <h2 id="tiers">2. Reading the Tiers</h2>
+    <div class="description">
+        <p class="intro">
+            ParlaSpeech distributes three separate TextGrids per audio file, one per annotation
+            layer: <code>align</code> (word/grapheme/phone alignment), <code>stress</code>
+            (primary stress) and <code>pause</code> (filled pauses). The examples bundled with
+            this guide are pre-merged into a single TextGrid for convenience, so all tiers
+            display together in Praat. A fully-enriched Croatian/Serbian TextGrid contains the
+            following tiers, top to bottom:
+        </p>
+
+        <div class="corpus-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Type</th>
+                        <th>Source TextGrid</th>
+                        <th>Contents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>PhoneAlign</strong></td>
+                        <td>Interval</td>
+                        <td><code>align</code></td>
+                        <td>Phone-level segmentation (Kaldi MFA), with boundary tags (e.g. <code>_B</code>, <code>_I</code>, <code>_E</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WordAlign</strong></td>
+                        <td>Interval</td>
+                        <td><code>align</code></td>
+                        <td>Word-level alignment (finer Kaldi MFA alignment, i.e. <code>words_align</code>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GraphAlign</strong></td>
+                        <td>Interval</td>
+                        <td><code>align</code></td>
+                        <td>Grapheme (character)-level alignment.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>StressGraph</strong></td>
+                        <td>Interval</td>
+                        <td><code>stress</code></td>
+                        <td>Primary-stress marker (<code>stress</code>) placed on the stressed syllable's nucleus.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FilledPauses</strong></td>
+                        <td>Interval</td>
+                        <td><code>pause</code></td>
+                        <td>Model-detected filled pauses (<code>filled_pause</code>), e.g. <em>"eee"</em>, <em>"umm"</em>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <h2 id="stress">3. Example 1 &mdash; Primary Stress</h2>
+    <div class="description">
+        <p class="intro">
+            <strong>Can we visually see the difference between stressed syllables?</strong>
+            The Croatian verb <em>uspostavi</em> ("establishes") is a <strong>primary-stress
+            doublet</strong>: it is realised with stress on either the <strong>2nd</strong> or the
+            <strong>3rd</strong> syllable. Because stress in Croatian raises <strong>pitch</strong>,
+            <strong>intensity</strong> and often <strong>duration</strong> on the stressed syllable,
+            the two variants look and sound distinct in Praat.
+        </p>
+
+        <p class="intro">
+            Open the two examples below and compare the <code>StressGraph</code> tier against the
+            pitch (blue) and intensity (green) tracks. In each, the <code>stress</code> marker sits
+            on the syllable whose nucleus carries the local pitch/intensity peak.
+        </p>
+
+        <div class="format-example">
+            <a href="../img/tg1_uspostavi_stress2.png" target="_blank">
+                <img src="../img/tg1_uspostavi_stress2.png" alt="Praat: uspostavi, stress on 2nd syllable" class="textgrid-example">
+            </a>
+            <p class="caption">Praat: <em>uspostavi</em> with primary stress on the 2nd syllable.</p>
+        </div>
+
+        <p class="intro">
+            To follow along, open
+            <code>examples/1_1ap6gfk6EE0_3764.5-3785.76.wav</code> and its matching
+            <code>examples/1_1ap6gfk6EE0_3764.5-3785.76.merged.TextGrid</code> in Praat.
+        </p>
+
+        <div class="format-example">
+            <a href="../img/tg2_uspostavi_stress3.png" target="_blank">
+                <img src="../img/tg2_uspostavi_stress3.png" alt="Praat: uspostavi, stress on 3rd syllable" class="textgrid-example">
+            </a>
+            <p class="caption">Praat: <em>uspostavi</em> with primary stress on the 3rd syllable.</p>
+        </div>
+
+        <p class="intro">
+            To follow along, open
+            <code>examples/2_0h81B4YMLnA_2916.36-2926.14.wav</code> and its matching
+            <code>examples/2_0h81B4YMLnA_2916.36-2926.14.merged.TextGrid</code> in Praat.
+        </p>
+
+        <div class="note">
+            <p><strong>Can you find your own doublet examples?</strong> 
+            <!-- Other Croatian near-minimal pairs, such as the
+            verb vs. noun readings of <em>računa</em>, can be located empirically with the finder
+            script (see <a href="#finding">&sect;6</a>): it lists how many instances exist per
+            stress position so you can pick the clearest ones to inspect in Praat. -->
+        </p>
+        </div>
+    </div>
+
+
+    <h2 id="filled_pause">4. Example 2 &mdash; Filled Pauses</h2>
+    <div class="description">
+        <p class="intro">
+            <strong>Umm&hellip; what now?</strong> Filled pauses &mdash; hesitation sounds such as
+            <em>"eee"</em> or <em>"mmm"</em> &mdash; are marked on the <code>FilledPauses</code> tier.
+            On the spectrogram a filled pause typically shows as a steady, sustained formant
+            structure with little change over its duration, unlike the rapidly-changing formants of
+            ordinary speech.
+        </p>
+
+        <div class="format-example">
+            <a href="../img/tg3_fp_examples.png" target="_blank">
+                <img src="../img/tg3_fp_examples.png" alt="Praat: filled pauses on the FilledPauses tier" class="textgrid-example">
+            </a>
+            <p class="caption">Praat: <code>filled_pause</code> intervals, aligned to sustained
+            hesitation sounds in the waveform and spectrogram.</p>
+        </div>
+
+        <p class="intro">
+            To follow along, open
+            <code>examples/3_099_ql5OTwz2G_8_19885.1-19903.7_M_ŽupanStipe_4fp.wav</code> and its
+            matching <code>examples/3_099_ql5OTwz2G_8_19885_1-19903_7_M_ŽupanStipe_4fp_merged.TextGrid</code>
+            in Praat &mdash; this segment contains four detected filled pauses.
+        </p>
+
+        <p class="intro">
+            This layer supports research on <strong>speech disfluencies</strong>,
+            <strong>planning phenomena</strong>, and the <strong>prosody&ndash;syntax interface</strong>.
+        </p>
+    </div>
+
+
+    <h2 id="false_positive">5. Example 3 &mdash; A False Positive</h2>
+    <div class="description">
+        <p class="intro">
+            The filled-pause detector is <strong>not infallible</strong>. Sometimes the model flags
+            a <code>filled_pause</code> where there is none &mdash; typically on a stretch of
+            ordinary speech, a breath, or background noise. Because the detections sit directly on
+            the <code>FilledPauses</code> tier alongside genuine hesitations, spotting the wrong
+            ones is a matter of listening and cross-checking the spectrogram: a real filled pause
+            shows steady, flat formants over its duration, while a false positive typically does
+            not.
+        </p>
+
+        <div class="format-example">
+            <a href="../img/tg4_false_positive.png" target="_blank">
+                <img src="../img/tg4_false_positive.png" alt="Praat: a false-positive filled pause on the FilledPauses tier" class="textgrid-example">
+            </a>
+            <p class="caption">Praat: a model-flagged <code>filled_pause</code> that is in fact a
+            false positive &mdash; the formant structure and audio do not match a true hesitation.</p>
+        </div>
+
+        <p class="intro">
+            To follow along, open
+            <code>examples/4_098_JfRtGxX95Ws_5232.44-5255.82_M_ŠpikaMilivoj_1fp.wav</code> and its
+            matching <code>examples/4_098_JfRtGxX95Ws_5232_44-5255_82_M_ŠpikaMilivoj_1fp_merged.TextGrid</code>
+            in Praat.
+        </p>
+
+        <p class="intro">
+            We include this example deliberately: automatic annotations are a strong starting point,
+            but for careful phonetic work it is worth <strong>listening and verifying</strong> rather
+            than trusting every marker. The overwhelming majority of detections are correct, but
+            recording issues, alignment errors, or genuine misclassifications do occur.
+        </p>
+    </div>
+
+
+    <!-- <h2 id="finding">6. Finding Your Own Examples</h2>
+    <div class="description">
+        <p class="intro">
+            The examples on this page were located with a small Python helper,
+            <code>examples/find_tg_examples.py</code>, which reads the ParlaSpeech v3 JSONL metadata and
+            (optionally) copies the matching <code>.wav</code> and <code>.TextGrid</code> files into
+            an examples folder. It has three modes:
+        </p>
+
+        <div class="corpus-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>What it does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>doublets</code></td>
+                        <td>Scans the whole JSONL, groups by surface word, and ranks words realised
+                        with more than one primary-stress position. Writes a results JSONL to pick from.</td>
+                    </tr>
+                    <tr>
+                        <td><code>stress</code></td>
+                        <td>Finds a target <code>--word</code> (optionally by <code>--upos</code>,
+                        gender, birth year), sanity-checks it, and lists how many instances exist per
+                        stress position before listing/copying.</td>
+                    </tr>
+                    <tr>
+                        <td><code>fp</code></td>
+                        <td>Finds instances with at least <code>--min-fp</code> model-detected filled
+                        pauses (default 1), with optional word/gender/birth filters.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="note">
+            <p><strong>Tip:</strong> if you have already found an interesting hit in the
+            <a href="../concordancer/concordancer-guide.html">concordancer</a>, its metadata panel
+            exposes the audio segment ID, which maps one-to-one to the corresponding TextGrid
+            filename. Locating that specific TG on disk is then often faster than re-running the
+            finder script.</p>
+        </div>
+
+        <p class="intro">Example invocations:</p>
+        <pre class="json-full"><code># 1. Rank stress doublets across the corpus, save a shortlist
+python find_tg_examples.py --mode doublets \
+    --jsonl ParlaSpeech-HR.v3.jsonl \
+    --out-jsonl doublets.jsonl
+
+# 2. Inspect a specific word; sanity-check + per-position counts, then copy stress=2 hits
+python find_tg_examples.py --mode stress \
+    --jsonl ParlaSpeech-HR.v3.jsonl \
+    --word uspostavi --upos VERB --stress 2 \
+    --audio-root /path/to/audio --tg-root /path/to/textgrids \
+    --copy --limit 10 --out-dir examples/
+
+# 3. Find utterances with at least two filled pauses, female speakers born 1980+
+python find_tg_examples.py --mode fp \
+    --jsonl ParlaSpeech-HR.v3.jsonl \
+    --min-fp 2 --gender F --birth-min 1980 \
+    --audio-root /path/to/audio --tg-root /path/to/textgrids --copy</code></pre>
+
+        <div class="note">
+            <p><strong>Notes.</strong> The <code>doublets</code> and <code>stress</code> modes require
+            the <code>words_align</code> and <code>primary_stress</code> layers, so they apply to
+            <strong>HR/RS</strong> only; the <code>fp</code> mode needs only <code>filled_pauses</code>
+            (all languages). Audio is copied from a nested <code>&lt;hash&gt;/&lt;stem&gt;.WAV</code>
+            layout; TextGrids from a flat folder (<code>--tg-root</code>, suffix set by
+            <code>--tg-suffix</code>). Add <code>--dry-run</code> with <code>--copy</code> to preview.</p>
+        </div>
+    </div> -->
+
+
+    <h2 id="summary">Summary</h2>
+    <div class="description">
+        <p class="intro">
+            Across the three examples above, we have shown how ParlaSpeech's TextGrid annotations
+            surface visibly and audibly in Praat: an <em>uspostavi</em> stress doublet split neatly
+            across the <code>StressGraph</code> tier, with the pitch and intensity peaks lining up
+            on the marked syllable; several genuine filled pauses on the <code>FilledPauses</code>
+            tier, showing the characteristic flat, sustained formant structure of a hesitation;
+            and one detector error &mdash; a false positive that the same spectrogram cues expose
+            on inspection. Together they demonstrate that the alignment, stress and filled-pause
+            layers are directly usable for phonetic inspection and error-checking, and that
+            &mdash; for careful work &mdash; the corpus rewards <strong>listening and verifying</strong>
+            alongside trusting the automatic annotations.
+        </p>
+    </div>
+
+
+    <footer style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
+        <p>For more information, visit the <a href="../index.html">ParlaSpeech main page</a>,
+        or see the <a href="../concordancer/concordancer-guide.html">Concordancer User Guide</a>.</p>
+    </footer>
+
+</body>
+</html>
