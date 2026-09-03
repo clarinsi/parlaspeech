@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="chL-XVolm1SuAvXFdi4GrWiDTAlDh8zo74V44r8aD-M" />
-    
+
 
     <title>ParlaSpeech - Parliamentary Speech Corpus</title>
     <link rel="canonical" href="https://clarinsi.github.io/parlaspeech/">
@@ -91,7 +91,7 @@
     }
     </script>
 
-    
+
 </head>
 
 
@@ -105,15 +105,11 @@
 
     <div class="description">
         <p class="intro">
-          <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering 
-          Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding 
+          <strong>ParlaSpeech</strong> is a multilingual collection of <strong>parliamentary speech corpora</strong> covering
+          Croatian (HR), Serbian (RS), Czech (CZ), and Polish (PL) parliamentary proceedings, created by aligning official parliamentary audio recordings with their corresponding
           <a href="https://www.clarin.eu/parlamint" target="_blank">ParlaMint</a> transcripts. It preserves rich metadata including speaker attributes (name, gender, political party) and session details (date, agenda, parliamentary term), enabling cross-disciplinary research in political discourse analysis, speech processing, and computational linguistics. The corpus supports computational (JSONL), phonetic (TextGrid) and corpus linguistic (NoSketchEngine) analysis formats.
         </p>
-        
-        <p class="intro>
 
-
-        
         <p class="intro">
             <strong><a href="http://hdl.handle.net/11356/1833">ParlaSpeech-v3.0</a></strong> extends the base ParlaSpeech corpora <strong>with five annotation layers</strong>: linguistic annotations (<strong>ParlaSpeech-Ling</strong> following Universal Dependencies), sentiment (<strong>ParlaSpeech-Senti</strong>), filled pause detection (<strong>ParlaSpeech-Pause</strong>), precise word-level alignments (<strong>ParlaSpeech-Align</strong>), and primary stress markers (<strong>ParlaSpeech-Stress</strong>). Currently, Croatian and Serbian versions contain all annotation layers, while Czech and Polish include only pause, sentiment and linguistic annotations. These structured enrichments facilitate advanced research in prosody, speech disfluencies, and multimodal parliamentary analysis. The corpus collection is, aside from the <a href="http://hdl.handle.net/11356/1833">CLARIN.SI repository</a>, now also available through the CLARIN.SI concordancers for <a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_hr">Croatian</a>, <a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_rs">Serbian</a>, <a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_cz">Czech</a> and <a href="https://www.clarin.si/ske/#concordance?corpname=parlaspeech3_pl">Polish</a>. There is also <a href="concordancer/concordancer-guide.html">basic documentation on how to search through these corpora</a>.
         </p>
@@ -123,8 +119,8 @@
             <p class="caption">Example TextGrid with all enrichments</p>
         </div>
 
-    </div>     
-      
+    </div>
+
 
 
     <div class="reference">
@@ -132,19 +128,19 @@
           <div class="application">
             <pre>
             @misc{ljubešić2025parlaspeech30richlyannotated,
-              title={ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian}, 
+              title={ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian},
               author={Nikola Ljubešić and Peter Rupnik and Ivan Porupski and Taja Kuzman Pungeršek},
               year={2025},
               eprint={2511.01619},
               archivePrefix={arXiv},
               primaryClass={cs.CL},
-              url={https://arxiv.org/abs/2511.01619}, 
+              url={https://arxiv.org/abs/2511.01619},
             }
             </pre>
           </div>
       </div>
-      
-    
+
+
     <h2 id="annotation_layers">Annotation Layers</h2>
     <div class="annotation-layers">
         <div class="layer">
@@ -156,6 +152,10 @@
         </div>
         <div class="layer">
             <span class="layer-name"><strong>ParlaSpeech-Pause:</strong></span> Detected filled pauses in speech (i.e. "ermm", "umm")
+        </div>
+
+        <div class="layer">
+            <span class="layer-name"><strong>ParlaSpeech-Topic:</strong></span> Topic according to the Comparative Agenda Project (CAP) schema
         </div>
 
         <div class="layer">
@@ -172,7 +172,7 @@
         <p><strong>Note 2:</strong> There are two word-level alignments: <code>words</code> and <code>words_align</code>. <code>words</code> is the ASR-level alignment, available in all languages, while <code>words_align</code> is a finer Kaldi MFA-level alignment, available only in HR and RS.</p>
     </div>
 
-    
+
     <div class="availability">
         <p>
             <strong>Available formats:</strong><br>
@@ -234,7 +234,7 @@
             </tbody>
         </table>
     </div>
-    
+
 
 
     <h2 id="authors">Authors</h2>
@@ -273,7 +273,7 @@
     <h2 id="concordancer">Explore the Concordancer</h2>
 
 <a href="concordancer/concordancer-guide.html">See the Concordancer User Guide for more.</a>
-    
+
     <h2 id="dataset_schema">Dataset Schema</h2>
 
     <div class="note">
@@ -285,7 +285,7 @@
         <div class="field">
             <span class="field-name">1. id</span> [string] - Unique sentence ID, referencing the utterance ID from ParlaMint 4.0, expanded with character offsets.
         </div>
-        
+
         <div class="field">
             <span class="field-name">2. words</span> [list of dicts] - ASR Word-level timing and character offset annotations.
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the word in seconds, relative.</div>
@@ -293,35 +293,35 @@
             <div class="subfield">• <strong>char_s</strong> [int] - Start character index in the transcript, relative.</div>
             <div class="subfield">• <strong>char_e</strong> [int] - End character index in the transcript, relative.</div>
         </div>
-        
+
         <div class="field">
             <span class="field-name">3. audio</span> [string] - Relative path to the audio file in ParlaSpeech.
         </div>
-        
+
         <div class="field">
             <span class="field-name">4. audio_length</span> [float] - Duration of the audio file in seconds.
         </div>
-        
+
         <div class="field">
             <span class="field-name">5. text</span> [string] - Text from official manual transcriptions corresponding to the audio.
         </div>
-        
+
         <div class="field">
             <span class="field-name">6. text_start</span> [int] - Start character index of the relevant text segment, absolute.
         </div>
-        
+
         <div class="field">
             <span class="field-name">7. text_end</span> [int] - End character index of the relevant text segment, absolute.
         </div>
-        
+
         <div class="field">
             <span class="field-name">8. audio_start</span> [float] - Start time of the relevant audio segment, absolute.
         </div>
-        
+
         <div class="field">
             <span class="field-name">9. audio_end</span> [float] - End time of the relevant audio segment, absolute.
         </div>
-        
+
         <div class="field">
             <span class="field-name">10. speaker_info</span> [dict] - Metadata about the speaker and session.
             <div class="subfield">• <strong>Text_ID</strong> [string] - Text document ID.</div>
@@ -348,20 +348,20 @@
             <div class="subfield">• <strong>Speaker_gender</strong> [string] - Gender of the speaker (M, F or "-").</div>
             <div class="subfield">• <strong>Speaker_birth</strong> [string] - Birth year of the speaker.</div>
         </div>
-        
+
         <h3>ParlaSpeech-Pause</h3>
         <div class="field">
             <span class="field-name">11. filled_pauses</span> [list of dicts] - Timestamped intervals of filled pauses in the audio.
             <div class="subfield">• <strong>time_s</strong> [float] - Start time of the pause in seconds, relative.</div>
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the pause in seconds, relative.</div>
             <div class="subfield">• <strong>words_idx</strong> [int] - Index of the word in <code>words</code> preceding the pause.</div>
-        
+
             <div class="note">
                 <p><strong>Note:</strong> <code>[]</code> (empty list) means no FPs detected, whereas <code>None</code> means that inference failed for that entry.</p>
             </div>
-        
+
         </div>
-        
+
         <h3>ParlaSpeech-Align</h3>
         <div class="field">
             <span class="field-name">12. words_align</span> [list of dicts] - Kaldi MFA word-level alignment data. Each dictionary corresponds to a word.
@@ -372,7 +372,7 @@
             <div class="subfield">• <strong>time_e</strong> [float] - End time of the word in seconds, relative.</div>
             <div class="subfield">• <strong>words_idx</strong> [int] - Index of word in <code>words</code>. Equal to Null if instance cannot be matched to any <code>words</code> instance.</div>
         </div>
-        
+
         <div class="field">
             <span class="field-name">13. chars_align</span> [list of lists of dicts] - Kaldi MFA character-level alignment data. Every dictionary corresponds to a character, while the list of dictionaries corresponds to a word.
             <div class="subfield">• <strong>text</strong> [string] - Character(s).</div>
@@ -381,7 +381,7 @@
             <div class="subfield">• <strong>char_s</strong> [int] - Start index in the full text, relative.</div>
             <div class="subfield">• <strong>char_e</strong> [int] - End index in the full text, relative.</div>
         </div>
-        
+
         <h3>ParlaSpeech-Stress</h3>
         <div class="field">
             <span class="field-name">14. primary_stress</span> [list of dicts] - Primary stress annotations for multisyllabic words.
@@ -390,11 +390,11 @@
             <div class="subfield">• <strong>nuclei</strong> [list of int] - Character indices of syllable nuclei.</div>
             <div class="subfield">• <strong>raw</strong> [list of float] - Inferred and unprocessed timestamped intervals of primary stress, relative to audio file.</div>
         </div>
-        
+
         <h3>ParlaSpeech-Ling</h3>
         <div class="field">
             <span class="field-name">15. linguistic_annotation</span> [list of dicts] - Text-based word-level linguistic annotation.
-            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the <code>text</code> that cannot be found in <code>words</code> (such as punctuation).</div> 
+            <div class="subfield">• <strong>words_idx</strong> [int] - Index of the corresponding word from <code>words</code>. Equal to Null for parts of the <code>text</code> that cannot be found in <code>words</code> (such as punctuation).</div>
             <div class="subfield">• <strong>id</strong> [int] - Token ID.</div>
             <div class="subfield">• <strong>text</strong> [string] - Word form.</div>
             <div class="subfield">• <strong>lemma</strong> [string] - Lemma of the word.</div>
@@ -408,18 +408,27 @@
 
         <h3>ParlaSpeech-Senti</h3>
         <div class="field">
-            <span class="field-name">16. sentiment</span> [dict] - Text-based sentiment prediction based on the ParlaSent model (https://huggingface.co/classla/xlm-r-parlasent).
+            <span class="field-name">16. sentiment</span> [dict] - Text-based sentiment prediction based on the ParlaSent model (<a href="https://huggingface.co/classla/xlm-r-parlasent" target="_blank">https://huggingface.co/classla/xlm-r-parlasent</a>).
             <div class="subfield">• <strong>ParlaSent_logit</strong> [float] - Sentence sentiment prediction from the ParlaSent model (continuous value, ranging from 0 (negative) to 6 (positive)).
             </div>
             <div class="subfield">• <strong>ParlaSent_3</strong> [string] - Sentence sentiment on 3 levels coming from the ParlaSent sentiment text prediction model (Negative, Neutral, Positive).</div>
             <div class="subfield">• <strong>ParlaSent_6</strong> [string] - Sentence sentiment on 6 levels coming from the ParlaSent sentiment text prediction model (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).</div>
         </div>
 
+        <h3>ParlaSpeech-Topic</h3>
+        <div class="field">
+            <span class="field-name">17. cap</span> [dict] - Topic prediction based on the ParlaCAP Topic Classifier model (<a href="https://huggingface.co/classla/ParlaCAP-Topic-Classifier" target="_blank">https://huggingface.co/classla/ParlaCAP-Topic-Classifier</a>).
+            <div class="subfield">• <strong>topic</strong> [string] - Topic according to the Comparative Agendas Project (<a href="https://www.comparativeagendas.net/pages/master-codebook" target="_blank">https://www.comparativeagendas.net/pages/master-codebook</a>). Where no topic is prevailing, the label is "Mix".
+            </div>
+            <div class="subfield">• <strong>prob</strong> [float] - Probability of the "topic" label.</div>
+        </div>
+
+
 
         <h3 id="example">Example of an Entry</h3>
         <div class="example-entry">
           <p>Here is a short sample from the corpora, reformatted for readability:</p>
-          
+
           <pre class="json-full" id="json-block"></pre>
 
 
@@ -494,9 +503,13 @@
                 "ParlaSent_logit": 3.428,
                 "ParlaSent_6": "Neutral Positive",
                 "ParlaSent_3": "Neutral"
+              },
+              "cap": {
+                "topic": "Government Operations",
+                "prob": 0.996102
               }
             };
-          
+
             function syntaxHighlight(json) {
             if (typeof json !== "string") {
                 json = JSON.stringify(json, null, 2);
@@ -593,6 +606,10 @@
             "ParlaSent_logit": 3.428,
             "ParlaSent_6": "Neutral Positive",
             "ParlaSent_3": "Neutral"
+          },
+          "cap": {
+            "topic": "Government Operations",
+            "prob": 0.996102
           }
         }</code></pre> -->
 
@@ -601,7 +618,7 @@
         </div>
 
 
-   
+
 
     <h3 id="history">History</h3>
 <ul class="history-timeline">
