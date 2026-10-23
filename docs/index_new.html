@@ -23,7 +23,8 @@
       { "@type": "Person", "name": "Peter Rupnik" },
       { "@type": "Person", "name": "Ivan Porupski" },
       { "@type": "Person", "name": "Danijel Koržinek" },
-      { "@type": "Person", "name": "Taja Kuzman Pungeršek" }
+      { "@type": "Person", "name": "Taja Kuzman Pungeršek" },
+      { "@type": "Person", "name": "Filip Dobranić" }
     ],
     "keywords": ["speech", "spoken corpus", "parliamentary debates", "ParlaSpeech", "ParlaMint", "filled pauses", "silent pauses", "primary stress", "forced alignment", "sentiment", "CAP topics", "Croatian", "Czech", "Polish", "Serbian", "Slovenian"],
     "inLanguage": ["hr", "cs", "pl", "sr", "sl"],
@@ -269,6 +270,19 @@
       background: rgba(255, 255, 255, 0.7);
       border-radius: 0 0.5rem 0.5rem 0;
       font-size: 0.9rem;
+    }
+
+    .new-badge {
+      display: inline-block;
+      margin-right: 0.4rem;
+      padding: 0.05rem 0.5rem;
+      border-radius: 999px;
+      background: #dc2626;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      vertical-align: 0.1em;
     }
 
     figure {
@@ -761,7 +775,8 @@
       </div>
 
       <p class="release-note">
-        <strong>ParlaSpeech 4.0</strong> adds the Slovenian parliament, a new enrichment layer of <strong>silent pauses</strong>, and <strong>CAP topic labels</strong> as speech-level metadata. The release will be available shortly in the CLARIN.SI repository under <a href="http://hdl.handle.net/11356/1885">http://hdl.handle.net/11356/1885</a>; all five corpora can already be searched in the <a href="#data">CLARIN.SI concordancers</a>.
+        <span class="new-badge">NEW!</span>
+        <strong>ParlaSpeech 4.0</strong> adds the Slovenian parliament, a new enrichment layer of <strong>silent pauses</strong>, and <strong>CAP topic labels</strong> as speech-level metadata. The release is available in the <a href="http://hdl.handle.net/11356/1885">CLARIN.SI repository</a>, and all five corpora can be searched in the <a href="#data">CLARIN.SI concordancers</a>.
       </p>
 
       <figure>
@@ -782,7 +797,7 @@
       <p class="section-intro">
         ParlaSpeech 4.0 is distributed as a single CLARIN.SI repository entry covering all five parliaments, while each parliament has its own concordancer entry for online search.
         <br /><br />
-        <a href="http://hdl.handle.net/11356/1885"><strong>Download ParlaSpeech 4.0 from the CLARIN.SI repository</strong></a> (release imminent)
+        <a href="http://hdl.handle.net/11356/1885"><strong>Download ParlaSpeech 4.0 from the CLARIN.SI repository</strong></a>
       </p>
 
       <ul class="item-list">
@@ -970,7 +985,10 @@
           </div>
           <div class="item-links">
             <a href="http://hdl.handle.net/11356/1833">Repository</a>
-            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_hr">Concordancer (HR)</a>
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_hr">Concordancer HR</a>
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_cz">Concordancer CZ</a>
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_pl">Concordancer PL</a>
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_rs">Concordancer RS</a>
             <a href="https://aclanthology.org/2026.lrec-1.447/">More Information</a>
           </div>
         </li>
@@ -1098,7 +1116,6 @@
         </div>
       </details>
 
-      <!-- TODO before publishing: confirm the field name and sub-fields of the silent pause layer against the 4.0 JSONL. -->
       <details class="schema-layer" open>
         <summary>ParlaSpeech-SilentPause <span class="layer-avail">all parliaments · new in 4.0</span></summary>
         <div class="schema-body">
@@ -1354,6 +1371,18 @@
       <ul class="event-list">
         <li class="event">
           <div class="event-header">
+            <span class="event-title">Umm... With Transformers? Insights from Filled Pause Use across Four Slavic Parliaments</span>
+            <span class="event-date">2026</span>
+          </div>
+          <div class="event-location">Proceedings of Interspeech 2026, pp. 4657–4662</div>
+          <div>Ivan Porupski, Branimir Dropuljić, Nikola Ljubešić</div>
+          <div class="item-links">
+            <a href="https://www.isca-archive.org/interspeech_2026/porupski26_interspeech.html">ISCA Archive</a>
+            <a href="https://doi.org/10.21437/Interspeech.2026-3262">DOI</a>
+          </div>
+        </li>
+        <li class="event">
+          <div class="event-header">
             <span class="event-title">ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian</span>
             <span class="event-date">May 2026</span>
           </div>
@@ -1455,7 +1484,8 @@
             Peter Rupnik · <a href="mailto:peter.rupnik@ijs.si">email</a><br />
             Ivan Porupski · <a href="mailto:ivan.porupski@ijs.si">email</a><br />
             Danijel Koržinek · <a href="mailto:danijel@pjwstk.edu.pl">email</a><br />
-            Taja Kuzman Pungeršek · <a href="mailto:taja.kuzman@ijs.si">email</a>
+            Taja Kuzman Pungeršek · <a href="mailto:taja.kuzman@ijs.si">email</a><br />
+            Filip Dobranić · <a href="mailto:filip.dobranic@inz.si">email</a>
           </div>
         </li>
         <li>
@@ -1520,6 +1550,7 @@
       "filled_pauses": [
         { "time_s": 0.36, "time_e": 0.6, "words_idx": 0 }
       ],
+      "silent_pauses": [],
       "words_align": [
         { "text": "i", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0 },
         { "text": "završno", "char_s": 2, "char_e": 9, "time_s": 0.6, "time_e": 1.56, "words_idx": 1 }
@@ -1550,8 +1581,8 @@
         "ParlaSent_3": "Neutral"
       },
       "cap": {
-        "topic": "Government Operations",
-        "prob": 0.996102
+        "topic": "Education",
+        "prob": 0.994786
       }
     };
 
