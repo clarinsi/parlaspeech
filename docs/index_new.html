@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ParlaSpeech - Richly annotated spoken corpora of parliamentary debates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="chL-XVolm1SuAvXFdi4GrWiDTAlDh8zo74V44r8aD-M" />
+  <meta name="description" content="ParlaSpeech is a collection of spoken parliamentary corpora of Croatian, Czech, Polish, Serbian and Slovenian, built by aligning ParlaMint transcripts with parliamentary recordings and enriched with filled and silent pauses, word alignment, primary stress, linguistic annotation, sentiment and CAP topics." />
+  <link rel="canonical" href="https://clarinsi.github.io/parlaspeech/" />
+  <link rel="icon" type="image/png" href="https://clarinsi.github.io/parlaspeech/img/ParlaSpeech_logo_v0.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "ParlaSpeech 4.0: Spoken corpora of parliamentary debates of Croatia, Czechia, Poland, Serbia and Slovenia",
+    "description": "The ParlaSpeech corpora are built from the transcripts of parliamentary proceedings of the Croatian, Serbian, Slovenian, Polish, and Czech parliaments available in the ParlaMint 4.0 corpus, and the parliamentary recordings available from the parliaments' YouTube channels. An instance is a transcript sentence with the corresponding metadata and the aligned audio. Enrichment layers: filled pauses, silent pauses, word- and grapheme-level alignment, primary stress, Universal Dependencies linguistic annotation, sentiment, and CAP topics.",
+    "url": "https://clarinsi.github.io/parlaspeech/",
+    "identifier": "http://hdl.handle.net/11356/1885",
+    "version": "4.0",
+    "creator": [
+      { "@type": "Person", "name": "Nikola Ljubešić" },
+      { "@type": "Person", "name": "Peter Rupnik" },
+      { "@type": "Person", "name": "Ivan Porupski" },
+      { "@type": "Person", "name": "Danijel Koržinek" },
+      { "@type": "Person", "name": "Taja Kuzman Pungeršek" }
+    ],
+    "keywords": ["speech", "spoken corpus", "parliamentary debates", "ParlaSpeech", "ParlaMint", "filled pauses", "silent pauses", "primary stress", "forced alignment", "sentiment", "CAP topics", "Croatian", "Czech", "Polish", "Serbian", "Slovenian"],
+    "inLanguage": ["hr", "cs", "pl", "sr", "sl"],
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "isBasedOn": "http://hdl.handle.net/11356/1859",
+    "distribution": [
+      { "@type": "DataDownload", "name": "ParlaSpeech 4.0", "contentUrl": "http://hdl.handle.net/11356/1885" }
+    ],
+    "citation": {
+      "@type": "ScholarlyArticle",
+      "name": "ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian",
+      "url": "https://aclanthology.org/2026.lrec-1.447/",
+      "sameAs": "https://doi.org/10.63317/3b7dnbjr75es"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --bg-alt: #ffffff;
+      --text: #1f2933;
+      --accent: #2563eb;
+      --accent-soft: #e0ecff;
+      --border: #e5e7eb;
+      --muted: #6b7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    code {
+      font-size: 0.85em;
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0 0.25rem;
+    }
+
+    /* Top navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 245, 247, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .nav-title:hover {
+      text-decoration: none;
+    }
+
+    .nav-title img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.15rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Layout */
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    section {
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.25rem;
+      border-radius: 0.75rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      scroll-margin-top: 4.5rem;
+    }
+
+    section h2 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    section h3 {
+      margin: 1.75rem 0 0.5rem;
+      font-size: 1.05rem;
+      scroll-margin-top: 4.5rem;
+    }
+
+    section p.section-intro {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+
+    /* Hero / intro block */
+    .hero {
+      margin-top: 1.75rem;
+      margin-bottom: 2rem;
+      padding: 1.75rem 1.5rem;
+      border-radius: 1rem;
+      background: linear-gradient(
+        135deg,
+        rgba(37, 99, 235, 0.07),
+        rgba(79, 70, 229, 0.03)
+      );
+      border: 1px solid var(--border);
+    }
+
+    .hero-head {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-logo {
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-size: 1.7rem;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 1rem;
+      color: #4b5563;
+      font-size: 0.98rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      font-size: 0.8rem;
+      color: #1d4ed8;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+    }
+
+    .release-note {
+      margin: 1rem 0 0;
+      padding: 0.75rem 0.9rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 0 0.5rem 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    figure {
+      margin: 1.25rem 0 0;
+    }
+
+    figure img {
+      display: block;
+      border-radius: 0.6rem;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Content lists */
+    .item-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem 1rem;
+    }
+
+    .item-list li {
+      padding: 0.75rem 0.75rem;
+      border-radius: 0.6rem;
+      border: 1px dashed var(--border);
+      background: #fafafa;
+      font-size: 0.9rem;
+    }
+
+    .item-list.grid-2x2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item-list.grid-2x2 > li {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .item-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .item-description {
+      font-size: 0.88rem;
+      color: #4b5563;
+    }
+
+    .item-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.9rem;
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .item-stats {
+      list-style: none;
+      padding: 0;
+      margin: 0.35rem 0 0;
+      display: block;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .item-list .item-stats li {
+      padding: 0;
+      border: 0;
+      background: none;
+      font-size: inherit;
+    }
+
+    .item-stats strong {
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .muted {
+      color: #9ca3af;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th,
+    td {
+      padding: 0.5rem 0.65rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    thead th {
+      background: #f9fafb;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td.num,
+    th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .matrix td.c,
+    .matrix th.c {
+      text-align: center;
+      width: 3.5rem;
+    }
+
+    .yes {
+      color: #15803d;
+      font-weight: 600;
+    }
+
+    tfoot td {
+      font-weight: 600;
+      background: #f9fafb;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Notes */
+    .note {
+      margin: 0.75rem 0;
+      padding: 0.6rem 0.8rem;
+      border-radius: 0.5rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .note p {
+      margin: 0.25rem 0;
+    }
+
+    /* Schema */
+    .schema-layer {
+      margin-top: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      background: #fafafa;
+    }
+
+    .schema-layer > summary {
+      cursor: pointer;
+      padding: 0.6rem 0.8rem;
+      font-weight: 600;
+      list-style-position: inside;
+    }
+
+    .schema-layer > summary .layer-avail {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 0.4rem;
+    }
+
+    .schema-body {
+      padding: 0 0.8rem 0.6rem;
+    }
+
+    .field {
+      padding: 0.5rem 0;
+      border-top: 1px dashed var(--border);
+      font-size: 0.88rem;
+      color: #374151;
+    }
+
+    .field-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .field-type {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .subfields {
+      list-style: none;
+      margin: 0.3rem 0 0 1rem;
+      padding: 0;
+    }
+
+    .subfields li {
+      padding: 0.1rem 0;
+    }
+
+    .subfields code {
+      font-weight: 600;
+    }
+
+    /* JSON example */
+    pre.json-full {
+      margin: 0.5rem 0 0;
+      padding: 1rem;
+      max-height: 34rem;
+      overflow: auto;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: #374151;
+    }
+
+    .json-key { color: #1d4ed8; }
+    .json-string { color: #047857; }
+    .json-number { color: #b91c1c; }
+    .json-literal { color: #7c3aed; }
+
+    /* Videos */
+    .video-card a.video-thumb {
+      position: relative;
+      display: block;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(79, 70, 229, 0.05));
+    }
+
+    .video-card a.video-thumb img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .video-card .play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .video-card .play span {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.9);
+      display: grid;
+      place-items: center;
+    }
+
+    .video-card .play svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: #fff;
+      margin-left: 0.15rem;
+    }
+
+    /* Citation */
+    .cite-box {
+      position: relative;
+      margin-top: 0.5rem;
+    }
+
+    .cite-box pre {
+      margin: 0;
+      padding: 2.25rem 1rem 1rem;
+      overflow-x: auto;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font: inherit;
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      cursor: pointer;
+    }
+
+    /* Events / publications */
+    .event-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .event {
+      padding: 0.75rem 0.75rem;
+      border-radius: 0.6rem;
+      border: 1px dashed var(--border);
+      background: #fafafa;
+      font-size: 0.9rem;
+    }
+
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .event-title {
+      font-weight: 600;
+    }
+
+    .event-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .event-location {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    /* History timeline */
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 1.1rem;
+      border-left: 2px solid var(--accent-soft);
+    }
+
+    .timeline li {
+      position: relative;
+      padding: 0 0 1rem 0.5rem;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -1.53rem;
+      top: 0.45rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline li.current::before {
+      background: var(--accent);
+    }
+
+    .timeline .year {
+      font-weight: 600;
+      color: var(--text);
+      margin-right: 0.35rem;
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: right;
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 0.5rem 0.9rem;
+      }
+
+      .hero {
+        padding: 1.25rem 1rem;
+      }
+
+      .hero-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+      }
+
+      .hero-title {
+        font-size: 1.4rem;
+      }
+
+      section {
+        padding: 1.25rem 1rem;
+      }
+
+      .item-list.grid-2x2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="nav-title" href="#top">
+        <img src="https://clarinsi.github.io/parlaspeech/img/ParlaSpeech_logo_v0.png" alt="" />
+        ParlaSpeech
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#data">Data</a>
+        <a href="#formats">Formats</a>
+        <a href="#schema">Schema</a>
+        <a href="#models">Models</a>
+        <a href="#tutorials">Tutorials</a>
+        <a href="#publications">Publications</a>
+        <a href="#history">History</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="top">
+      <div class="hero-head">
+        <img class="hero-logo" src="https://clarinsi.github.io/parlaspeech/img/ParlaSpeech_logo_v0.png" alt="ParlaSpeech logo" />
+        <h1 class="hero-title">ParlaSpeech - Richly annotated spoken corpora of parliamentary debates</h1>
+      </div>
+
+      <p class="hero-subtitle">
+        ParlaSpeech is a collection of spoken corpora of the Croatian, Czech, Polish, Serbian, and Slovenian parliaments. The corpora are built from the transcripts of parliamentary proceedings available in the <a href="http://hdl.handle.net/11356/1859">ParlaMint 4.0</a> corpus and the parliamentary recordings available from the parliaments' YouTube channels. An instance is a transcript sentence with the corresponding metadata and the aligned audio.
+        <br /><br />
+        Each sentence keeps the rich <a href="https://www.clarin.eu/parlamint">ParlaMint</a> metadata on the speaker (name, gender, party, role) and the session (date, term, agenda), and is enriched with automatic annotations in both modalities: filled and silent pauses, word- and grapheme-level alignment and primary word stress on the speech side, and linguistic annotation, sentiment, and CAP topics on the text side. This makes ParlaSpeech useful across political discourse analysis, phonetics, corpus linguistics, and speech technology development.
+      </p>
+
+      <div class="hero-meta">
+        <span class="tag">5 parliaments</span>
+        <span class="tag">10k+ hours of speech</span>
+        <span class="tag">3.9M aligned sentences</span>
+        <span class="tag">7 enrichment layers</span>
+        <span class="tag">CC BY-SA 4.0</span>
+      </div>
+
+      <p class="release-note">
+        <strong>ParlaSpeech 4.0</strong> adds the Slovenian parliament, a new enrichment layer of <strong>silent pauses</strong>, and <strong>CAP topic labels</strong> as speech-level metadata. The release will be available shortly in the CLARIN.SI repository under <a href="http://hdl.handle.net/11356/1885">http://hdl.handle.net/11356/1885</a>; all five corpora can already be searched in the <a href="#data">CLARIN.SI concordancers</a>.
+      </p>
+
+      <figure>
+        <img src="https://clarinsi.github.io/parlaspeech/img/parlaspeech-v3_example_ver5.png" alt="One ParlaSpeech sentence in Praat with word and grapheme alignment, primary stress and filled pause tiers, together with its sentiment, topic, linguistic annotation and speaker metadata." loading="lazy" />
+        <figcaption>Example TextGrid with all enrichments</figcaption>
+      </figure>
+
+      <div class="hero-meta">
+        <span>Developed and curated by</span>
+        <img style="width: 25%; max-width: 160px; display: inline-block;" src="https://www.clarin.si/info/wp-content/uploads/2024/03/CLASSLA-k-centre-transparent-background-768x252.png" alt="CLASSLA Knowledge Centre" />
+        <img style="width: 25%; max-width: 160px; display: inline-block;" src="https://www.clarin.si/info/wp-content/uploads/2014/08/Clarin-SI-logo.png" alt="CLARIN.SI" />
+      </div>
+    </section>
+
+    <!-- ============================== DATA ============================== -->
+    <section id="data">
+      <h2>Data</h2>
+      <p class="section-intro">
+        ParlaSpeech 4.0 is distributed as a single CLARIN.SI repository entry covering all five parliaments, while each parliament has its own concordancer entry for online search.
+        <br /><br />
+        <a href="http://hdl.handle.net/11356/1885"><strong>Download ParlaSpeech 4.0 from the CLARIN.SI repository</strong></a> (release imminent)
+      </p>
+
+      <ul class="item-list">
+        <li>
+          <div class="item-title">Croatian Parliament (HR)</div>
+          <div class="item-meta">Croatian · all 7 enrichment layers</div>
+          <ul class="item-stats">
+            <li><strong>923k</strong> sentences</li>
+            <li><strong>3.1k</strong> hours</li>
+            <li><strong>324k</strong> filled pauses</li>
+            <li><strong>972k</strong> silent pauses</li>
+            <li><strong>11M</strong> word stresses</li>
+          </ul>
+          <div class="item-links">
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech4_hr">Concordancer</a>
+            <a href="https://huggingface.co/datasets/classla/ParlaSpeech-HR">Hugging Face</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-title">Czech Parliament (CZ)</div>
+          <div class="item-meta">Czech · 5 enrichment layers</div>
+          <ul class="item-stats">
+            <li><strong>718k</strong> sentences</li>
+            <li><strong>1.2k</strong> hours</li>
+            <li><strong>200k</strong> filled pauses</li>
+            <li><strong>683k</strong> silent pauses</li>
+            <li class="muted">no word stress</li>
+          </ul>
+          <div class="item-links">
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech4_cz">Concordancer</a>
+            <a href="https://huggingface.co/datasets/classla/ParlaSpeech-CZ">Hugging Face</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-title">Polish Parliament (PL)</div>
+          <div class="item-meta">Polish · 5 enrichment layers</div>
+          <ul class="item-stats">
+            <li><strong>535k</strong> sentences</li>
+            <li><strong>1k</strong> hours</li>
+            <li><strong>200k</strong> filled pauses</li>
+            <li><strong>180k</strong> silent pauses</li>
+            <li class="muted">no word stress</li>
+          </ul>
+          <div class="item-links">
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech4_pl">Concordancer</a>
+            <a href="https://huggingface.co/datasets/classla/ParlaSpeech-PL">Hugging Face</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-title">Serbian Parliament (RS)</div>
+          <div class="item-meta">Serbian · all 7 enrichment layers</div>
+          <ul class="item-stats">
+            <li><strong>291k</strong> sentences</li>
+            <li><strong>900</strong> hours</li>
+            <li><strong>74k</strong> filled pauses</li>
+            <li><strong>308k</strong> silent pauses</li>
+            <li><strong>2M</strong> word stresses</li>
+          </ul>
+          <div class="item-links">
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech4_rs">Concordancer</a>
+            <a href="https://huggingface.co/datasets/classla/ParlaSpeech-RS">Hugging Face</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-title">Slovenian Parliament (SI)</div>
+          <div class="item-meta">Slovenian · 5 enrichment layers · new in 4.0</div>
+          <ul class="item-stats">
+            <li><strong>1,435k</strong> sentences</li>
+            <li><strong>4.1k</strong> hours</li>
+            <li><strong>626k</strong> filled pauses</li>
+            <li><strong>2,171k</strong> silent pauses</li>
+            <li class="muted">no word stress</li>
+          </ul>
+          <div class="item-links">
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech4_si">Concordancer</a>
+          </div>
+        </li>
+      </ul>
+
+      <h3 id="layers">Enrichment layers</h3>
+      <p class="section-intro">
+        Speech-side layers are inferred from the audio, text-side layers from the transcript. Word alignment and primary stress are currently available for Croatian and Serbian only.
+      </p>
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th scope="col">Layer</th>
+              <th scope="col">Content</th>
+              <th scope="col" class="c">HR</th>
+              <th scope="col" class="c">CZ</th>
+              <th scope="col" class="c">PL</th>
+              <th scope="col" class="c">RS</th>
+              <th scope="col" class="c">SI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ParlaSpeech-FilledPause</strong></td>
+              <td>Automatic annotation of filled pauses ("eerm")</td>
+              <td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-SilentPause</strong> <span class="tag">new</span></td>
+              <td>Automatic annotation of silent pauses</td>
+              <td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-Align</strong></td>
+              <td>Precise word- and grapheme-level alignment</td>
+              <td class="c yes">✓</td><td class="c">–</td><td class="c">–</td><td class="c yes">✓</td><td class="c">–</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-Stress</strong></td>
+              <td>Primary stress in multisyllabic words</td>
+              <td class="c yes">✓</td><td class="c">–</td><td class="c">–</td><td class="c yes">✓</td><td class="c">–</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-Ling</strong></td>
+              <td>Universal Dependencies annotation (lemma, part-of-speech, morphology, syntax)</td>
+              <td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-Senti</strong></td>
+              <td>Sentiment estimated from the transcript</td>
+              <td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td>
+            </tr>
+            <tr>
+              <td><strong>ParlaSpeech-Topic</strong> <span class="tag">new</span></td>
+              <td>CAP topic label of the speech, based on the transcript</td>
+              <td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c yes">✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="overview">Size overview</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Parliament</th>
+              <th scope="col" class="num">Sentences</th>
+              <th scope="col" class="num">Hours</th>
+              <th scope="col" class="num">Filled pauses</th>
+              <th scope="col" class="num">Silent pauses</th>
+              <th scope="col" class="num">Word stresses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Croatia (HR)</td><td class="num">923k</td><td class="num">3.1k</td><td class="num">324k</td><td class="num">972k</td><td class="num">11M</td></tr>
+            <tr><td>Czechia (CZ)</td><td class="num">718k</td><td class="num">1.2k</td><td class="num">200k</td><td class="num">683k</td><td class="num muted">–</td></tr>
+            <tr><td>Poland (PL)</td><td class="num">535k</td><td class="num">1k</td><td class="num">200k</td><td class="num">180k</td><td class="num muted">–</td></tr>
+            <tr><td>Serbia (RS)</td><td class="num">291k</td><td class="num">900</td><td class="num">74k</td><td class="num">308k</td><td class="num">2M</td></tr>
+            <tr><td>Slovenia (SI)</td><td class="num">1,435k</td><td class="num">4.1k</td><td class="num">626k</td><td class="num">2,171k</td><td class="num muted">–</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>Total</td><td class="num">3.9M</td><td class="num">10.3k</td><td class="num">1.4M</td><td class="num">4.3M</td><td class="num">13M</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <h3 id="related-data">Source data and earlier releases</h3>
+      <ul class="item-list grid-2x2">
+        <li>
+          <div class="item-title">ParlaMint 4.0 corpus collection</div>
+          <div class="item-meta">TEI XML, TXT, CoNLL-U · source of transcripts and metadata</div>
+          <div class="item-description">
+            ParlaMint is a collection of comparable corpora of parliamentary debates from European countries and regions, richly annotated with metadata on speakers and parties. The ParlaSpeech sentences, their IDs and the speaker and session metadata come from ParlaMint 4.0.
+          </div>
+          <div class="item-links">
+            <a href="http://hdl.handle.net/11356/1859">Repository</a>
+            <a href="https://www.clarin.eu/parlamint">More Information</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">ParlaSpeech 3.0</div>
+          <div class="item-meta">JSONL, TextGrid, VERT · HR, CZ, PL, RS</div>
+          <div class="item-description">
+            The previous release, covering four parliaments and five enrichment layers (filled pauses, alignment, primary stress, linguistic annotation, and sentiment). Described in the LREC 2026 paper listed under <a href="#publications">Publications</a>.
+          </div>
+          <div class="item-links">
+            <a href="http://hdl.handle.net/11356/1833">Repository</a>
+            <a href="https://www.clarin.si/ske/#dashboard?corpname=parlaspeech3_hr">Concordancer (HR)</a>
+            <a href="https://aclanthology.org/2026.lrec-1.447/">More Information</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================== FORMATS ============================== -->
+    <section id="formats">
+      <h2>Formats</h2>
+      <p class="section-intro">
+        The same data are distributed in four formats, each aimed at a different kind of use.
+      </p>
+      <ul class="item-list grid-2x2">
+        <li>
+          <div class="item-title">JSONL</div>
+          <div class="item-meta">Master format · all parliaments · all layers</div>
+          <div class="item-description">
+            Newline-delimited JSON, where each line is a valid JSON serialization of one sentence with all its metadata and enrichments. Mostly intended for computerized processing. See the <a href="#schema">dataset schema</a> and <a href="#example">example entry</a> below.
+          </div>
+        </li>
+        <li>
+          <div class="item-title">FLAC</div>
+          <div class="item-meta">Audio · all parliaments</div>
+          <div class="item-description">
+            Per-sentence audio recordings, referenced from each JSONL entry through the <code>audio</code> field.
+          </div>
+        </li>
+        <li>
+          <div class="item-title">VERT</div>
+          <div class="item-meta">Vertical format · for concordancers</div>
+          <div class="item-description">
+            Text with links to audio, linguistic annotation, sentiment, filled pauses, and primary word stress (where available). This is the format behind the CLARIN.SI noSketch Engine concordancers.
+          </div>
+          <div class="item-links">
+            <a href="concordancer/concordancer-guide.html">Concordancer guide</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">TextGrid</div>
+          <div class="item-meta">Praat format · HR and RS only</div>
+          <div class="item-description">
+            Word- and grapheme-level alignment, primary word stress, and filled pauses as tiers, for use with <a href="https://www.fon.hum.uva.nl/praat/">Praat</a> in phonetics and other speech-focused research.
+          </div>
+        </li>
+      </ul>
+
+      <figure>
+        <img src="https://clarinsi.github.io/parlaspeech/img/TextGrid_example_v1.png" alt="An example TextGrid file opened in Praat, with tiers for words, characters, filled pauses and stress under the waveform and spectrogram." loading="lazy" style="max-width: 640px; margin: 0 auto;" />
+        <figcaption>Example TextGrid file visualization</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============================== SCHEMA ============================== -->
+    <section id="schema">
+      <h2>Dataset schema</h2>
+      <p class="section-intro">
+        The fields of one JSONL instance, grouped by the layer they belong to. An instance is a single transcript sentence with its metadata and aligned audio.
+      </p>
+
+      <div class="note">
+        <p><strong>Timing information:</strong> absolute times are timestamps from the original full-length session audio, so instances don't start at 0.0 s. Relative times are normalized to each extracted sentence, always beginning at 0.0 s.</p>
+        <p><strong>Two word-level alignments:</strong> <code>words</code> is the ASR-level alignment, available for all parliaments, while <code>words_align</code> is a finer Kaldi MFA-level alignment, available for HR and RS only.</p>
+      </div>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech (base) <span class="layer-avail">all parliaments</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">id</span> <span class="field-type">[string]</span> Unique sentence ID, referencing the utterance ID from ParlaMint 4.0, expanded with character offsets.</div>
+          <div class="field"><span class="field-name">words</span> <span class="field-type">[list of dicts]</span> ASR word-level timing and character offset annotations.
+            <ul class="subfields">
+              <li><code>time_s</code> [float] Start time of the word in seconds, relative.</li>
+              <li><code>time_e</code> [float] End time of the word in seconds, relative.</li>
+              <li><code>char_s</code> [int] Start character index in the transcript, relative.</li>
+              <li><code>char_e</code> [int] End character index in the transcript, relative.</li>
+            </ul>
+          </div>
+          <div class="field"><span class="field-name">audio</span> <span class="field-type">[string]</span> Relative path to the audio file in ParlaSpeech.</div>
+          <div class="field"><span class="field-name">audio_length</span> <span class="field-type">[float]</span> Duration of the audio file in seconds.</div>
+          <div class="field"><span class="field-name">text</span> <span class="field-type">[string]</span> Text from the official manual transcriptions corresponding to the audio.</div>
+          <div class="field"><span class="field-name">text_start</span> <span class="field-type">[int]</span> Start character index of the relevant text segment, absolute.</div>
+          <div class="field"><span class="field-name">text_end</span> <span class="field-type">[int]</span> End character index of the relevant text segment, absolute.</div>
+          <div class="field"><span class="field-name">audio_start</span> <span class="field-type">[float]</span> Start time of the relevant audio segment, absolute.</div>
+          <div class="field"><span class="field-name">audio_end</span> <span class="field-type">[float]</span> End time of the relevant audio segment, absolute.</div>
+          <div class="field"><span class="field-name">speaker_info</span> <span class="field-type">[dict]</span> Metadata about the speaker and session.
+            <ul class="subfields">
+              <li><code>Text_ID</code> [string] Text document ID.</li>
+              <li><code>ID</code> [string] Speech segment ID.</li>
+              <li><code>Title</code> [string] Title of the debate/session.</li>
+              <li><code>Date</code> [string] Date of the session.</li>
+              <li><code>Body</code> [string] Parliamentary body or chamber.</li>
+              <li><code>Term</code> [string] Parliamentary term.</li>
+              <li><code>Session</code> [string] Session number.</li>
+              <li><code>Meeting</code> [string] Meeting number.</li>
+              <li><code>Sitting</code> [string] Sitting number.</li>
+              <li><code>Agenda</code> [string] Agenda topic.</li>
+              <li><code>Subcorpus</code> [string] Subcorpus name.</li>
+              <li><code>Lang</code> [string] Language of the transcript.</li>
+              <li><code>Speaker_role</code> [string] Role of the speaker (e.g. Regular, Minister).</li>
+              <li><code>Speaker_MP</code> [string] Whether the speaker is a Member of Parliament.</li>
+              <li><code>Speaker_minister</code> [string] Whether the speaker is a minister.</li>
+              <li><code>Speaker_party</code> [string] Party abbreviation.</li>
+              <li><code>Speaker_party_name</code> [string] Full name of the party.</li>
+              <li><code>Party_status</code> [string] Government, opposition or coalition.</li>
+              <li><code>Party_orientation</code> [string] Political orientation (e.g. left, right).</li>
+              <li><code>Speaker_ID</code> [string] Unique speaker identifier, usually in the format "LastnameFirstname".</li>
+              <li><code>Speaker_name</code> [string] Full name of the speaker in the format "Lastname, Firstname".</li>
+              <li><code>Speaker_gender</code> [string] Gender of the speaker (M, F or "-").</li>
+              <li><code>Speaker_birth</code> [string] Birth year of the speaker.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-FilledPause <span class="layer-avail">all parliaments</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">filled_pauses</span> <span class="field-type">[list of dicts]</span> Timestamped intervals of filled pauses in the audio.
+            <ul class="subfields">
+              <li><code>time_s</code> [float] Start time of the pause in seconds, relative.</li>
+              <li><code>time_e</code> [float] End time of the pause in seconds, relative.</li>
+              <li><code>words_idx</code> [int] Index of the word in <code>words</code> preceding the pause.</li>
+            </ul>
+            <div class="note"><p><code>[]</code> (empty list) means no filled pauses were detected, whereas <code>None</code> means that inference failed for that entry.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- TODO before publishing: confirm the field name and sub-fields of the silent pause layer against the 4.0 JSONL. -->
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-SilentPause <span class="layer-avail">all parliaments · new in 4.0</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">silent_pauses</span> <span class="field-type">[list of dicts]</span> Timestamped intervals of silent pauses in the audio.
+            <ul class="subfields">
+              <li><code>time_s</code> [float] Start time of the pause in seconds, relative.</li>
+              <li><code>time_e</code> [float] End time of the pause in seconds, relative.</li>
+              <li><code>words_idx</code> [int] Index of the word in <code>words</code> preceding the pause.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-Align <span class="layer-avail">HR and RS only</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">words_align</span> <span class="field-type">[list of dicts]</span> Kaldi MFA word-level alignment data. Each dictionary corresponds to a word.
+            <ul class="subfields">
+              <li><code>text</code> [string] Word text.</li>
+              <li><code>char_s</code> [int] Start character index, relative.</li>
+              <li><code>char_e</code> [int] End character index, relative.</li>
+              <li><code>time_s</code> [float] Start time of the word in seconds, relative.</li>
+              <li><code>time_e</code> [float] End time of the word in seconds, relative.</li>
+              <li><code>words_idx</code> [int] Index of the word in <code>words</code>. Null if the instance cannot be matched to any <code>words</code> instance.</li>
+            </ul>
+          </div>
+          <div class="field"><span class="field-name">chars_align</span> <span class="field-type">[list of lists of dicts]</span> Kaldi MFA character-level alignment data. Every dictionary corresponds to a character, while each list of dictionaries corresponds to a word.
+            <ul class="subfields">
+              <li><code>text</code> [string] Character(s).</li>
+              <li><code>time_s</code> [float] Start time of the character(s), relative.</li>
+              <li><code>time_e</code> [float] End time of the character(s), relative.</li>
+              <li><code>char_s</code> [int] Start index in the full text, relative.</li>
+              <li><code>char_e</code> [int] End index in the full text, relative.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-Stress <span class="layer-avail">HR and RS only</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">primary_stress</span> <span class="field-type">[list of dicts]</span> Primary stress annotations for multisyllabic words.
+            <ul class="subfields">
+              <li><code>words_align_idx</code> [int] Index of the word in <code>words_align</code>.</li>
+              <li><code>stress</code> [int] Index of the syllable containing the primary stress.</li>
+              <li><code>nuclei</code> [list of int] Character indices of syllable nuclei.</li>
+              <li><code>raw</code> [list of float] Inferred and unprocessed timestamped intervals of primary stress, relative to the audio file.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-Ling <span class="layer-avail">all parliaments</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">linguistic_annotation</span> <span class="field-type">[list of dicts]</span> Text-based word-level linguistic annotation.
+            <ul class="subfields">
+              <li><code>words_idx</code> [int] Index of the corresponding word in <code>words</code>. Null for parts of the <code>text</code> that cannot be found in <code>words</code> (such as punctuation).</li>
+              <li><code>id</code> [int] Token ID.</li>
+              <li><code>text</code> [string] Word form.</li>
+              <li><code>lemma</code> [string] Lemma of the word.</li>
+              <li><code>upos</code> [string] Universal part of speech.</li>
+              <li><code>xpos</code> [string] Language-specific part of speech.</li>
+              <li><code>feats</code> [string] Morphological features.</li>
+              <li><code>head</code> [int] Head of the current word (syntactic dependency relation).</li>
+              <li><code>deprel</code> [string] Type of syntactic dependency relation.</li>
+              <li><code>misc</code> [string] Additional information.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-Senti <span class="layer-avail">all parliaments</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">sentiment</span> <span class="field-type">[dict]</span> Text-based sentiment prediction from the <a href="https://huggingface.co/classla/xlm-r-parlasent">ParlaSent model</a>.
+            <ul class="subfields">
+              <li><code>ParlaSent_logit</code> [float] Sentence sentiment prediction as a continuous value, ranging from 0 (negative) to 6 (positive).</li>
+              <li><code>ParlaSent_3</code> [string] Sentence sentiment on 3 levels (Negative, Neutral, Positive).</li>
+              <li><code>ParlaSent_6</code> [string] Sentence sentiment on 6 levels (Negative, Mixed Negative, Neutral Negative, Neutral Positive, Mixed Positive, Positive).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="schema-layer" open>
+        <summary>ParlaSpeech-Topic <span class="layer-avail">all parliaments · new in 4.0</span></summary>
+        <div class="schema-body">
+          <div class="field"><span class="field-name">cap</span> <span class="field-type">[dict]</span> Topic prediction from the <a href="https://huggingface.co/classla/ParlaCAP-Topic-Classifier">ParlaCAP topic classifier</a>. The label is assigned at the level of the speech, so all sentences of one speech share it.
+            <ul class="subfields">
+              <li><code>topic</code> [string] Topic according to the <a href="https://www.comparativeagendas.net/pages/master-codebook">Comparative Agendas Project</a> schema. Where no topic is prevailing, the label is "Mix".</li>
+              <li><code>prob</code> [float] Probability of the <code>topic</code> label.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <h3 id="example">Example of an entry</h3>
+      <p class="section-intro">A short sample from the Croatian corpus, reformatted for readability.</p>
+      <pre class="json-full" id="json-block" tabindex="0" aria-label="Example JSONL entry"></pre>
+    </section>
+
+    <!-- ============================== MODELS ============================== -->
+    <section id="models">
+      <h2>Models</h2>
+      <p class="section-intro">
+        Openly available models used to produce the ParlaSpeech enrichment layers, and models trained on ParlaSpeech data.
+      </p>
+      <ul class="item-list grid-2x2">
+        <li>
+          <div class="item-title">Filled pause detector</div>
+          <div class="item-meta">Wav2Vec2-BERT · audio frame classification · ParlaSpeech-FilledPause</div>
+          <div class="item-description">
+            A speech transformer fine-tuned on Slovenian to detect filled pauses directly from the speech signal. It generalizes well to other South and West Slavic languages, which allows its use on all five parliaments.
+          </div>
+          <div class="item-links">
+            <a href="https://doi.org/10.57967/hf/6732">Model on Hugging Face</a>
+            <a href="https://aclanthology.org/2025.bsnlp-1.1/">More Information</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">Primary stress identifier</div>
+          <div class="item-meta">Wav2Vec2-BERT · audio frame classification · ParlaSpeech-Stress</div>
+          <div class="item-description">
+            A speech transformer fine-tuned on a new Croatian dataset to identify the syllable carrying primary stress in multisyllabic words, with near-perfect results on Croatian and Serbian.
+          </div>
+          <div class="item-links">
+            <a href="https://huggingface.co/classla/Wav2Vec2BertPrimaryStressAudioFrameClassifier">Model on Hugging Face</a>
+            <a href="https://www.isca-archive.org/interspeech_2025/ljubesic25_interspeech.html">More Information</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">ParlaSent model</div>
+          <div class="item-meta">XLM-R · text regression · ParlaSpeech-Senti</div>
+          <div class="item-description">
+            A multilingual transformer for sentiment analysis of parliamentary texts, fine-tuned on manually annotated sentences from seven parliaments. Its continuous output is mapped to 3- and 6-level sentiment labels.
+          </div>
+          <div class="item-links">
+            <a href="https://huggingface.co/classla/xlm-r-parlasent">Model on Hugging Face</a>
+            <a href="https://aclanthology.org/2024.lrec-main.1393/">More Information</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">ParlaCAP topic classifier</div>
+          <div class="item-meta">XLM-R-Parla · text classification · ParlaSpeech-Topic</div>
+          <div class="item-description">
+            A multilingual classifier assigning the 21 top-level topics of the Comparative Agendas Project schema to parliamentary speeches. Developed in the <a href="https://clarinsi.github.io/parlacap/">ParlaCAP project</a>.
+          </div>
+          <div class="item-links">
+            <a href="https://doi.org/10.57967/hf/6684">Model on Hugging Face</a>
+            <a href="https://doi.org/10.48550/arXiv.2602.16516">More Information</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">Croatian ASR models trained on ParlaSpeech-HR</div>
+          <div class="item-meta">wav2vec2 · speech recognition</div>
+          <div class="item-description">
+            Speech recognition models for Croatian fine-tuned on the ParlaSpeech-HR data, with and without a language model.
+          </div>
+          <div class="item-links">
+            <a href="https://huggingface.co/classla/wav2vec2-xls-r-parlaspeech-hr">XLS-R model</a>
+            <a href="https://huggingface.co/classla/wav2vec2-large-slavic-parlaspeech-hr">Slavic model</a>
+            <a href="https://aclanthology.org/2022.parlaclarin-1.16/">More Information</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================== TUTORIALS ============================== -->
+    <section id="tutorials">
+      <h2>Tutorials</h2>
+      <p class="section-intro">
+        Video introductions and guides for searching and analysing ParlaSpeech, prepared by the CLASSLA Knowledge Centre.
+      </p>
+      <ul class="item-list">
+        <li class="video-card">
+          <a class="video-thumb" href="https://video.arnes.si/watch/x2w9yy686frl" aria-label="Watch: Introducing ParlaSpeech #1, Parliaments' talking!">
+            <img src="https://video.arnes.si/attachments/video/x2/x2w9yy686frl/transcoded/image/ParlaSpeech_1.f93g2l6hzcs1.480p.jpg" alt="" loading="lazy" />
+            <span class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" /></svg></span></span>
+          </a>
+          <div class="item-title">Introducing ParlaSpeech #1: Parliaments' talking!</div>
+          <div class="item-meta">Video · 4 min · Isabell Furkert</div>
+          <div class="item-description">
+            What the dataset contains, its annotation layers, how to access it (CLARIN.SI repository, noSketch Engine, Hugging Face), and what it can be used for, from political discourse analysis to phonetics and speech recognition.
+          </div>
+          <div class="item-links">
+            <a href="https://video.arnes.si/watch/x2w9yy686frl">Watch the video</a>
+          </div>
+        </li>
+        <li class="video-card">
+          <a class="video-thumb" href="https://video.arnes.si/watch/6xf6kp44vxkk" aria-label="Watch: Exploring ParlaSpeech #2, Searching and analysing speech data">
+            <img src="https://video.arnes.si/attachments/video/6x/6xf6kp44vxkk/transcoded/image/ParlaSpeech_2.tzjmglj65c9m.480p.jpg" alt="" loading="lazy" />
+            <span class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" /></svg></span></span>
+          </a>
+          <div class="item-title">Exploring ParlaSpeech #2: Searching and analysing speech data</div>
+          <div class="item-meta">Video · 7 min · Isabell Furkert</div>
+          <div class="item-description">
+            Simple and advanced concordance queries in noSketch Engine, including stress and filled pause search and filtering by speaker metadata, followed by opening and editing TextGrid files in Praat.
+          </div>
+          <div class="item-links">
+            <a href="https://video.arnes.si/watch/6xf6kp44vxkk">Watch the video</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">Concordancer user guide</div>
+          <div class="item-meta">noSketch Engine · written guide</div>
+          <div class="item-description">
+            Step-by-step documentation on how to search the ParlaSpeech corpora in the CLARIN.SI concordancers, including queries over pauses, stress, and speaker metadata.
+          </div>
+          <div class="item-links">
+            <a href="concordancer/concordancer-guide.html">Read the guide</a>
+          </div>
+        </li>
+      </ul>
+      <p class="section-intro" style="margin: 1rem 0 0;">
+        More training videos are available on the <a href="https://video.arnes.si/en/?channel=v8585yrdxhxl">CLASSLA-training channel</a>.
+      </p>
+    </section>
+
+    <!-- ============================== PUBLICATIONS ============================== -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="section-intro">
+        If you use ParlaSpeech, please cite the LREC 2026 paper below.
+      </p>
+
+      <div class="cite-box">
+        <button class="copy-btn" type="button" data-copy="bibtex">Copy BibTeX</button>
+        <pre id="bibtex">@inproceedings{ljubesic-etal-2026-parlaspeech,
+    title = "{P}arla{S}peech 3.0: Richly Annotated Spoken Parliamentary Corpora of {C}roatian, {C}zech, {P}olish, and {S}erbian",
+    author = "Ljube{\v{s}}i{\'c}, Nikola  and
+      Rupnik, Peter  and
+      Porupski, Ivan  and
+      Kuzman Punger{\v{s}}ek, Taja",
+    editor = "Piperidis, Stelios  and
+      Bel, N{\'u}ria  and
+      van den Heuvel, Henk  and
+      Ide, Nancy  and
+      Krek, Simon  and
+      Toral, Antonio",
+    booktitle = "Proceedings of the Fifteenth Language Resources and Evaluation Conference",
+    month = may,
+    year = "2026",
+    address = "Palma de Mallorca, Spain",
+    publisher = "ELRA Language Resource Association",
+    url = "https://aclanthology.org/2026.lrec-1.447/",
+    doi = "10.63317/3b7dnbjr75es",
+    pages = "5677--5688"
+}</pre>
+      </div>
+
+      <h3>Papers</h3>
+      <ul class="event-list">
+        <li class="event">
+          <div class="event-header">
+            <span class="event-title">ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian</span>
+            <span class="event-date">May 2026</span>
+          </div>
+          <div class="event-location">Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026), pp. 5677–5688</div>
+          <div>Nikola Ljubešić, Peter Rupnik, Ivan Porupski, Taja Kuzman Pungeršek</div>
+          <div class="item-links">
+            <a href="https://aclanthology.org/2026.lrec-1.447/">ACL Anthology</a>
+            <a href="https://doi.org/10.63317/3b7dnbjr75es">DOI</a>
+          </div>
+        </li>
+        <li class="event">
+          <div class="event-header">
+            <span class="event-title">Identifying Primary Stress Across Related Languages and Dialects with Transformer-based Speech Encoder Models</span>
+            <span class="event-date">August 2025</span>
+          </div>
+          <div class="event-location">Proceedings of Interspeech 2025</div>
+          <div>Nikola Ljubešić, Ivan Porupski, Peter Rupnik</div>
+          <div class="item-links">
+            <a href="https://www.isca-archive.org/interspeech_2025/ljubesic25_interspeech.html">ISCA Archive</a>
+          </div>
+        </li>
+        <li class="event">
+          <div class="event-header">
+            <span class="event-title">Identifying Filled Pauses in Speech Across South and West Slavic Languages</span>
+            <span class="event-date">July 2025</span>
+          </div>
+          <div class="event-location">Proceedings of the 10th Workshop on Slavic Natural Language Processing (Slavic NLP 2025), pp. 1–8</div>
+          <div>Nikola Ljubešić, Ivan Porupski, Peter Rupnik</div>
+          <div class="item-links">
+            <a href="https://aclanthology.org/2025.bsnlp-1.1/">ACL Anthology</a>
+          </div>
+        </li>
+        <li class="event">
+          <div class="event-header">
+            <span class="event-title">The ParlaSpeech Collection of Automatically Generated Speech and Text Datasets from Parliamentary Proceedings</span>
+            <span class="event-date">November 2024</span>
+          </div>
+          <div class="event-location">Speech and Computer (SPECOM 2024), Lecture Notes in Computer Science</div>
+          <div>Nikola Ljubešić, Peter Rupnik, Danijel Koržinek</div>
+          <div class="item-links">
+            <a href="https://doi.org/10.1007/978-3-031-77961-9_10">Springer</a>
+          </div>
+        </li>
+        <li class="event">
+          <div class="event-header">
+            <span class="event-title">ParlaSpeech-HR - a Freely Available ASR Dataset for Croatian Bootstrapped from the ParlaMint Corpus</span>
+            <span class="event-date">June 2022</span>
+          </div>
+          <div class="event-location">Proceedings of the Workshop ParlaCLARIN III within the 13th Language Resources and Evaluation Conference</div>
+          <div>Nikola Ljubešić, Danijel Koržinek, Peter Rupnik, Ivo-Pavao Jazbec</div>
+          <div class="item-links">
+            <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ACL Anthology</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================== HISTORY ============================== -->
+    <section id="history">
+      <h2>History</h2>
+      <p class="section-intro">How ParlaSpeech grew from one parliament to five.</p>
+      <ol class="timeline">
+        <li>
+          <span class="year">2021</span> The idea of the ParlaSpeech corpora was born while proposing the second iteration of the <a href="https://www.clarin.eu/parlamint">ParlaMint project</a>, inside which textual transcripts were made available for 20+ European parliaments. We ideated a task to deliver at least 50 hours of aligned text and speech for at least three parliaments / languages. ParlaSpeech v1 and v2 were born inside the ParlaMint project.
+        </li>
+        <li>
+          <span class="year">2022</span> ParlaSpeech v1 aligned the Croatian parliament spoken data to the existing Croatian ParlaMint transcripts. The results are the <a href="https://aclanthology.org/2022.parlaclarin-1.16/">ParlaCLARIN workshop paper</a> describing the construction process, and the <a href="http://hdl.handle.net/11356/1494">ParlaSpeech-HR v1 corpus</a>, 1,816 hours in size.
+        </li>
+        <li>
+          <span class="year">2023</span> ParlaSpeech v2 was the final result of the ParlaMint project, spanning the parliaments of Croatia, Czechia, Poland, and Serbia, and 5,000 hours of audio. The improved alignment process, applied to the Croatian, Polish and Serbian parliaments, is described in the <a href="https://doi.org/10.1007/978-3-031-77961-9_10">SPECOM conference paper</a>, while the Czech corpus was compiled from the <a href="https://link.springer.com/chapter/10.1007/978-3-030-83527-9_25">previously constructed Czech parliamentary speech corpus</a>.
+        </li>
+        <li>
+          <span class="year">2025</span> <a href="http://hdl.handle.net/11356/1833">ParlaSpeech v3</a> enriched the audio and transcripts of v2 with UD-based linguistic annotation, filled pauses and primary stress, more detailed word- and character-level alignment, and transcript-based sentiment. It was presented at <a href="https://aclanthology.org/2026.lrec-1.447/">LREC 2026</a>.
+        </li>
+        <li class="current">
+          <span class="year">2026</span> ParlaSpeech v4 adds the Slovenian parliament, silent pauses as a new enrichment layer, and CAP topic labels as speech-level metadata, reaching more than 10,000 hours across five parliaments. Extensions to the Bulgarian, Bosnian and Ukrainian parliaments are planned.
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============================== CONTACT ============================== -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="section-intro">
+        If you have any questions about ParlaSpeech, its data formats, or the enrichment models, we will be happy to help.
+      </p>
+      <ul class="item-list">
+        <li>
+          <div class="item-title">Contact person</div>
+          <div class="item-description">
+            Nikola Ljubešić<br />
+            <a href="mailto:nikola.ljubesic@ijs.si">nikola.ljubesic@ijs.si</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">Authors</div>
+          <div class="item-description">
+            Nikola Ljubešić · <a href="mailto:nikola.ljubesic@ijs.si">email</a><br />
+            Peter Rupnik · <a href="mailto:peter.rupnik@ijs.si">email</a><br />
+            Ivan Porupski · <a href="mailto:ivan.porupski@ijs.si">email</a><br />
+            Danijel Koržinek · <a href="mailto:danijel@pjwstk.edu.pl">email</a><br />
+            Taja Kuzman Pungeršek · <a href="mailto:taja.kuzman@ijs.si">email</a>
+          </div>
+        </li>
+        <li>
+          <div class="item-title">CLARIN.SI Helpdesk</div>
+          <div class="item-description">
+            <a href="mailto:info@clarin.si">info@clarin.si</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>
+      &copy; 2021–<span id="year">2026</span> ParlaSpeech · CLASSLA Lab · CLARIN.SI ·
+      <a href="#top">Back to top</a>
+    </span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Example JSONL entry (Croatian, all layers)
+    const jsonData = {
+      "id": "ParlaMint-HR_2017-11-09-0.u57194_7269-7278",
+      "words": [
+        { "time_s": 0.0, "time_e": 0.44, "char_s": 0, "char_e": 1 },
+        { "time_s": 0.66, "time_e": 1.58, "char_s": 2, "char_e": 9 }
+      ],
+      "audio": "I27W0FVLD2I/I27W0FVLD2I_27158.08-27159.66.flac",
+      "audio_length": 1.58,
+      "text": "I završno.",
+      "text_start": 7269,
+      "text_end": 7278,
+      "audio_start": 27158.08,
+      "audio_end": 27159.66,
+      "speaker_info": {
+        "Text_ID": "ParlaMint-HR_2017-11-09-0",
+        "ID": "ParlaMint-HR_2017-11-09-0.u57194",
+        "Title": "",
+        "Date": "2017-11-09",
+        "Body": "Unicameralism",
+        "Term": "9. mandat",
+        "Session": "-",
+        "Meeting": "Zasedanje 6",
+        "Sitting": "2017-12-15",
+        "Agenda": "-",
+        "Subcorpus": "Reference",
+        "Lang": "Croatian",
+        "Speaker_role": "Regular",
+        "Speaker_MP": "MP",
+        "Speaker_minister": "notMinister",
+        "Speaker_party": "SDP",
+        "Speaker_party_name": "Socijaldemokratska partija Hrvatske",
+        "Party_status": "Coalition",
+        "Party_orientation": "Centre-left",
+        "Speaker_ID": "GlasovacSabina",
+        "Speaker_name": "Glasovac, Sabina",
+        "Speaker_gender": "F",
+        "Speaker_birth": "1978"
+      },
+      "filled_pauses": [
+        { "time_s": 0.36, "time_e": 0.6, "words_idx": 0 }
+      ],
+      "words_align": [
+        { "text": "i", "char_s": 0, "char_e": 1, "time_s": 0.03, "time_e": 0.31, "words_idx": 0 },
+        { "text": "završno", "char_s": 2, "char_e": 9, "time_s": 0.6, "time_e": 1.56, "words_idx": 1 }
+      ],
+      "chars_align": [
+        [ { "text": "i", "time_s": 0.03, "time_e": 0.31, "char_s": 0, "char_e": 1 } ],
+        [
+          { "text": "z", "time_s": 0.6, "time_e": 0.71, "char_s": 2, "char_e": 3 },
+          { "text": "a", "time_s": 0.71, "time_e": 0.84, "char_s": 3, "char_e": 4 },
+          { "text": "v", "time_s": 0.84, "time_e": 0.87, "char_s": 4, "char_e": 5 },
+          { "text": "r", "time_s": 0.87, "time_e": 0.91, "char_s": 5, "char_e": 6 },
+          { "text": "š", "time_s": 0.91, "time_e": 1.06, "char_s": 6, "char_e": 7 },
+          { "text": "n", "time_s": 1.06, "time_e": 1.15, "char_s": 7, "char_e": 8 },
+          { "text": "o", "time_s": 1.15, "time_e": 1.56, "char_s": 8, "char_e": 9 }
+        ]
+      ],
+      "primary_stress": [
+        { "words_align_idx": 1, "stress": 1, "nuclei": [1, 3, 6], "raw": [0.7, 0.84] }
+      ],
+      "linguistic_annotation": [
+        { "words_idx": 0, "id": 1, "text": "I", "lemma": "i", "upos": "CCONJ", "xpos": "Cc", "feats": null, "head": 2, "deprel": "cc", "misc": "start_char=0|end_char=1" },
+        { "words_idx": 1, "id": 2, "text": "završno", "lemma": "završan", "upos": "ADJ", "xpos": "Agpnsny", "feats": "Case=Nom|Definite=Def|Degree=Pos|Gender=Neut|Number=Sing", "head": 0, "deprel": "root", "misc": "start_char=2|end_char=9" },
+        { "words_idx": null, "id": 3, "text": ".", "lemma": ".", "upos": "PUNCT", "xpos": "Z", "feats": null, "head": 2, "deprel": "punct", "misc": "start_char=10|end_char=11" }
+      ],
+      "sentiment": {
+        "ParlaSent_logit": 3.428,
+        "ParlaSent_6": "Neutral Positive",
+        "ParlaSent_3": "Neutral"
+      },
+      "cap": {
+        "topic": "Government Operations",
+        "prob": 0.996102
+      }
+    };
+
+    function syntaxHighlight(json) {
+      if (typeof json !== "string") {
+        json = JSON.stringify(json, null, 2);
+      }
+      json = json.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return json.replace(
+        /("(\\u[\da-fA-F]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(\.\d+)?([eE][+-]?\d+)?)/g,
+        (match) => {
+          let cls = "json-number";
+          if (/^"/.test(match)) {
+            cls = /:$/.test(match) ? "json-key" : "json-string";
+          } else if (/true|false|null/.test(match)) {
+            cls = "json-literal";
+          }
+          return `<span class="${cls}">${match}</span>`;
+        }
+      );
+    }
+
+    document.getElementById("json-block").innerHTML = syntaxHighlight(jsonData);
+
+    // Copy BibTeX
+    document.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const text = document.getElementById(btn.dataset.copy).textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = "Copied";
+        } catch (e) {
+          btn.textContent = "Select and copy manually";
+        }
+        setTimeout(() => (btn.textContent = "Copy BibTeX"), 2000);
+      });
+    });
+  </script>
+</body>
+</html>
