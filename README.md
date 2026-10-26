@@ -9,7 +9,7 @@ The latest release is **ParlaSpeech 4.0**: five parliaments, 10,000+ hours of au
 Project website: [https://clarinsi.github.io/parlaspeech](https://clarinsi.github.io/parlaspeech)
 
 Written guides:
-- Concordancer user guide: [https://clarinsi.github.io/parlaspeech/concordancer/](https://clarinsi.github.io/parlaspeech/concordancer/)
+- Concordancer user guide: [https://clarinsi.github.io/parlaspeech/concordancer/concordancer-guide.html](https://clarinsi.github.io/parlaspeech/concordancer/concordancer-guide.html)
 - TextGrid guide: [https://clarinsi.github.io/parlaspeech/textgrid/textgrid-guide.html](https://clarinsi.github.io/parlaspeech/textgrid/textgrid-guide.html)
 
 ### Data
