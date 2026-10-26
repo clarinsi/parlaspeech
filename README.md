@@ -1,21 +1,24 @@
-# ParlaSpeech data preparation procedure
+# ParlaSpeech
 
-This repository demonstrates the procedure and utilities used to automatically process large amounts of speech data in
-order to create a corpus which can be used to train models for speech processing, for example in automatic speech
-recognition.
+ParlaSpeech is a collection of richly annotated spoken corpora of parliamentary debates for Croatian, Czech, Polish, Serbian and (new in 4.0) Slovenian. The corpora are built by aligning the ParlaMint transcripts with the parliamentary YouTube recordings, and enriched with filled and silent pauses, word- and grapheme-level alignment, primary stress, Universal Dependencies linguistic annotation, sentiment, and CAP topics.
+
+The latest release is **ParlaSpeech 4.0**: five parliaments, 10,000+ hours of audio, 3.9M aligned sentences, 7 enrichment layers.
+
+### Documentation
+
+Project website: [https://clarinsi.github.io/parlaspeech](https://clarinsi.github.io/parlaspeech)
+
+Written guides:
+- Concordancer user guide: [https://clarinsi.github.io/parlaspeech/concordancer/](https://clarinsi.github.io/parlaspeech/concordancer/)
+- TextGrid guide: [https://clarinsi.github.io/parlaspeech/textgrid/textgrid-guide.html](https://clarinsi.github.io/parlaspeech/textgrid/textgrid-guide.html)
+
+### Data
+
+Download ParlaSpeech 4.0 from the CLARIN.SI repository: [http://hdl.handle.net/11356/1885](http://hdl.handle.net/11356/1885)
 
 ### Old repository
 
-This repository is used for the new iteration of the project starting 2025. For old data, switch to [old-2022](https://github.com/clarinsi/parlaspeech/tree/old-2022) branch.
-
-### New documentation
-
-We are developing the documentation of the ParlaSpeech dataset collection here: [https://clarinsi.github.io/parlaspeech](https://clarinsi.github.io/parlaspeech).
-
-### Concordancer user guide
-
-Learn how to explore this corpus with the concordancer: [https://clarinsi.github.io/parlaspeech/concordancer/](https://clarinsi.github.io/parlaspeech/concordancer/)
-
+This repository is used for the new iteration of the project starting 2025. For the original 2022 code, switch to the [old-2022](https://github.com/clarinsi/parlaspeech/tree/old-2022) branch.
 
 ### Authors
 
@@ -24,4 +27,5 @@ Learn how to explore this corpus with the concordancer: [https://clarinsi.github
 * Ivan Porupski <ivan.porupski@ijs.si>
 * Danijel Koržinek <danijel@pja.edu.pl>
 * Taja Kuzman Pungeršek <taja.kuzman@ijs.si>
-  
+* Filip Dobranić <filip.dobranic@inz.si>
+
