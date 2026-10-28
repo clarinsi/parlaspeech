@@ -31,10 +31,10 @@
     "license": "https://creativecommons.org/licenses/by-sa/4.0/",
     "isBasedOn": "http://hdl.handle.net/11356/1859",
     "distribution": [
-      { "@type": "DataDownload", "name": "ParlaSpeech 4.0", "contentUrl": "http://hdl.handle.net/11356/1885" }
+      { "@type": "DataDownload", "name": "ParlaSpeech 4.0", "contentUrl": "http://hdl.handle.net/11356/1885", "encodingFormat": "application/x-gtar" }
     ],
     "citation": {
-      "@type": "ScholarlyArticle",
+      "@type": "CreativeWork",
       "name": "ParlaSpeech 3.0: Richly Annotated Spoken Parliamentary Corpora of Croatian, Czech, Polish, and Serbian",
       "url": "https://aclanthology.org/2026.lrec-1.447/",
       "sameAs": "https://doi.org/10.63317/3b7dnbjr75es"
@@ -862,7 +862,7 @@
           <ul class="item-stats">
             <li><strong>718k</strong> sentences</li>
             <li><strong>1.2k</strong> hours</li>
-            <li><strong>200k</strong> filled pauses</li>
+            <li><strong>206k</strong> filled pauses</li>
             <li><strong>683k</strong> silent pauses</li>
             <li class="muted">no word stress</li>
           </ul>
@@ -878,7 +878,7 @@
           <ul class="item-stats">
             <li><strong>535k</strong> sentences</li>
             <li><strong>1k</strong> hours</li>
-            <li><strong>200k</strong> filled pauses</li>
+            <li><strong>197k</strong> filled pauses</li>
             <li><strong>180k</strong> silent pauses</li>
             <li class="muted">no word stress</li>
           </ul>
@@ -992,8 +992,8 @@
           </thead>
           <tbody>
             <tr><td>Croatia (HR)</td><td class="num">923k</td><td class="num">3.1k</td><td class="num">324k</td><td class="num">972k</td><td class="num">11M</td></tr>
-            <tr><td>Czechia (CZ)</td><td class="num">718k</td><td class="num">1.2k</td><td class="num">200k</td><td class="num">683k</td><td class="num muted">–</td></tr>
-            <tr><td>Poland (PL)</td><td class="num">535k</td><td class="num">1k</td><td class="num">200k</td><td class="num">180k</td><td class="num muted">–</td></tr>
+            <tr><td>Czechia (CZ)</td><td class="num">718k</td><td class="num">1.2k</td><td class="num">206k</td><td class="num">683k</td><td class="num muted">–</td></tr>
+            <tr><td>Poland (PL)</td><td class="num">535k</td><td class="num">1k</td><td class="num">197k</td><td class="num">180k</td><td class="num muted">–</td></tr>
             <tr><td>Serbia (RS)</td><td class="num">291k</td><td class="num">900</td><td class="num">74k</td><td class="num">308k</td><td class="num">2M</td></tr>
             <tr><td>Slovenia (SI)</td><td class="num">1,435k</td><td class="num">4.1k</td><td class="num">626k</td><td class="num">2,171k</td><td class="num muted">–</td></tr>
           </tbody>
@@ -1070,6 +1070,9 @@
           <div class="item-meta">Praat format · HR and RS only</div>
           <div class="item-description">
             Word- and grapheme-level alignment, primary word stress, and filled pauses as tiers, for use with <a href="https://www.fon.hum.uva.nl/praat/">Praat</a> in phonetics and other speech-focused research.
+          </div>
+          <div class="item-links">
+            <a href="textgrid/textgrid-guide.html">TextGrid guide</a>
           </div>
         </li>
       </ul>
@@ -1255,7 +1258,7 @@
       <h3 id="example">Example of an entry</h3>
       <p class="section-intro">A short sample from the Croatian corpus, reformatted for readability.</p>
       <div class="cite-box">
-        <button class="copy-btn" type="button" data-copy="json-block" data-label="Copy JSON">Copy JSON</button>
+        <button class="copy-btn" type="button" data-copy="json-block" data-label="Copy Example">Copy Example</button>
         <pre class="json-full" id="json-block" tabindex="0" aria-label="Example JSONL entry"></pre>
       </div>
     </section>
